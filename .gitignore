@@ -30,4 +30,7 @@
 *.out
 *.app
 
+# Verzeichnisse
+lib/
+
 
