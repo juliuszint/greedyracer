@@ -1,0 +1,581 @@
+#line 1 "\\\\?\\C:\\Users\\admin\\Documents\\Visual Studio 2010\\Projects\\Vektoria_2015-02-12a\\Vektoria\\trunk\\VektoriaApp\\shaders\\Source\\tiling.hlsl"
+
+
+#line 1 "constant.h"
+
+
+#line 10
+
+
+
+
+#line 16
+
+
+#line 20
+cbuffer cbPerObject : register ( b0 ) 
+{ 
+    matrix g_mWorld : packoffset ( c0 ) ; 
+} ; 
+
+cbuffer cbPerCamera : register ( b1 ) 
+{ 
+    matrix g_mViewProj : packoffset ( c0 ) ; 
+} ; 
+
+cbuffer cbPerFrame : register ( b2 ) 
+{ 
+    matrix g_mView : packoffset ( c0 ) ; 
+    matrix g_mViewInv : packoffset ( c4 ) ; 
+    matrix g_mProjection : packoffset ( c8 ) ; 
+    matrix g_mProjectionInv : packoffset ( c12 ) ; 
+    matrix g_mProjectionInvViewport : packoffset ( c16 ) ; 
+    float4 g_f4AmbientColorUp : packoffset ( c20 ) ; 
+    float4 g_f4AmbientColorDown : packoffset ( c21 ) ; 
+    float3 g_f3CameraPos : packoffset ( c22 ) ; 
+    float g_fAlphaTest : packoffset ( c22 . w ) ; 
+    uint g_uNumLights : packoffset ( c23 ) ; 
+    uint g_uNumSpotLights : packoffset ( c23 . y ) ; 
+    uint g_uWindowWidth : packoffset ( c23 . z ) ; 
+    uint g_uWindowHeight : packoffset ( c23 . w ) ; 
+    uint g_uMaxNumLightsPerTile : packoffset ( c24 ) ; 
+    uint g_uMaxNumElementsPerTile : packoffset ( c24 . y ) ; 
+    uint g_uNumTilesX : packoffset ( c24 . z ) ; 
+    uint g_uNumTilesY : packoffset ( c24 . w ) ; 
+    uint g_uMaxVPLs : packoffset ( c25 ) ; 
+    uint g_uMaxNumVPLsPerTile : packoffset ( c25 . y ) ; 
+    uint g_uMaxNumVPLElementsPerTile : packoffset ( c25 . z ) ; 
+    float g_fVPLSpotStrength : packoffset ( c25 . w ) ; 
+    float g_fVPLSpotRadius : packoffset ( c26 ) ; 
+    float g_fVPLPointStrength : packoffset ( c26 . y ) ; 
+    float g_fVPLPointRadius : packoffset ( c26 . z ) ; 
+    float g_fVPLRemoveBackFaceContrib : packoffset ( c26 . w ) ; 
+    float g_fVPLColorThreshold : packoffset ( c27 ) ; 
+    float g_fVPLBrightnessThreshold : packoffset ( c27 . y ) ; 
+    float g_fPerFramePad1 : packoffset ( c27 . z ) ; 
+    float g_fPerFramePad2 : packoffset ( c27 . w ) ; 
+} ; 
+
+cbuffer cbShadowConstants : register ( b3 ) 
+{ 
+    matrix g_mPointShadowViewProj [ 12 ] [ 6 ] ; 
+    matrix g_mSpotShadowViewProj [ 12 ] ; 
+    float4 g_f4ShadowBias ; 
+} 
+
+cbuffer cbVPLConstants : register ( b4 ) 
+{ 
+    uint g_uNumVPLs ; 
+    uint g_uVPLPad [ 3 ] ; 
+} 
+
+struct SVPLData 
+{ 
+    float4 f4Direction ; 
+    float4 f4Color ; 
+    float4 f4SourceLightDirection ; 
+} ; 
+
+#line 85
+SamplerState g_Sampler : register ( s0 ) ; 
+SamplerComparisonState g_ShadowSampler : register ( s1 ) ; 
+
+#line 92
+float4 ConvertProjToView ( float4 p ) 
+{ 
+    p = mul ( p , g_mProjectionInv ) ; 
+    p /= p . w ; 
+    return p ; 
+} 
+
+#line 100
+float ConvertProjDepthToView ( float z ) 
+{ 
+    z = 1.f / ( z * g_mProjectionInv . _34 + g_mProjectionInv . _44 ) ; 
+    return z ; 
+} 
+
+uint GetTileIndex ( float2 ScreenPos ) 
+{ 
+    float fTileRes = ( float ) 32 ; 
+    uint nTileIdx = floor ( ScreenPos . x / fTileRes ) + floor ( ScreenPos . y / fTileRes ) * g_uNumTilesX ; 
+    return nTileIdx ; 
+} 
+
+#line 116
+void GetLightListInfo ( in Buffer < uint > PerTileLightIndexBuffer , in uint uMaxNumLightsPerTile , in uint uMaxNumElementsPerTile , 
+in float4 SVPosition , out uint uFirstLightIndex , out uint uNumLights ) 
+{ 
+    uint nTileIndex = GetTileIndex ( SVPosition . xy ) ; 
+    uint nStartIndex = uMaxNumElementsPerTile * nTileIndex ; 
+    
+#line 123
+    uint uHalfZBitsHigh = PerTileLightIndexBuffer [ nStartIndex ] ; 
+    uint uHalfZBitsLow = PerTileLightIndexBuffer [ nStartIndex + 1 ] ; 
+    uint uHalfZBits = ( uHalfZBitsHigh << 16 ) | uHalfZBitsLow ; 
+    float fHalfZ = asfloat ( uHalfZBits ) ; 
+    
+    float fViewPosZ = ConvertProjDepthToView ( SVPosition . z ) ; 
+    
+    uFirstLightIndex = ( fViewPosZ < fHalfZ ) ? ( nStartIndex + 4 ) : ( nStartIndex + 4 + uMaxNumLightsPerTile ) ; 
+    uNumLights = ( fViewPosZ < fHalfZ ) ? PerTileLightIndexBuffer [ nStartIndex + 2 ] : PerTileLightIndexBuffer [ nStartIndex + 3 ] ; 
+} 
+
+#line 136
+float HalfLambert ( float3 f3Vec1 , float3 f3Vec2 ) 
+{ 
+    float fProduct = dot ( f3Vec1 , f3Vec2 ) ; 
+    fProduct *= 0.5f ; 
+    fProduct += 0.5f ; 
+    return fProduct ; 
+} 
+
+float BlinnPhongSpec ( float3 f3Normal , float3 f3LightDir , float fSpecpower ) 
+{ 
+    float3 f3HalfAngle = normalize ( f3Normal + f3LightDir ) ; 
+    return pow ( saturate ( dot ( f3Normal , f3HalfAngle ) ) , fSpecpower ) ; 
+} 
+
+void SubsurfaceScattering ( in float4 f4CenterAndRadius , in float3 f3ToLight , in float3 f3LightColor , in float4 float4TexColor , 
+in float fThickValue , in float4 f4SSSBRDFParams , in float4 f4ColorSSS , in float4 f4VertexPos , 
+in float3 f3CamPos , in float3 f3Normal , in bool bPointLight , 
+inout float3 f3LightColorSpecularResult , inout float3 f3LightDiffuseResult ) 
+{ 
+    const float fMaterialThickness = f4SSSBRDFParams . r ; 
+    const float fRimScalar = f4SSSBRDFParams . b ; 
+    const float fExtinctionCoefficientRed = f4ColorSSS . r ; 
+    const float fExtinctionCoefficientGreen = f4ColorSSS . g ; 
+    const float fExtinctionCoefficientBlue = f4ColorSSS . b ; 
+    const float fSpecPower = 1.f ; 
+    const float3 f3SpecColor = f3LightColorSpecularResult ; 
+    const float4 f4TexColor = float4TexColor ; 
+    float3 f3LightDir = normalize ( f3ToLight ) ; 
+    float4 f4LightPos ; 
+    float3 f3LightDirSSS ; 
+    float4 f4FinColor ; 
+    
+    float3 f3EyeVector = normalize ( f3CamPos - f4VertexPos . xyz ) ; 
+    f3LightDirSSS = - f3EyeVector ; 
+    f4LightPos = f4CenterAndRadius ; 
+    f4LightPos . w = 1.f ; 
+    
+    float fAttenuation = 10.f * ( 1.f / distance ( f4LightPos , f4VertexPos ) ) ; 
+    
+    const float3 f3Eye = normalize ( f3CamPos . xyz - f4VertexPos . xyz ) ; 
+    float4 f4DotLN = HalfLambert ( f3LightDirSSS , f3Normal ) * fAttenuation ; 
+    
+    float3 f3IndirectLightComponent = ( float3 ) ( fMaterialThickness * max ( 0 , dot ( - f3Normal , f3LightDirSSS ) ) ) ; 
+    f3IndirectLightComponent += HalfLambert ( - f3Eye , f3LightDirSSS ) * fMaterialThickness ; 
+    f3IndirectLightComponent *= fAttenuation ; 
+    f3IndirectLightComponent . r *= fExtinctionCoefficientRed ; 
+    f3IndirectLightComponent . g *= fExtinctionCoefficientGreen ; 
+    f3IndirectLightComponent . b *= fExtinctionCoefficientBlue ; 
+    f3IndirectLightComponent . rgb *= fThickValue ; 
+    
+    float3 f3Rim = ( float3 ) ( 1.f - max ( 0.f , dot ( f3Normal , f3Eye ) ) ) ; 
+    f3Rim *= f3Rim ; 
+    f3Rim *= max ( 0.f , dot ( f3Normal , f3LightDirSSS ) ) * f3SpecColor ; 
+    
+    f4DotLN *= f4TexColor ; 
+    
+    f4FinColor = f4DotLN + float4 ( f3IndirectLightComponent , 1.f ) ; 
+    f4FinColor . a = 1.f ; 
+    f4FinColor . rgb += ( f3Rim * fRimScalar * fAttenuation * f4FinColor . a ) ; 
+    f4FinColor . rgb += ( BlinnPhongSpec ( f3Normal , f3LightDirSSS , fSpecPower ) * fAttenuation * f3SpecColor * f4FinColor . a * .05f ) ; 
+    f4FinColor . rgb *= f3LightColor ; 
+    
+    float fEdge = max ( dot ( normalize ( f3CamPos - f4VertexPos . xyz ) , f3Normal ) , 0 ) ; 
+    [ branch ] 
+    if ( ( fEdge < 0.8f ) && ( fMaterialThickness > 2.f ) ) 
+    { 
+        f3LightDiffuseResult . rgb *= f3IndirectLightComponent / 15.f ; 
+        f3LightColorSpecularResult . rgb *= f3IndirectLightComponent / 15.f ; 
+    } 
+    else 
+    { 
+        f3LightDiffuseResult *= f4FinColor . xyz ; 
+        f3LightColorSpecularResult *= f4FinColor . xyz ; 
+    } 
+} 
+
+#line 213
+
+
+#line 3 "\\\\?\\C:\\Users\\admin\\Documents\\Visual Studio 2010\\Projects\\Vektoria_2015-02-12a\\Vektoria\\trunk\\VektoriaApp\\shaders\\Source\\tiling.hlsl"
+
+
+
+
+
+
+
+
+
+
+#line 24
+
+
+#line 27
+Buffer < float4 > g_pointLightCenterAndRadiusBuffer : register ( t0 ) ; 
+Buffer < float4 > g_spotLightCenterAndRadiusBuffer : register ( t1 ) ; 
+
+
+StructuredBuffer < float4 > g_VPLCenterAndRadiusBuffer : register ( t2 ) ; 
+
+
+#line 36
+
+Texture2DMS < float , 2 > g_depthTexture : register ( t3 ) ; 
+
+
+#line 46
+
+
+#line 52
+groupshared uint ldsZMax ; 
+groupshared uint ldsZMin ; 
+
+#line 56
+groupshared uint ldsPointLightIdxCounterA ; 
+groupshared uint ldsPointLightIdxCounterB ; 
+groupshared uint ldsPointLightIdx [ 2 * 272 ] ; 
+
+#line 61
+groupshared uint ldsSpotLightIdxCounterA ; 
+groupshared uint ldsSpotLightIdxCounterB ; 
+groupshared uint ldsSpotLightIdx [ 2 * 272 ] ; 
+
+
+groupshared uint ldsVPLIdxCounterA ; 
+groupshared uint ldsVPLIdxCounterB ; 
+groupshared uint ldsVPLIdx [ 2 * 1024 ] ; 
+
+
+#line 75
+float4 CreatePlaneEquation ( float4 f4b , float4 f4c ) 
+{ 
+    float4 f4n ; 
+    
+    f4n . xyz = normalize ( cross ( f4b . xyz , f4c . xyz ) ) ; 
+    f4n . w = 0 ; 
+    return f4n ; 
+} 
+
+#line 85
+float GetSignedDistanceFromPlane ( float4 f4p , float4 f4eqn ) 
+{ 
+    return dot ( f4eqn . xyz , f4p . xyz ) ; 
+} 
+
+#line 115
+
+
+
+bool CalculateMinMaxDepthInLdsMSAA ( uint3 uGlobalIdx , uint uDepthBufferNumSamples ) 
+{ 
+    float fMinZForThisPixel = 3.402823466e+38F ; 
+    float fMaxZForThisPixel = 0.f ; 
+    
+    float fOpaqueDepth0 = g_depthTexture . Load ( uint2 ( uGlobalIdx . x , uGlobalIdx . y ) , 0 ) . x ; 
+    float fOpaqueViewPosZ0 = ConvertProjDepthToView ( fOpaqueDepth0 ) ; 
+    
+#line 135
+    
+    if ( fOpaqueDepth0 != 0.f ) 
+    { 
+        fMaxZForThisPixel = max ( fMaxZForThisPixel , fOpaqueViewPosZ0 ) ; 
+        fMinZForThisPixel = min ( fMinZForThisPixel , fOpaqueViewPosZ0 ) ; 
+    } 
+    
+    for ( uint uSampleIdx = 1 ; uSampleIdx < uDepthBufferNumSamples ; uSampleIdx ++ ) 
+    { 
+        float fOpaqueDepth = g_depthTexture . Load ( uint2 ( uGlobalIdx . x , uGlobalIdx . y ) , uSampleIdx ) . x ; 
+        float fOpaqueViewPosZ = ConvertProjDepthToView ( fOpaqueDepth ) ; 
+        
+#line 156
+        
+        if ( fOpaqueDepth != 0.f ) 
+        { 
+            fMaxZForThisPixel = max ( fMaxZForThisPixel , fOpaqueViewPosZ ) ; 
+            fMinZForThisPixel = min ( fMinZForThisPixel , fOpaqueViewPosZ ) ; 
+        } 
+        
+    } 
+    
+    uint uZMaxForThisPixel = asuint ( fMaxZForThisPixel ) ; 
+    uint uZMinForThisPixel = asuint ( fMinZForThisPixel ) ; 
+    InterlockedMax ( ldsZMax , uZMaxForThisPixel ) ; 
+    InterlockedMin ( ldsZMin , uZMinForThisPixel ) ; 
+    
+    return ( ( fMaxZForThisPixel - fMinZForThisPixel ) > 50.f ) ; 
+} 
+
+
+void ApplyLightCulling ( in uint3 uGlobalIdx , in uint uLocalIdxFlattend , in uint3 uGroupIdx , out float fHalfZ ) 
+{ 
+    if ( uLocalIdxFlattend == 0 ) 
+    { 
+        ldsZMin = 0x7f7fffff ; 
+        ldsZMax = 0 ; 
+        ldsPointLightIdxCounterA = 0 ; 
+        ldsPointLightIdxCounterB = 272 ; 
+        ldsSpotLightIdxCounterA = 0 ; 
+        ldsSpotLightIdxCounterB = 272 ; 
+        
+        ldsVPLIdxCounterA = 0 ; 
+        ldsVPLIdxCounterB = 1024 ; 
+        
+    } 
+    
+#line 191
+    float4 f4FrustumEqn [ 4 ] ; 
+    { 
+        uint uPxm = 32 * uGroupIdx . x ; 
+        uint uPym = 32 * uGroupIdx . y ; 
+        uint uPxp = 32 * ( uGroupIdx . x + 1 ) ; 
+        uint uPyp = 32 * ( uGroupIdx . y + 1 ) ; 
+        
+        uint uWindowWitdthDivisibleByTileRes = 32 * g_uNumTilesX ; 
+        uint uWindowHeightDivisibkeByTileRes = 32 * g_uNumTilesY ; 
+        
+#line 202
+        float4 f4Frustum [ 4 ] ; 
+        f4Frustum [ 0 ] = ConvertProjToView ( float4 ( uPxm / ( float ) uWindowWitdthDivisibleByTileRes * 2.f - 1.f , 
+        ( uWindowHeightDivisibkeByTileRes - uPym ) / ( float ) uWindowHeightDivisibkeByTileRes * 2.f - 1.f , 
+        1.f , 1.f ) ) ; 
+        f4Frustum [ 1 ] = ConvertProjToView ( float4 ( uPxp / ( float ) uWindowWitdthDivisibleByTileRes * 2.f - 1.f , 
+        ( uWindowHeightDivisibkeByTileRes - uPym ) / ( float ) uWindowHeightDivisibkeByTileRes * 2.f - 1.f , 
+        1.f , 1.f ) ) ; 
+        f4Frustum [ 2 ] = ConvertProjToView ( float4 ( uPxp / ( float ) uWindowWitdthDivisibleByTileRes * 2.f - 1.f , 
+        ( uWindowHeightDivisibkeByTileRes - uPyp ) / ( float ) uWindowHeightDivisibkeByTileRes * 2.f - 1.f , 
+        1.f , 1.f ) ) ; 
+        f4Frustum [ 3 ] = ConvertProjToView ( float4 ( uPxm / ( float ) uWindowWitdthDivisibleByTileRes * 2.f - 1.f , 
+        ( uWindowHeightDivisibkeByTileRes - uPyp ) / ( float ) uWindowHeightDivisibkeByTileRes * 2.f - 1.f , 
+        1.f , 1.f ) ) ; 
+        
+#line 217
+        for ( uint i = 0 ; i < 4 ; i ++ ) 
+        { 
+            f4FrustumEqn [ i ] = CreatePlaneEquation ( f4Frustum [ i ] , f4Frustum [ ( i + 1 ) & 3 ] ) ; 
+        } 
+    } 
+    
+    GroupMemoryBarrierWithGroupSync ( ) ; 
+    
+#line 227
+    
+    uint uDepthBufferWidth , uDepthBufferHeight , uDepthBufferNumSamples ; 
+    g_depthTexture . GetDimensions ( uDepthBufferWidth , uDepthBufferHeight , uDepthBufferNumSamples ) ; 
+    CalculateMinMaxDepthInLdsMSAA ( uGlobalIdx , uDepthBufferNumSamples ) ; 
+    
+    
+    GroupMemoryBarrierWithGroupSync ( ) ; 
+    
+    float fMaxZ = asfloat ( ldsZMax ) ; 
+    float fMinZ = asfloat ( ldsZMin ) ; 
+    fHalfZ = ( fMinZ + fMaxZ ) / 2.f ; 
+    
+#line 240
+    for ( uint i = uLocalIdxFlattend ; i < g_uNumLights ; i += ( 32 * 32 ) ) 
+    { 
+        float4 f4Center = g_pointLightCenterAndRadiusBuffer [ i ] ; 
+        float fR = f4Center . w ; 
+        f4Center . xyz = mul ( float4 ( f4Center . xyz , 1.f ) , g_mView ) . xyz ; 
+        
+#line 247
+        if ( ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 0 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 1 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 2 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 3 ] ) < fR ) ) 
+        { 
+            if ( - f4Center . z + fMinZ < fR && f4Center . z - fHalfZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsPointLightIdxCounterA , 1 , uDstIdx ) ; 
+                ldsPointLightIdx [ uDstIdx ] = i ; 
+            } 
+            if ( - f4Center . z + fHalfZ < fR && f4Center . z - fMaxZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsPointLightIdxCounterB , 1 , uDstIdx ) ; 
+                ldsPointLightIdx [ uDstIdx ] = i ; 
+            } 
+        } 
+    } 
+    
+#line 268
+    for ( uint j = uLocalIdxFlattend ; j < g_uNumSpotLights ; j += ( 32 * 32 ) ) 
+    { 
+        float4 f4Center = g_spotLightCenterAndRadiusBuffer [ j ] ; 
+        float fR = f4Center . w ; 
+        f4Center . xyz = mul ( float4 ( f4Center . xyz , 1.f ) , g_mView ) . xyz ; 
+        
+#line 275
+        if ( ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 0 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 1 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 2 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 3 ] ) < fR ) ) 
+        { 
+            if ( - f4Center . z + fMinZ < fR && f4Center . z - fHalfZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsSpotLightIdxCounterA , 1 , uDstIdx ) ; 
+                ldsSpotLightIdx [ uDstIdx ] = j ; 
+            } 
+            if ( - f4Center . z + fHalfZ < fR && f4Center . z - fMaxZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsSpotLightIdxCounterB , 1 , uDstIdx ) ; 
+                ldsSpotLightIdx [ uDstIdx ] = j ; 
+            } 
+        } 
+    } 
+    
+    uint uNumVPLs = min ( g_uMaxVPLs , g_uNumVPLs ) ; 
+    
+#line 298
+    for ( uint k = uLocalIdxFlattend ; k < uNumVPLs ; k += ( 32 * 32 ) ) 
+    { 
+        float4 f4Center = g_VPLCenterAndRadiusBuffer [ k ] ; 
+        float fR = f4Center . w ; 
+        f4Center . xyz = mul ( float4 ( f4Center . xyz , 1.f ) , g_mView ) . xyz ; 
+        
+#line 305
+        if ( ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 0 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 1 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 2 ] ) < fR ) && 
+        ( GetSignedDistanceFromPlane ( f4Center , f4FrustumEqn [ 3 ] ) < fR ) ) 
+        { 
+            if ( - f4Center . z + fMinZ < fR && f4Center . z - fHalfZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsVPLIdxCounterA , 1 , uDstIdx ) ; 
+                ldsVPLIdx [ uDstIdx ] = k ; 
+            } 
+            if ( - f4Center . z + fHalfZ < fR && f4Center . z - fMaxZ < fR ) 
+            { 
+                uint uDstIdx = 0 ; 
+                InterlockedAdd ( ldsVPLIdxCounterB , 1 , uDstIdx ) ; 
+                ldsVPLIdx [ uDstIdx ] = k ; 
+            } 
+        } 
+    } 
+    
+} 
+
+#line 330
+RWBuffer < uint > g_perTilePointLightIndexBufferOut : register ( u0 ) ; 
+RWBuffer < uint > g_perTileSpotLightIndexBufferOut : register ( u1 ) ; 
+
+RWBuffer < uint > g_perTileVPLIndexBufferOut : register ( u2 ) ; 
+
+
+#line 338
+[ numthreads ( 32 , 32 , 1 ) ] 
+void CullLightCS ( uint3 uGlobalIdx : SV_DispatchThreadID , uint3 uLocalIdx : SV_GroupThreadID , uint3 uGroupIdx : SV_GroupID ) 
+{ 
+    uint uLocalIdxFlattened = uLocalIdx . x + uLocalIdx . y * 32 ; 
+    
+    float fHalfZ ; 
+    ApplyLightCulling ( uGlobalIdx , uLocalIdxFlattened , uGroupIdx , fHalfZ ) ; 
+    
+#line 347
+    { 
+        uint uTileIdxFlattened = uGroupIdx . x + uGroupIdx . y * g_uNumTilesX ; 
+        uint uStartOffset = g_uMaxNumElementsPerTile * uTileIdxFlattened ; 
+        
+        for ( uint i = uLocalIdxFlattened ; i < ldsPointLightIdxCounterA ; i += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTilePointLightIndexBufferOut [ uStartOffset + i + 4 ] = ldsPointLightIdx [ i ] ; 
+        } 
+        
+        for ( uint j = uLocalIdxFlattened ; j < ldsPointLightIdxCounterB - 272 ; j += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTilePointLightIndexBufferOut [ uStartOffset + j + 4 + g_uMaxNumLightsPerTile ] = ldsPointLightIdx [ j + 272 ] ; 
+        } 
+        
+        if ( uLocalIdxFlattened == 0 ) 
+        { 
+            
+            uint uHalfZBits = asuint ( fHalfZ ) ; 
+            uint uHalfZBitsHigh = uHalfZBits >> 16 ; 
+            uint uHalfZBitsLow = uHalfZBits & 0x0000FFFF ; 
+            g_perTilePointLightIndexBufferOut [ uStartOffset + 0 ] = uHalfZBitsHigh ; 
+            g_perTilePointLightIndexBufferOut [ uStartOffset + 1 ] = uHalfZBitsLow ; 
+            
+#line 373
+            g_perTilePointLightIndexBufferOut [ uStartOffset + 2 ] = ldsPointLightIdxCounterA ; 
+            
+            g_perTilePointLightIndexBufferOut [ uStartOffset + 3 ] = ldsPointLightIdxCounterB - 272 ; 
+        } 
+    } 
+    
+#line 380
+    { 
+        uint uTileIdxFlattened = uGroupIdx . x + uGroupIdx . y * g_uNumTilesX ; 
+        uint uStartOffset = g_uMaxNumElementsPerTile * uTileIdxFlattened ; 
+        
+        for ( uint i = uLocalIdxFlattened ; i < ldsSpotLightIdxCounterA ; i += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + i + 4 ] = ldsSpotLightIdx [ i ] ; 
+        } 
+        
+        for ( uint j = uLocalIdxFlattened ; j < ldsSpotLightIdxCounterB - 272 ; j += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + j + 4 + g_uMaxNumLightsPerTile ] = ldsSpotLightIdx [ j + 272 ] ; 
+        } 
+        
+        if ( uLocalIdxFlattened == 0 ) 
+        { 
+            
+            uint uHalfZBits = asuint ( fHalfZ ) ; 
+            uint uHalfZBitsHigh = uHalfZBits >> 16 ; 
+            uint uHalfZBitsLow = uHalfZBits & 0x0000FFFF ; 
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + 0 ] = uHalfZBitsHigh ; 
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + 1 ] = uHalfZBitsLow ; 
+            
+#line 406
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + 2 ] = ldsSpotLightIdxCounterA ; 
+            
+            g_perTileSpotLightIndexBufferOut [ uStartOffset + 3 ] = ldsSpotLightIdxCounterB - 272 ; 
+        } 
+    } 
+    
+    
+    { 
+        uint uTileIdxFlattened = uGroupIdx . x + uGroupIdx . y * g_uNumTilesX ; 
+        uint uStartOffset = g_uMaxNumVPLElementsPerTile * uTileIdxFlattened ; 
+        
+        for ( uint i = uLocalIdxFlattened ; i < ldsVPLIdxCounterA ; i += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTileVPLIndexBufferOut [ uStartOffset + i + 4 ] = ldsVPLIdx [ i ] ; 
+        } 
+        
+        for ( uint j = uLocalIdxFlattened ; j < ldsVPLIdxCounterB - 1024 ; j += ( 32 * 32 ) ) 
+        { 
+            
+            g_perTileVPLIndexBufferOut [ uStartOffset + j + 4 + g_uMaxNumVPLsPerTile ] = ldsVPLIdx [ j + 1024 ] ; 
+        } 
+        
+        if ( uLocalIdxFlattened == 0 ) 
+        { 
+            
+            uint uHalfZBits = asuint ( fHalfZ ) ; 
+            uint uHalfZBitsHigh = uHalfZBits >> 16 ; 
+            uint uHalfZBitsLow = uHalfZBits & 0x0000FFFF ; 
+            g_perTileVPLIndexBufferOut [ uStartOffset + 0 ] = uHalfZBitsHigh ; 
+            g_perTileVPLIndexBufferOut [ uStartOffset + 1 ] = uHalfZBitsLow ; 
+            
+#line 439
+            g_perTileVPLIndexBufferOut [ uStartOffset + 2 ] = ldsVPLIdxCounterA ; 
+            
+            g_perTileVPLIndexBufferOut [ uStartOffset + 3 ] = ldsVPLIdxCounterB - 1024 ; 
+        } 
+    } 
+    
+}  

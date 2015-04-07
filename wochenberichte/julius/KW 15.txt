@@ -1,0 +1,2 @@
+Projektname und eigenschaften festgelegt.
+Git repository angelegt und umbenanntes template hinzugefügt.

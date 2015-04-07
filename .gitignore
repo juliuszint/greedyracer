@@ -22,7 +22,12 @@
 *.a
 *.lib
 
+# Visualstudio Intelisense
+*.sdf
+
 # Executables
 *.exe
 *.out
 *.app
+
+
