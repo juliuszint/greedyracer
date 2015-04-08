@@ -25,6 +25,7 @@
 # Visualstudio Intelisense
 *.sdf
 *.opensdf
+*.suo
 
 # Executables
 *.exe
