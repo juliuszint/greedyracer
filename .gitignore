@@ -2,7 +2,7 @@
 *.slo
 *.lo
 *.o
-*.obj
+*.db
 
 # Precompiled Headers
 *.gch
@@ -32,6 +32,7 @@
 *.out
 *.app
 
+*.user
 # Verzeichnisse
 lib/
 source/debug

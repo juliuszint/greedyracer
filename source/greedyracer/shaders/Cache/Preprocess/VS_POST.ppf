@@ -1,4 +1,4 @@
-#line 1 "\\\\?\\C:\\Users\\admin\\Documents\\Visual Studio 2010\\Projects\\VektoriaV13_Beta\\AppHalloKugel\\VektoriaApp\\shaders\\Source\\postprocessing.hlsl"
+#line 1 "\\\\?\\G:\\greedyracer\\source\\greedyracer\\shaders\\Source\\postprocessing.hlsl"
 
 
 #line 1 "postconstants.h"
@@ -86,7 +86,7 @@ float3 ToneMap ( float3 f3Color , float fAvgLuminance , float fThreshold , float
     return f3Color ; 
 } 
 
-#line 2 "\\\\?\\C:\\Users\\admin\\Documents\\Visual Studio 2010\\Projects\\VektoriaV13_Beta\\AppHalloKugel\\VektoriaApp\\shaders\\Source\\postprocessing.hlsl"
+#line 2 "\\\\?\\G:\\greedyracer\\source\\greedyracer\\shaders\\Source\\postprocessing.hlsl"
 
 
 #line 1 "fxaa.h"
@@ -362,7 +362,7 @@ float4 rcpFrameOpt
 #line 345
 
 
-#line 13 "\\\\?\\C:\\Users\\admin\\Documents\\Visual Studio 2010\\Projects\\VektoriaV13_Beta\\AppHalloKugel\\VektoriaApp\\shaders\\Source\\postprocessing.hlsl"
+#line 13 "\\\\?\\G:\\greedyracer\\source\\greedyracer\\shaders\\Source\\postprocessing.hlsl"
 Texture2D tex2D [ 8 ] : register ( t15 ) ; 
 
 #line 17

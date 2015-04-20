@@ -73,7 +73,30 @@ public:
 	void WindowReSize(int iNewWidth, int iNewHeight); // WindowsReSize wird immer dann aufgerufen, wenn der Benutzer die Fenstergröße verändert hat
 
 private:
-    // Hier ist Platz für Deine Vektoriaobjekte:
+	HWND m_hwnd;
+	bool m_bReSized;
+	// Hier ist Platz für Deine Vektoriaobjekte:
+	CRoot m_zroot;
+	CScene m_zscene;
+	CHardware m_zh;
+	CFrame m_zframe;
+	CViewport m_zviewport;
+
+	CDeviceKeyboard keyboard;
+	
+	//CPlacement m_zpSphere;
+	//CGeoSphere m_zgSphere;
+	//CMaterial m_zm;
+
+	CFileWavefront importer;
+	CGeo * worldGeo;
+	CPlacement worldPlacement;
+	CMaterial worldMaterial;
+
+	CPlacement m_zpCamera;
+	CCamera m_zcamera;
+	CParallelLight m_zlight;
+
 };
 
 
