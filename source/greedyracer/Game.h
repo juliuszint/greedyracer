@@ -93,6 +93,10 @@ private:
 	CPlacement worldPlacement;
 	CMaterial worldMaterial;
 
+	CGeoSphere carGeo;
+	CPlacement carPlacement;
+	CMaterial carMaterial;
+
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;

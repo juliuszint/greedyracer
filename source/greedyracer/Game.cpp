@@ -36,15 +36,19 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->worldGeo = this->importer.LoadGeo("..\\..\\models\\map.obj");
 	this->worldPlacement.AddGeo(this->worldGeo);
 	this->worldGeo->ReduceRedundancy();
-
-	m_zscene.AddPlacement(&worldPlacement);
 	this->worldPlacement.Translate(CHVector(0, 0, -3));
 	this->worldMaterial.MakeTextureDiffuse("textures\\mapTexture.jpg");
 	this->worldMaterial.SetTextureGlowBlack();
 	this->worldGeo->SetMaterial(&this->worldMaterial);
 	this->worldGeo->MapPlanarY();
-	
-	
+	this->m_zscene.AddPlacement(&worldPlacement);
+
+	this->carMaterial.MakeTextureDiffuse("textures\\green_image.jpg");
+	this->carGeo.Init(0.05f, &this->carMaterial, 50, 50);
+	this->carPlacement.AddGeo(&this->carGeo);
+	this->carPlacement.Translate(CHVector(0, 0.1, -3));
+	this->m_zscene.AddPlacement(&this->carPlacement);
+
 	m_zroot.AddFrameHere(&m_zframe);
 	m_zframe.AddViewport(&m_zviewport);
 	m_zroot.AddScene(&m_zscene);
