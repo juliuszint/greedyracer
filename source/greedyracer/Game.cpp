@@ -38,6 +38,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->worldGeo->ReduceRedundancy();
 	this->worldPlacement.Translate(CHVector(0, 0, -3));
 	this->worldMaterial.MakeTextureDiffuse("textures\\mapTexture.jpg");
+	this->worldMaterial.MakeTextureSpecular("textures\\mapReflection.jpg");
 	this->worldMaterial.SetTextureGlowBlack();
 	this->worldGeo->SetMaterial(&this->worldMaterial);
 	this->worldGeo->MapPlanarY();
