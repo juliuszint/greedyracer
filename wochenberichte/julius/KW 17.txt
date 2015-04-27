@@ -1,0 +1,15 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Erste lauffähige Version
+
+Damit eine Entwicklung mit mehreren Teilnehmern möglich ist hab ich das Projekt erstmal soweit hochgezogen 
+das jeder seine Sandbox hat in der er Arbeiten kann. Dazu hab ich eine Textur in Photoshop erstellt für die
+Map und in Blender ein World-Mesh. 
+
+Nachdem das Mesh geladen war und die Texture demensprechend darüber lag hab ich mich ein bisschen in die
+Input möglichkeiten von Vektoria eingelesen und es möglichgemacht das man die Camera mit WASD und den Pfeiltasten
+steuert. so war es möglich über die Welt zu fliegen.
+
+Danach hab ich noch ein weiteres Mesh (sphere) zur welt hinzugefügt (als dummy Auto) von dem Punkt an sollte
+es möglich sein für alle am Projekt zu arbeiten ohne sich in die quere zu kommen.
+

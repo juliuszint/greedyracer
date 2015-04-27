@@ -1,0 +1,18 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Anlegen eines Projekts
+
+Zu beginn hab ich mich eingelesen in die Versionsverwaltung Git und hab mir dann auf Github einen Account
+eingerichtent. Anschließend hab ich ein Repository mit dem Namen GreedyRacer angelegt und mich mit dem 
+Pushen und Pullen von Changesets vertraut gemacht. 
+
+Das Projekttemplate aus dem download der Vektoria Engine angepasst und alle Stellen die den Projektnamen
+enthalten auf GreedyRacer umgeändert. Geschaut ob alles lauffähig ist. (Da ich einen leeren Szenegraphen
+erstmal hochladen wollte gab es Probleme da die Beta version bei einem leeren Szenegraphen abgestürzt ist.
+mit der neuen version hat sich das allerdings geändert)
+
+Erstes rumspielen mit dem Import von Blenderfiles. (Mit der neusten 32 Bit version hat es nicht geklappt
+allerdings mit einer älteren. Danach umstieg von .blend files auf .obj files)
+
+
+

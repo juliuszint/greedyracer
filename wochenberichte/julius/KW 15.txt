@@ -1,2 +1,17 @@
-Projektname und eigenschaften festgelegt.
-Git repository angelegt und umbenanntes template hinzugefügt.
+Julius Zint									16.04.15 - 10.04.15
+
+Grundsätzliche Gameidee
+
+
+Diskussionen zur Spielidee (Brainstorming). Die ideen reichten von einem "ganz normalen" Rennspiel über
+Spiele mit Waffen an den Autos und Rennspielen in All. Am Ende haben wir uns für ein recht "simples" Spiel
+entschieden was so allerdings noch nicht auf dem Markt vorhanden ist und zwar ein Rundenbasiertes Rennspiel
+wo man über riskante Abkürzungen zeit rausholen kann oder noch mehr zeit verlieren kann. 
+
+Erste Gedanken über den Rennkurs und dessen hindernisse. Wir haben uns dafür entschieden die erste Map die
+wir machen mit vielen elementen aus dem Allgäu zu versehen (um die herkunft des spiels zu zeigen). Als hindernisse
+dienen einmal ein Wald in dem ein Baum auf die Straße fällt oder ein Reh über die Straße läuft. Ein Staudamm der
+von zeit zu zeit wasser durchlässt. Ein Dorf in dem eine Brauerei steht wo von zeit zu zeit ein Bierfass über die
+Straße rollt und zu guter letzt eine Brücke die hochfährt von zeit zu zeit.
+
+Festlegen des Spielnamens auf GreedyRacer
