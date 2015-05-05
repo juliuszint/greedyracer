@@ -84,21 +84,30 @@ private:
 
 	CDeviceKeyboard keyboard;
 	
-	//CPlacement m_zpSphere;
-	//CGeoSphere m_zgSphere;
-	//CMaterial m_zm;
-
 	CFileWavefront importer;
 	CGeo * worldGeo;
 	CPlacement worldPlacement;
 	CMaterial worldMaterial;
 
+	CMaterial routeMaterial;
+	CPlacement routePlacement;
+	
+	#define RELEM 40
+	CPlacement routePlacements[RELEM];
+	CGeoQuad routeGeos[RELEM];
+
+	CMaterial groundMaterial;
+	#define GELEM 80
+	CPlacement groundPlacements[GELEM][GELEM];
+	CGeoQuad groundGeos[GELEM][GELEM];
+
 	CGeoSphere carGeo;
 	CPlacement carPlacement;
 	CMaterial carMaterial;
 
-	CPlacement m_zpCamera;
-	CCamera m_zcamera;
+	CPlacement cameraPointPlacement;
+	CPlacement cameraPlacement;
+	CCamera camera;
 	CParallelLight m_zlight;
 
 };

@@ -1,0 +1,17 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Worldmesh mit ordentlichem Kurs
+
+In einer Besprechung haben wir uns zusammengehockt und das Productbacklog mit ersten Userstories befüllt.
+Haben einen ersten Sprint festegelgt in dem jeder aufgaben hat für die Woche.
+
+Hab mich zum erstem mal mit Prozeduraler Modellierung auseinandergesetzt. Um ein ordentliches modell für
+den kurs hinzubekommen. Als erste hab ich mir CGeoQuad angeschaut und zur Szene hinzugefügt. Um nicht immer
+die Kamera in position zu fliegen hab ich mir angeschaut wie ich die Kamera position fix einstellen kann.
+zuerst gabs probleme weil ich die kamera ausrichung über das Placement machen wollte (was nicht funktioniert)
+um die kamera in eine bestimmte richtung schauen zu lassen gibt es die SetPointing Methode in der man einen
+Punkt angiebt wohin die Kamera schauen soll.
+
+Nachdem die Kamera eingestellt war war immer noch nichts zu sehen obwohl das CGeoQuad mit textur und placement
+im Szenegraphen eingehängt war. Das problem war das ich in die falsche richtung Rotiert habe und somit von hinten
+auf das quad geschaut hab. Im viewport war Backfaceculling angeschaltet und daher war nichts zu sehen.

@@ -1,0 +1,6 @@
+Julius Zint									16.04.15 - 10.04.15
+
+World mesh mit ordentlichem Kurs
+
+Nachdem das erste Quad zu sehen war mit einer straßentextur wollte ich den kurs durch kopieren von mehreren Quads
+nacheinander machen. aktuell gibt es ein define mit der man eine beliebig lange (gerade) strecke erstellen kann. 
