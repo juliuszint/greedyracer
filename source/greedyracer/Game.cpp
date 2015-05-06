@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Game.h"
+#include "RouteGenerator.h"
 
 // Todo (julius): neue engine herunterladen (bug mit leerem Szenegraphen gefixed)
 // blender lieber als .obj exportieren und dann importieren 
@@ -61,13 +62,18 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->groundMaterial.MakeTextureDiffuse("textures\\grass.jpg");
 	this->groundMaterial.MakeTextureSpecular("textures\\black_image.jpg");
 
+	CRouteGenerator generator;
+	CPlacement route = generator.Generate();
+
 	for (int i = 0; i < RELEM; i++)
 	{
 		this->routeGeos[i].Init(28, 19, &this->routeMaterial);
 		this->routeGeos[i].MapPlanarZ();
 		this->routePlacements[i].AddGeo(&this->routeGeos[i]);
 		this->routePlacements[i].RotateXDelta(-HALFPI);
-		this->routePlacements[i].TranslateDelta(CHVector(100, 0.1, 100 + 38 * i));
+		this->routePlacements[i].TranslateDelta(CHVector(100, 0.1, 100 + 38 * i,
+			
+			1));
 		this->m_zscene.AddPlacement(&this->routePlacements[i]);
 		//this->routePlacement.AddPlacement(&this->routePlacements[i]);
 	}
