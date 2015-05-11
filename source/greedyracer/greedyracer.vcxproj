@@ -138,17 +138,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BigHouse.h" />
     <ClInclude Include="Brewery.h" />
+    <ClInclude Include="Camaro.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="LittleHouse.h" />
+    <ClInclude Include="Porsche.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Track.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BigHouse.cpp" />
     <ClCompile Include="Brewery.cpp" />
+    <ClCompile Include="Camaro.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="LittleHouse.cpp" />
+    <ClCompile Include="Porsche.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="greedyracer.cpp" />
+    <ClCompile Include="Track.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VektoriaTest.ico" />

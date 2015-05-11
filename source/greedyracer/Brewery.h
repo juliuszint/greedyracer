@@ -27,14 +27,14 @@ public:
 	CPlacement m_zpChimney;
 	CPlacement m_zpAllPlacements;
 
-	CMaterial m_zmFacadeBrewery;
-	CMaterial m_zmRoofBrewery;
-	CMaterial m_zmFacadeBreweryTower;
-	CMaterial m_zmRoofBreweryTower;
-	CMaterial m_zmFacadeBrewerySupply;
-	CMaterial m_zmFacadeBreweryChimney;
+	CMaterial m_zmFacade;
+	CMaterial m_zmRoof;
+	CMaterial m_zmFacadeTower;
+	CMaterial m_zmRoofTower;
+	CMaterial m_zmFacadeSupply;
+	CMaterial m_zmFacadeChimney;
 
-	CPlacement GetBreweryPlacement();
+	CPlacement* GetBreweryPlacement();
 
 	void InitBrewery();
 
