@@ -1,0 +1,25 @@
+Peter Axmann										06.04.15 - 12.04.15
+
+Grundplanung des Projekts									
+
+In der ersten Woche des Projekts haben wir gemeinschaftlich eine Grundidee für unseren 3D_Fahrsimulator 
+festgelegt. Durch Brainstorming haben wir viele erschiedene Ideen für unser Projekt gesammelt. Wir haben
+uns dann ersteinmal auf ein Simples Rundenbasiertes Rennspiel mit Perspektive von oben festgelegt. Die Idee
+des Spiels ist es ein Partyrennspiel zu kreieren, welches Lokal auf einem Computer mit (bisher) zwei Personen
+gespielt werden kann. Im Vordergrund des Spiels steht der Funfaktor, es soll Spaß machen und durch eine liebevolle
+Grafik bestechen. 
+Die Idee am Spiel ist es, Abkürzungen zu erkennen und diese zu nutzen um viel Zeit herauszuholen und das Rennen
+für sich zu entscheiden, die Abkürzungen sind aber mit Fallen versehen und nicht immer zugänglich!
+Das Design der Spielumgebung soll an das Allgäu erinner und mit vielen Elementen aus der Umgebung hervorstechen.
+
+Es soll eine Brücke im Spiel implementiert werden welche eine Abkürzung darstellt, die Brücke wird sich aber
+ofters im Spielverlauf hochziehen und somit den Weg versperren. Desweiteren wurde besprochen, dass mein ein
+kleines Waldstück macht bei welchem Tiere über der Straße rennen sollen. 
+Ausßerdem geplan ist, ein wichtiges emelent der Bayrischen Kulturmit zu implementieren: Bier. Derzeit angesehen
+ist es auch hier wiederum eine Abkürung zu befahren bei welcher große Bierfäßer teile des Weges blockieren sollen 
+als Szenerie ist ein kleines "Dorf" mit Bierbrauerei gedacht.
+Als letzes wurde besprochen einen Staudamm mit zu implementieren, welcher einen Streckenabschnitt überfluttet und
+somit die Straße(Abkürzung) nichtmehr befahrbar macht.
+
+Als Letztes wurde noch der Name des Projekts festgelegt: GreedyRacer
+

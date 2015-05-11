@@ -1,0 +1,12 @@
+Peter Axmann										20.04.15 - 26.04.15
+
+3D-Modell Erstellung und Hiracharchitektur Modellierung
+
+Als Erste Aufgabe der Woche habe ich eine mögliche Autovariante für das Spiel entworfen mit dem 3D Programm 
+Maya von Autodesk. Das Mesh wurde dann Trianguliert und als OBJ Exportiert um zu testen wie sich die 
+Vektoria-Engine mit der Importierung anstellt. Die Importierung von einem Mesh als OBJ verlief problemlos, 
+nur leider werden von Maya,Blender und CO. keine  BI-Tangenten mitgeliefert, welche für Bump-Mapping 
+notwendig sind, somit war klar: nur die Autos in einem 3D-Programm erstellen und die Spielwelt mit 
+prozedurales Modellierung. 
+Die Zweite Aufgabe folte aus der ersten: Einarbeitung in prozedurale Modellierung mit der Vektoria-Engine.
+Ich habe mich in dieser Woche hauptsächlich mit Hiracharchitektur, welche die Vektoria-Engine bietet, beschäftigt.

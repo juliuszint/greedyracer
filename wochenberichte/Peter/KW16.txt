@@ -1,0 +1,11 @@
+Peter Axmann										13.04.15 - 19.04.15
+
+Vertrautmachen mit GIT und erste Versuche mit der Vektoria-Engine
+
+IN dieser Woche habe ich mich mit der Verwaltungssoftware GIT außeinander gesetzt und mich eingearbeitet in die 
+verschiedenen Funktionen der Software wie z.B. GIT Clone, Push, Pull. Desweiteren habe ich mir das Repository 
+welches Julius angelegt hat gecloned und gestestet ob alles funktioniert, dabei wurde festgestellt, dass mit der 
+Vektoria V13Beta ein paar Fehler aufgetreten sind welches die Anwendung abstürzen lässt, wurde aber behoben und
+alles lauffähig gemacht.
+Außerdem habe ich mich mit der Vektoria-Engine eingearbeitet und die ersten Übungen der Dokumentation 
+nachgestellt.

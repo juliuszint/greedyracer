@@ -56,6 +56,7 @@
 
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
+#include "Brewery.h"
 
 using namespace Vektoria;
 
@@ -100,6 +101,44 @@ private:
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
+
+	//Häuser
+		//Windows
+	
+		//Gebäude
+	CGeoWing m_zgHouseH1;
+	CGeoWing m_zgHouseH2;
+	CGeoWing m_zgBrewery;
+	CGeoWindow m_zgBreweryDoor;
+	CGeoWing m_zgBreweryTower;
+	CGeoTube m_zgBrewerySupply;
+	CGeoWall m_zgBreweryChimney;
+
+		//Placements
+	CPlacement m_zpHouseH1;
+	CPlacement m_zpHouseH2;
+	CPlacement m_zpBrewery;
+	CPlacement m_zpBreweryAll;
+	CPlacement m_zpBreweryTower;
+	CPlacement m_zpBreweryTower2;
+	CPlacement m_zpBrewerySupply;
+	CPlacement m_zpBrewerySupply2;
+	CPlacement m_zpBreweryChimney;
+	CPlacement m_zpAllHouses;
+
+		//Materials
+	CMaterial m_zmFacadeH1;
+	CMaterial m_zmRoofH1;
+	CMaterial m_zmFacadeH2;
+	CMaterial m_zmRoofH2;
+	CMaterial m_zmFacadeBrewery;
+	CMaterial m_zmRoofBrewery;
+	CMaterial m_zmFacadeBreweryTower;
+	CMaterial m_zmRoofBreweryTower;
+	CMaterial m_zmFacadeBrewerySupply;
+	CMaterial m_zmFacadeBreweryChimney;
+
+	//CBrewery m_zpBrewery;
 
 };
 
