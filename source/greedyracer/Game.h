@@ -56,6 +56,8 @@
 
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
+#include "CharacterController.h"
+#include "Vehicle.h"
 
 using namespace Vektoria;
 
@@ -109,6 +111,8 @@ private:
 	CPlacement cameraPlacement;
 	CCamera camera;
 	CParallelLight m_zlight;
+
+	CCharacterController Cont1;
 
 };
 

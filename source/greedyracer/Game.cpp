@@ -49,11 +49,11 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	//this->m_zscene.AddPlacement(&worldPlacement);
 	//this->worldPlacement.RotateYDelta(HALFPI);
 
-	//this->carMaterial.MakeTextureDiffuse("textures\\green_image.jpg");
-	//this->carGeo.Init(1.05f, &this->carMaterial, 50, 50);
-	//this->carPlacement.AddGeo(&this->carGeo);
-	//this->carPlacement.Translate(CHVector(0, 0.1, -3));
-	//this->m_zscene.AddPlacement(&this->carPlacement);
+	this->carMaterial.MakeTextureDiffuse("textures\\green_image.jpg");
+	this->carGeo.Init(1.05f, &this->carMaterial, 50, 50);
+	this->carPlacement.AddGeo(&this->carGeo);
+	this->carPlacement.Translate(CHVector(100.f, 1.1f, 400.f));
+	this->m_zscene.AddPlacement(&this->carPlacement);
 
 	this->routeMaterial.MakeTextureDiffuse("textures\\streettexture.jpg");
 	this->routeMaterial.MakeTextureSpecular("textures\\black_image.jpg");
@@ -64,6 +64,10 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	CRouteGenerator generator;
 	CPlacement route = generator.Generate();
+
+	Cont1.addCharacter(&carPlacement);
+	Cont1.addKeyboard(&keyboard);
+
 
 	for (int i = 0; i < RELEM; i++)
 	{
@@ -93,9 +97,12 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	//this->m_zscene.AddPlacement(&this->routePlacement);
 	
+	keyboard.SetWASDTranslationSensitivity(10);
+
 	this->m_zroot.AddFrameHere(&m_zframe);
 	this->m_zframe.AddViewport(&m_zviewport);
 	this->m_zroot.AddScene(&m_zscene);
+
 
 	this->cameraPlacement.AddCamera(&camera);
 	this->cameraPlacement.Translate(CHVector(200, 200, 400));
@@ -114,6 +121,8 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	this->keyboard.PlaceWASD(this->cameraPlacement, res, true);
 	
+	this->Cont1.Move(10 * fTimeDelta);
+
 	this->m_zroot.Tick(fTimeDelta);
 }
 

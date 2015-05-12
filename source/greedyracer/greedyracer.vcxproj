@@ -138,17 +138,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RouteGenerator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="RouteGenerator.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="greedyracer.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VektoriaTest.ico" />
