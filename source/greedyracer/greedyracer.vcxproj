@@ -138,15 +138,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="world\BigHouse.h" />
+    <ClInclude Include="world\Brewery.h" />
+    <ClInclude Include="world\Buildings.h" />
+    <ClInclude Include="world\Camaro.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="world\LittleHouse.h" />
+    <ClInclude Include="world\Porsche.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="world\Track.h" />
+    <ClInclude Include="world\Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="world\BigHouse.cpp" />
+    <ClCompile Include="world\Brewery.cpp" />
+    <ClCompile Include="world\Buildings.cpp" />
+    <ClCompile Include="world\Camaro.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="world\LittleHouse.cpp" />
+    <ClCompile Include="world\Porsche.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="greedyracer.cpp" />
+    <ClCompile Include="world\Track.cpp" />
+    <ClCompile Include="world\Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VektoriaTest.ico" />
