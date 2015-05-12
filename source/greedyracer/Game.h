@@ -57,6 +57,8 @@
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
 #include "world\Ground.h";
+#include "world\Track.h"
+#include "world\Camaro.h"
 
 using namespace Vektoria;
 
@@ -85,6 +87,13 @@ private:
 
 	CDeviceKeyboard keyboard;
 	Ground ground;
+	CPlacement* groundPlacement;
+
+	CTrack track;
+	CPlacement* trackPlacment;
+
+	CCamaro camaro;
+	CPlacement* camaroPlacment;
 
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;

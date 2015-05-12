@@ -35,8 +35,20 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// Note(julius): mit der neusten blender version (2.47) funktioniert der import nicht!
 	// mit der version (2.59) scheint alles zu klappen
 	this->ground.Init(10, 10, 20, 20);
+	this->track.InitTrack();
+	this->camaro.InitCamaro();
+	
+	this->groundPlacement = this->ground.GetPlacement();
+	this->trackPlacment = this->track.GetPlacement(); 
+	this->camaroPlacment = this->camaro.GetPlacement();
 
-	this->m_zscene.AddPlacement(this->ground.GetPlacement());
+	this->m_zpCamera.TranslateDelta(50, 30, 50);
+	this->trackPlacment->TranslateDelta(CHVector(80, 0.01, 80));
+	this->camaroPlacment->TranslateDelta(CHVector(40, 2, 30));
+
+	this->m_zscene.AddPlacement(this->camaroPlacment);
+	this->m_zscene.AddPlacement(this->groundPlacement);
+	this->m_zscene.AddPlacement(this->trackPlacment);
 
 	m_zroot.AddFrameHere(&m_zframe);
 	m_zframe.AddViewport(&m_zviewport);
