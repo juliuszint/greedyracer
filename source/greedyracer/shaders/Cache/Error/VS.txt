@@ -1,3 +1,0 @@
-\\?\G:\greedyracer\source\greedyracer\shaders\Source\shaders.hlsl(410,12): warning X3078: 'i': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used
-\\?\G:\greedyracer\source\greedyracer\shaders\Source\shaders.hlsl(167,10): warning X3576: semantics in type overridden by variable/function or enclosing type
-
