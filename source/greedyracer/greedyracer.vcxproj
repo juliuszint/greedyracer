@@ -138,7 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ground.h" />
+    <ClInclude Include="world\Ground.h" />
     <ClInclude Include="world\BigHouse.h" />
     <ClInclude Include="world\Brewery.h" />
     <ClInclude Include="world\Buildings.h" />
@@ -153,7 +153,7 @@
     <ClInclude Include="world\Tree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="world\Ground.cpp" />
     <ClCompile Include="world\BigHouse.cpp" />
     <ClCompile Include="world\Brewery.cpp" />
     <ClCompile Include="world\Buildings.cpp" />

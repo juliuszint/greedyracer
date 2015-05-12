@@ -25,6 +25,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zframe.Init(hwnd, eApiRender_DirectX11_Shadermodel50);
 	m_zviewport.InitFull(&m_zcamera);
 	m_zframe.AddDeviceKeyboard(&this->keyboard);
+	this->keyboard.SetWASDTranslationSensitivity(20);
 
 	m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
 
@@ -33,22 +34,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	// Note(julius): mit der neusten blender version (2.47) funktioniert der import nicht!
 	// mit der version (2.59) scheint alles zu klappen
-	this->worldGeo = this->importer.LoadGeo("..\\..\\models\\map.obj");
-	this->worldPlacement.AddGeo(this->worldGeo);
-	this->worldGeo->ReduceRedundancy();
-	this->worldPlacement.Translate(CHVector(0, 0, -3));
-	this->worldMaterial.MakeTextureDiffuse("textures\\mapTexture.jpg");
-	this->worldMaterial.MakeTextureSpecular("textures\\mapReflection.jpg");
-	this->worldMaterial.SetTextureGlowBlack();
-	this->worldGeo->SetMaterial(&this->worldMaterial);
-	this->worldGeo->MapPlanarY();
-	this->m_zscene.AddPlacement(&worldPlacement);
+	this->ground.Init(10, 10, 20, 20);
 
-	this->carMaterial.MakeTextureDiffuse("textures\\green_image.jpg");
-	this->carGeo.Init(0.05f, &this->carMaterial, 50, 50);
-	this->carPlacement.AddGeo(&this->carGeo);
-	this->carPlacement.Translate(CHVector(0, 0.1, -3));
-	this->m_zscene.AddPlacement(&this->carPlacement);
+	this->m_zscene.AddPlacement(this->ground.GetPlacement());
 
 	m_zroot.AddFrameHere(&m_zframe);
 	m_zframe.AddViewport(&m_zviewport);
@@ -68,7 +56,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	// Hier die Echtzeit-Veränderungen einfügen:
 	m_zroot.Tick(fTimeDelta);
 	float res = fTimeDelta * 5;
-	this->keyboard.PlaceWASD(this->m_zpCamera, res);
+	this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
 }
 
 void CGame::Fini()

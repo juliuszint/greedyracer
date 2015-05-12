@@ -17,6 +17,6 @@ public:
 
 	void Init(float quadWidth, float quadHeight, int width, int height);
 
-	CPlacement GetPlacement();
+	CPlacement* GetPlacement();
 };
 

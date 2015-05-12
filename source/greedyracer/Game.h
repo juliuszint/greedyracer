@@ -56,6 +56,7 @@
 
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
+#include "world\Ground.h";
 
 using namespace Vektoria;
 
@@ -83,24 +84,20 @@ private:
 	CViewport m_zviewport;
 
 	CDeviceKeyboard keyboard;
-	
-	//CPlacement m_zpSphere;
-	//CGeoSphere m_zgSphere;
-	//CMaterial m_zm;
-
-	CFileWavefront importer;
-	CGeo * worldGeo;
-	CPlacement worldPlacement;
-	CMaterial worldMaterial;
-
-	CGeoSphere carGeo;
-	CPlacement carPlacement;
-	CMaterial carMaterial;
+	Ground ground;
 
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
 
 };
+
+
+
+
+
+
+
+
 
 
