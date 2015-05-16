@@ -11,14 +11,14 @@ CBigHouse::~CBigHouse()
 }
 
 void CBigHouse::InitBigHouse(){
-	m_zmFacade.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
-	m_zmFacade.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
-	m_zmRoof.MakeTextureDiffuse("textures\\dachplatten_notFinal.jpg");
-	m_zmRoof.MakeTextureBump("textures\\dachplatten_Bump_notFinal.jpg");
+	m_zmFacade.MakeTextureDiffuse("textures\\Haus\\Fassade_512.png");
+	m_zmFacade.MakeTextureBump("textures\\Haus\\Fassade_512_n.png");
+	m_zmRoof.MakeTextureDiffuse("textures\\Haus\\Dachziegel_Rot_512.png");
+	m_zmRoof.MakeTextureBump("textures\\Haus\\Dachziegel_Rot_512_n.png");
 
-	m_zmFacade.SetBumpStrength(7.0f);
-	m_zmRoof.SetBumpStrength(5.0f);
-	m_zgBigHouse.SetTextureRepeat(10.0f, 5.0f);
+	m_zmFacade.SetBumpStrength(2.0f);
+	m_zmRoof.SetBumpStrength(0.1f);
+	m_zgBigHouse.SetTextureRepeat(3.0f, 1.0f);
 
 	m_zgBigHouse.SetMaterialFacade(&m_zmFacade);
 	m_zgBigHouse.SetMaterialRoof(&m_zmRoof);

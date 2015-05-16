@@ -113,12 +113,22 @@ private:
 	CLittleHouse m_zgLittleHouse;
 	CBrewery m_zgBrewery;
 	//Note(Peter): Ende der Inizialisierung
-	//Note(Peter): Inizialisierung Porschemesh
+	//Note(Peter): Inizialisierung Autos
 	CPorsche m_zgPorsche;
 	CCamaro m_zgCamaro;
-
+	//Note(Peter): Inizialisierung Enviroment
 	CTree m_zgTree;
+	CTree m_zgTreeBush;
 	CTrack m_zgTrack;
+	CGeoQuad m_zgGround;
+	CPlacement m_zpGround;
+	CMaterial m_zmGrass;
+
+	CGeoCube m_zgSkybox;
+	CPlacement m_zpSkybox;
+	CMaterial m_zmSkybox;
+	// Ray
+	CRay m_zrRay;
 
 };
 

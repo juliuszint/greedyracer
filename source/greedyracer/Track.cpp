@@ -16,7 +16,7 @@ void CTrack::InitTrack(){
 	m_pzgAsphaltMarks = m_zgAsphaltMarks.LoadGeo("meshes\\Track\\TrackMarks.obj");
 	m_pzgRennstrecke = m_zgRennstrecke.LoadGeo("meshes\\Track\\Rennstrecke.obj");
 
-	m_zmAsphalt.MakeTextureDiffuse("textures\\black_image.jpg");
+	m_zmAsphalt.MakeTextureDiffuse("textures\\Sonstiges\\Asphalt_512.png");
 	m_zmAsphaltMarks.MakeTextureDiffuse("textures\\white_image.jpg");
 	m_zmRennstrecke.MakeTextureDiffuse("textures\\Rennstrecke.jpg");
 

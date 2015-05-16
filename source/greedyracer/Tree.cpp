@@ -11,10 +11,17 @@ CTree::~CTree()
 }
 
 void CTree::InitTree(){
+	m_zmLeafs.MakeTextureDiffuse("textures\\green_image.jpg");
+	m_zmLog.MakeTextureDiffuse("textures\\black_image");
+
 	m_zgTip.InitTubeOriel(2.0f, 2.0f, 0.2f, &m_zmLeafs);
-	m_zgMiddle.InitTubeOriel(2.5f, 2.0f, 0.2f, &m_zmLeafs);
+	m_zgMiddle.InitTubeOriel(2.5f, 1.8f, 0.2f, &m_zmLeafs);
 	m_zgBottom.InitTubeOriel(3.0f, 2.5f, 0.2f, &m_zmLeafs);
 	m_zgLog.InitTubeSine(1.0f, 0.8f, 3.0f, 0.2f, &m_zmLog);
+
+	m_zgTip.SetMaterial(&m_zmLeafs);
+	m_zgMiddle.SetMaterial(&m_zmLeafs);
+	m_zgBottom.SetMaterial(&m_zmLeafs);
 
 	m_zpTip.AddGeo(&m_zgTip);
 	m_zpMiddle.AddGeo(&m_zgMiddle);
@@ -34,6 +41,25 @@ void CTree::InitTree(){
 	m_zpTree.AddPlacement(&m_zpBottom);
 	m_zpTree.AddPlacement(&m_zpLog);
 }
-CPlacement* CTree::GetPlacement(){
+void CTree::InitTreeBush(){
+	m_zmLeafs.MakeTextureDiffuse("textures\\green_image.jpg");
+	m_zmLog.MakeTextureDiffuse("textures\\black_image.jpg");
+
+	m_zgBush.Init(2.5f, &m_zmLeafs);
+	m_zgLog.InitTubeSine(1.0f, 0.8f, 3.0f, 0.2f , &m_zmLog);
+
+	m_zpBush.AddGeo(&m_zgBush);
+	m_zpLog.AddGeo(&m_zgLog);
+
+	m_zpBush.ScaleY(1.1f);
+	m_zpBush.TranslateYDelta(5.0f);
+
+	m_zpTree.AddPlacement(&m_zpBush);
+	m_zpTree.AddPlacement(&m_zpLog);
+
+}
+
+CPlacement* CTree::GetPlacementTree(){
 	return &m_zpTree;
 }
+
