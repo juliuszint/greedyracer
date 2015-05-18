@@ -138,6 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterController.h" />
+    <ClInclude Include="Vehicle.h" />
     <ClInclude Include="world\Ground.h" />
     <ClInclude Include="world\BigHouse.h" />
     <ClInclude Include="world\Brewery.h" />
@@ -153,6 +155,8 @@
     <ClInclude Include="world\Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterController.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="world\Ground.cpp" />
     <ClCompile Include="world\BigHouse.cpp" />
     <ClCompile Include="world\Brewery.cpp" />

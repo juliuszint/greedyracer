@@ -55,6 +55,10 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zroot.AddScene(&m_zscene);
 	//m_zscene.AddPlacement(&m_zpSphere);
 
+	Cont1.addCharacter(camaro.GetPlacement());
+	Cont1.addKeyboard(&keyboard);
+
+
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
@@ -69,6 +73,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	m_zroot.Tick(fTimeDelta);
 	float res = fTimeDelta * 5;
 	this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
+	Cont1.Move(10 * fTimeDelta);
 }
 
 void CGame::Fini()

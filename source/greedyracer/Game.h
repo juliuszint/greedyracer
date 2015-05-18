@@ -59,6 +59,8 @@
 #include "world\Ground.h";
 #include "world\Track.h"
 #include "world\Camaro.h"
+#include "CharacterController.h"
+#include "Vehicle.h"
 
 using namespace Vektoria;
 
@@ -98,6 +100,8 @@ private:
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
+
+	CCharacterController Cont1;
 
 };
 
