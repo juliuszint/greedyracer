@@ -1,16 +1,6 @@
 #include "LittleHouse.h"
 
-
-CLittleHouse::CLittleHouse()
-{
-}
-
-
-CLittleHouse::~CLittleHouse()
-{
-}
-
-void CLittleHouse::InitLittleHouse(){
+void CLittleHouse::Init(){
 	m_zmFacade.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
 	m_zmFacade.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
 	m_zmRoof.MakeTextureDiffuse("textures\\dachplatten_notFinal.jpg");
@@ -35,7 +25,7 @@ void CLittleHouse::InitLittleHouse(){
 	m_zpLittleHouse.Scale(0.03f);
 }
 
-CPlacement* CLittleHouse::GetLittleHousePlacement(){
+CPlacement* CLittleHouse::GetRootPlacement(){
 	return &m_zpLittleHouse;
 }
 

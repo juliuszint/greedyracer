@@ -1,13 +1,13 @@
 #pragma once
+
 #include "Vektoria\Root.h"
+#include "..\Entity.h"
+
 using namespace Vektoria;
 
-class CTree
+class CTree : public Entity
 {
-public:
-	CTree();
-	~CTree();
-
+private:
 	CGeoWall m_zgTip;
 	CGeoWall m_zgMiddle;
 	CGeoWall m_zgBottom;
@@ -21,8 +21,8 @@ public:
 
 	CMaterial m_zmLeafs;
 	CMaterial m_zmLog;
-	
-	void InitTree();
-	CPlacement* GetPlacement();
+public:
+	void Init();
+	CPlacement* GetRootPlacement();
 };
 

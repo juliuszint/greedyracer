@@ -1,18 +1,21 @@
 #include "Ground.h"
 
 
-Ground::Ground()
-{
-}
-
-
 Ground::~Ground()
 {
 	free(this->groundPlacements);
 	free(this->quadGeos);
 }
 
-void Ground::Init(float quadWidth, float quadHeight, int width, int height)
+void Ground::Configure(float quadWidth, float quadHeight, int width, int height)
+{
+	this->quadWidth = quadWidth;
+	this->quadHeight = quadHeight;
+	this->width = width;
+	this->height = height;
+}
+
+void Ground::Init()
 {
 	int memSize = width * height;
 	this->quadGeos = NULL;
@@ -26,7 +29,7 @@ void Ground::Init(float quadWidth, float quadHeight, int width, int height)
 	//memset(this->quadGeos, 0x00, sizeof(CPlacement) * memSize);
 
 	this->material.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
-	this->material.MakeTextureSpecular("textures\\black_image.jpg");
+	this->material.SetTextureSpecularBlack();
 
 	for (int x = 0; x < width; x++)
 	{
@@ -43,7 +46,7 @@ void Ground::Init(float quadWidth, float quadHeight, int width, int height)
 	}
 }
 
-CPlacement* Ground::GetPlacement()
+CPlacement* Ground::GetRootPlacement()
 {
 	return  &this->overallPlacement;
 }

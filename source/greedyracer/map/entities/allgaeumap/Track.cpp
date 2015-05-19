@@ -1,16 +1,6 @@
 #include "Track.h"
 
-
-CTrack::CTrack()
-{
-}
-
-
-CTrack::~CTrack()
-{
-}
-
-void CTrack::InitTrack(){
+void CTrack::Init(){
 	
 	m_pzgAsphalt = m_zgAsphalt.LoadGeo("meshes\\Track\\Track.obj");
 	m_pzgAsphaltMarks = m_zgAsphaltMarks.LoadGeo("meshes\\Track\\TrackMarks.obj");
@@ -29,6 +19,6 @@ void CTrack::InitTrack(){
 
 }
 
-CPlacement* CTrack::GetPlacement(){
+CPlacement* CTrack::GetRootPlacement(){
 	return &m_zpTrack;
 }

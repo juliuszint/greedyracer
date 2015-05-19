@@ -1,17 +1,12 @@
 #pragma once
 #include "Vektoria\Root.h"
+#include "..\Entity.h"
 
 using namespace Vektoria;
 
-class CBrewery
+class CBrewery : public Entity
 {
 private: 
-
-
-public:
-	CBrewery();
-	~CBrewery();
-
 	CGeoWing m_zgBrewery;
 	CGeoWing m_zgTower;
 	CGeoWindow m_zgDoor;
@@ -33,10 +28,9 @@ public:
 	CMaterial m_zmRoofTower;
 	CMaterial m_zmFacadeSupply;
 	CMaterial m_zmFacadeChimney;
+public:
+	void Init();
 
-	CPlacement* GetBreweryPlacement();
-
-	void InitBrewery();
-
+	CPlacement* GetRootPlacement();
 };
 

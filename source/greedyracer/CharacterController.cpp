@@ -104,7 +104,6 @@ static float angle_y = 0;
 		Character->TranslateDelta(-buffer);
 		Character->RotateY((angle_y));
 		Character->TranslateDelta(buffer);
-
 	}
 
 	if (this->playerKeyboard->KeyPressed(DIK_K))

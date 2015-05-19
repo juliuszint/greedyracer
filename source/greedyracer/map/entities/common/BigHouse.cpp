@@ -1,16 +1,7 @@
 #include "BigHouse.h"
 
 
-CBigHouse::CBigHouse()
-{
-}
-
-
-CBigHouse::~CBigHouse()
-{
-}
-
-void CBigHouse::InitBigHouse(){
+void CBigHouse::Init(){
 	m_zmFacade.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
 	m_zmFacade.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
 	m_zmRoof.MakeTextureDiffuse("textures\\dachplatten_notFinal.jpg");
@@ -34,6 +25,6 @@ void CBigHouse::InitBigHouse(){
 	m_zpBigHouse.Scale(0.03f);
 }
 
-CPlacement* CBigHouse::GetBigHousePlacement(){
+CPlacement* CBigHouse::GetRootPlacement(){
 	return &m_zpBigHouse;
 }

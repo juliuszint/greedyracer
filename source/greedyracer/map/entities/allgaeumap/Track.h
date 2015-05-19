@@ -1,13 +1,12 @@
 #pragma once
 #include "Vektoria\Root.h"
+#include "..\Entity.h"
+
 using namespace Vektoria;
 
-class CTrack
+class CTrack : public Entity
 {
-public:
-	CTrack();
-	~CTrack();
-
+private:
 	CGeo* m_pzgAsphalt;
 	CGeo* m_pzgAsphaltMarks;
 
@@ -20,9 +19,9 @@ public:
 
 	CMaterial m_zmAsphalt;
 	CMaterial m_zmAsphaltMarks;
+public:
+	void Init();
 
-	void InitTrack();
-
-	CPlacement* GetPlacement();
+	CPlacement* GetRootPlacement();
 };
 

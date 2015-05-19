@@ -1,16 +1,7 @@
 #include "Porsche.h"
 
 
-CPorsche::CPorsche()
-{
-}
-
-
-CPorsche::~CPorsche()
-{
-}
-
-void CPorsche::InitPorsche(){
+void CPorsche::Init(){
 
 
 	m_pzgBodywork = m_zgBodywork.LoadGeo("meshes\\Porsche\\PorscheBodywork.obj");
@@ -43,6 +34,6 @@ void CPorsche::InitPorsche(){
 	m_zpPorsche.AddPlacement(&m_zpRearTires);
 }
 
-CPlacement* CPorsche::GetPlacement(){
+CPlacement* CPorsche::GetRootPlacement(){
 	return &m_zpPorsche;
 }

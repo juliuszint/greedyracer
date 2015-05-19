@@ -1,16 +1,6 @@
 #include "Tree.h"
 
-
-CTree::CTree()
-{
-}
-
-
-CTree::~CTree()
-{
-}
-
-void CTree::InitTree(){
+void CTree::Init(){
 	m_zgTip.InitTubeOriel(2.0f, 2.0f, 0.2f, &m_zmLeafs);
 	m_zgMiddle.InitTubeOriel(2.5f, 2.0f, 0.2f, &m_zmLeafs);
 	m_zgBottom.InitTubeOriel(3.0f, 2.5f, 0.2f, &m_zmLeafs);
@@ -34,6 +24,7 @@ void CTree::InitTree(){
 	m_zpTree.AddPlacement(&m_zpBottom);
 	m_zpTree.AddPlacement(&m_zpLog);
 }
-CPlacement* CTree::GetPlacement(){
+
+CPlacement* CTree::GetRootPlacement(){
 	return &m_zpTree;
 }

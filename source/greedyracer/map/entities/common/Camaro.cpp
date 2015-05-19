@@ -1,16 +1,7 @@
 #include "Camaro.h"
 
 
-CCamaro::CCamaro()
-{
-}
-
-
-CCamaro::~CCamaro()
-{
-}
-
-void CCamaro::InitCamaro(){
+void CCamaro::Init(){
 
 
 	m_pzgBodywork = m_zgBodywork.LoadGeo("meshes\\Camaro\\CamaroBodywork.obj");
@@ -57,6 +48,6 @@ void CCamaro::InitCamaro(){
 	//m_zpCamaro.AddPlacement(&m_zpRearTires);
 }
 
-CPlacement* CCamaro::GetPlacement(){
+CPlacement* CCamaro::GetRootPlacement(){
 	return &m_zpCamaro;
 }

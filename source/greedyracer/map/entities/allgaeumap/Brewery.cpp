@@ -1,17 +1,6 @@
 #include "Brewery.h"
 
-
-CBrewery::CBrewery()
-{
-	
-}
-
-
-CBrewery::~CBrewery()
-{
-}
-
-void CBrewery::InitBrewery(){
+void CBrewery::Init(){
 	//Brewery
 	m_zmFacade.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
 	m_zmFacade.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
@@ -112,6 +101,6 @@ void CBrewery::InitBrewery(){
 	m_zpAllPlacements.TranslateZDelta(-6.6f);*/
 
 }
-CPlacement* CBrewery::GetBreweryPlacement(){
+CPlacement* CBrewery::GetRootPlacement(){
 	return &m_zpAllPlacements;
 }

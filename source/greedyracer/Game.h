@@ -56,11 +56,13 @@
 
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
-#include "world\Ground.h";
-#include "world\Track.h"
-#include "world\Camaro.h"
+#include "map\entities\common\Ground.h";
+#include "map\entities\allgaeumap\Track.h"
+#include "map\entities\common\Camaro.h"
 #include "CharacterController.h"
 #include "Vehicle.h"
+#include "map\Map.h"
+#include "map\AllgaeuMap.h"
 
 using namespace Vektoria;
 
@@ -86,23 +88,12 @@ private:
 	CHardware m_zh;
 	CFrame m_zframe;
 	CViewport m_zviewport;
-
 	CDeviceKeyboard keyboard;
-	Ground ground;
-	CPlacement* groundPlacement;
-
-	CTrack track;
-	CPlacement* trackPlacment;
-
-	CCamaro camaro;
-	CPlacement* camaroPlacment;
-
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
 
-	CCharacterController Cont1;
-
+	Map* currentMap;
 };
 
 

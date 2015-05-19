@@ -1,21 +1,20 @@
 #pragma once
 
 #include "Vektoria\Root.h"
+#include "..\Entity.h"
+
 using namespace Vektoria;
 
-class CLittleHouse
+class CLittleHouse : public Entity
 {
-public:
-	CLittleHouse();
-	~CLittleHouse();
-
+private:
 	CGeoWing m_zgLittleHouse;
 	CPlacement m_zpLittleHouse;
 	CMaterial m_zmFacade;
 	CMaterial m_zmRoof;
+public:
+	CPlacement* GetRootPlacement();
 
-	CPlacement* GetLittleHousePlacement();
-
-	void InitLittleHouse();
+	void Init();
 };
 
