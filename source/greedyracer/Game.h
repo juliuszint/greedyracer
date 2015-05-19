@@ -95,6 +95,10 @@ private:
 	CCamaro camaro;
 	CPlacement* camaroPlacment;
 
+	CMaterial testMaterial;
+	CGeoQuad testQuad;
+	CPlacement testPlacement;
+
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;

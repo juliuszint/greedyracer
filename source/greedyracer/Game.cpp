@@ -46,9 +46,18 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->trackPlacment->TranslateDelta(CHVector(80, 0.01, 80));
 	this->camaroPlacment->TranslateDelta(CHVector(40, 2, 30));
 
-	this->m_zscene.AddPlacement(this->camaroPlacment);
-	this->m_zscene.AddPlacement(this->groundPlacement);
-	this->m_zscene.AddPlacement(this->trackPlacment);
+	this->testMaterial.MakeTextureDiffuse("textures\\water02.jpg");
+	this->testMaterial.MakeTextureSpecular("textures\\black_image.jpg");
+	this->testMaterial.SetAni(4, 4, 10);
+
+	this->testQuad.Init(50, 50, &this->testMaterial);
+	this->testPlacement.AddGeo(&this->testQuad);
+	this->testPlacement.RotateXDelta(-HALFPI);
+
+	this->m_zscene.AddPlacement(&this->testPlacement);
+	//this->m_zscene.AddPlacement(this->camaroPlacment);
+	//this->m_zscene.AddPlacement(this->groundPlacement);
+	//this->m_zscene.AddPlacement(this->trackPlacment);
 
 	m_zroot.AddFrameHere(&m_zframe);
 	m_zframe.AddViewport(&m_zviewport);
