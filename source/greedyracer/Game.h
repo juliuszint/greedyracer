@@ -82,6 +82,9 @@ public:
 private:
 	HWND m_hwnd;
 	bool m_bReSized;
+	bool fixedCameraMode;
+	bool cKeyReleased;
+
 	// Hier ist Platz für Deine Vektoriaobjekte:
 	CRoot m_zroot;
 	CScene m_zscene;
@@ -94,6 +97,8 @@ private:
 	CParallelLight m_zlight;
 
 	Map* currentMap;
+
+	void ToggleCameraMode();
 };
 
 

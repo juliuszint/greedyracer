@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Game.h"
+#include <Windows.h>
 
 // Todo (julius): neue engine herunterladen (bug mit leerem Szenegraphen gefixed)
 // blender lieber als .obj exportieren und dann importieren 
@@ -19,6 +20,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 {
 	m_hwnd = hwnd;
 	m_bReSized = false;
+	fixedCameraMode = false;
+	cKeyReleased = true;
+
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
 	m_zroot.Init(psplash);
 	m_zcamera.Init();
@@ -29,7 +33,6 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->keyboard.SetWASDTranslationSensitivity(20);
 
 	m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
-
 
 	m_zroot.AddFrameHere(&m_zframe);
 	m_zframe.AddViewport(&m_zviewport);
@@ -42,11 +45,6 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->currentMap->Init();
 	this->m_zscene.AddPlacement(this->currentMap->GetRootPlacement());
 
-
-	//Cont1.addCharacter(camaro.GetPlacement());
-	//Cont1.addKeyboard(&keyboard);
-
-
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
@@ -57,8 +55,33 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	// Hier die Echtzeit-Veränderungen einfügen:
 	m_zroot.Tick(fTimeDelta);
 	float res = fTimeDelta * 5;
-	this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
-	//Cont1.Move(10 * fTimeDelta);
+
+	// Note (julius): für debug zwecke hab ich hier ein kleine code schnipsel reingemacht
+	// der es möglich macht das man zwischen 2 kamera modi hin und her springt. 1 der freie modus
+	// für die entwicklung und 2 der feste modus wo die kamera fix ausgerichtet ist. 
+	// getoggeld wird das ganze mit C
+	if (this->keyboard.KeyPressed(DIK_C))
+	{
+		if (cKeyReleased)
+		{
+			cKeyReleased = false;
+			this->ToggleCameraMode();
+			OutputDebugStringA("C Pressed Toggled Camera mode\n");
+		}
+	}
+	else
+	{
+		if (!cKeyReleased)
+		{
+			cKeyReleased = true;
+			OutputDebugStringA("C Released\n");
+		}
+	}
+
+	if (!fixedCameraMode)
+	{
+		this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
+	}
 }
 
 void CGame::Fini()
@@ -71,5 +94,19 @@ void CGame::WindowReSize(int iNewWidth, int iNewHeight)
 	// Windows ReSize wird immer automatisch aufgerufen, wenn die Fenstergröße verändert wurde.
 	// Hier kannst Du dann die Auflösung des Viewports neu einstellen:
 
+}
+
+void CGame::ToggleCameraMode()
+{
+	if (fixedCameraMode)
+	{
+		this->m_zpCamera.SetPointingOff();
+	}
+	else
+	{
+		this->m_zpCamera.Translate(CHVector(300, 150, 300));
+		this->m_zpCamera.SetPointing(new CHVector(300, 1, 300));
+	}
+	fixedCameraMode = !fixedCameraMode;
 }
 
