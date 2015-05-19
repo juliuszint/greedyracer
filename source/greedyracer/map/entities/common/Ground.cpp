@@ -1,13 +1,13 @@
 #include "Ground.h"
 
 
-Ground::~Ground()
+CGround::~CGround()
 {
 	free(this->groundPlacements);
 	free(this->quadGeos);
 }
 
-void Ground::Configure(float quadWidth, float quadHeight, int width, int height)
+void CGround::Configure(float quadWidth, float quadHeight, int width, int height)
 {
 	this->quadWidth = quadWidth;
 	this->quadHeight = quadHeight;
@@ -15,7 +15,7 @@ void Ground::Configure(float quadWidth, float quadHeight, int width, int height)
 	this->height = height;
 }
 
-void Ground::Init()
+void CGround::Init()
 {
 	int memSize = width * height;
 	this->quadGeos = NULL;
@@ -46,7 +46,7 @@ void Ground::Init()
 	}
 }
 
-CPlacement* Ground::GetRootPlacement()
+CPlacement* CGround::GetRootPlacement()
 {
 	return  &this->overallPlacement;
 }

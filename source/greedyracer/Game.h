@@ -96,7 +96,7 @@ private:
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
 
-	Map* currentMap;
+	CMap* currentMap;
 
 	void ToggleCameraMode();
 };

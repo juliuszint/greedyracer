@@ -6,7 +6,7 @@
 
 using namespace Vektoria;
 
-class Water : Entity
+class CWater : CEntity
 {
 private:
 	CGeoQuad quad;

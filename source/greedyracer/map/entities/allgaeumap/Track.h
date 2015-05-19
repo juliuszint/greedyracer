@@ -4,7 +4,7 @@
 
 using namespace Vektoria;
 
-class CTrack : public Entity
+class CTrack : public CEntity
 {
 private:
 	CGeo* m_pzgAsphalt;

@@ -4,7 +4,7 @@
 
 using namespace Vektoria;
 
-class CBigHouse : public Entity
+class CBigHouse : public CEntity
 {
 private:
 	CGeoWing m_zgBigHouse;

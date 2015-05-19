@@ -1,13 +1,13 @@
 #include "Water.h"
 
 
-void Water::Configure(int width, int height)
+void CWater::Configure(int width, int height)
 {
 	this->width = width;
 	this->height = height;
 }
 
-void Water::Init()
+void CWater::Init()
 {
 	this->material.MakeTextureDiffuse("textures\\water02.jpg");
 	this->material.SetTextureSpecularBlack();
@@ -18,7 +18,7 @@ void Water::Init()
 	this->placement.RotateXDelta(-HALFPI);
 }
 
-CPlacement* Water::GetRootPlacement()
+CPlacement* CWater::GetRootPlacement()
 {
 	return &this->placement;
 }

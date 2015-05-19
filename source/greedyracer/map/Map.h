@@ -7,7 +7,7 @@
 
 using namespace Vektoria;
 
-class Map : public Entity
+class CMap : public CEntity
 {
 public:
 	// Note (julius): gibt die Startposition für den Spieler auf dieser Strecke zurück

@@ -6,7 +6,7 @@
 
 using namespace Vektoria;
 
-class Ground : public Entity
+class CGround : public CEntity
 {
 private:
 	CPlacement overallPlacement;
@@ -19,7 +19,7 @@ private:
 	int height;
 public:
 	// Note (julius): Destructor
-	~Ground();
+	~CGround();
 	
 	// Note (julius): wird vor init aufgerufen um einzustellen wie breit die quads 
 	// sind und wie viel auf wie viele felder hinzugefügt werden

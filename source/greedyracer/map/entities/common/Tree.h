@@ -5,7 +5,7 @@
 
 using namespace Vektoria;
 
-class CTree : public Entity
+class CTree : public CEntity
 {
 private:
 	CGeoWall m_zgTip;

@@ -4,7 +4,7 @@
 
 using namespace Vektoria;
 
-class CBrewery : public Entity
+class CBrewery : public CEntity
 {
 private: 
 	CGeoWing m_zgBrewery;

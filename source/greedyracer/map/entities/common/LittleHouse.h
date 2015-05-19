@@ -5,7 +5,7 @@
 
 using namespace Vektoria;
 
-class CLittleHouse : public Entity
+class CLittleHouse : public CEntity
 {
 private:
 	CGeoWing m_zgLittleHouse;

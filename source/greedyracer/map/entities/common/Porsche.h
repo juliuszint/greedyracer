@@ -4,7 +4,7 @@
 
 using namespace Vektoria;
 
-class CPorsche : public Entity
+class CPorsche : public CEntity
 {
 private:
 	CGeo* m_pzgBodywork;

@@ -4,7 +4,7 @@
 
 using namespace Vektoria;
 
-class CCamaro : public Entity
+class CCamaro : public CEntity
 {
 private:
 	CGeo* m_pzgBodywork;

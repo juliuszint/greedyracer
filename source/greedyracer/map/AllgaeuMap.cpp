@@ -1,16 +1,16 @@
 #include "AllgaeuMap.h"
 
 
-AllgaeuMap::~AllgaeuMap()
+CAllgaeuMap::~CAllgaeuMap()
 {
 	free(this->ground);
 	free(this->water);
 }
 
-void AllgaeuMap::Init()
+void CAllgaeuMap::Init()
 {
-	this->water = new Water();
-	this->ground = new Ground();
+	this->water = new CWater();
+	this->ground = new CGround();
 
 	this->ground->Configure(10, 10, 60, 40);
 	this->ground->Init();
@@ -22,11 +22,11 @@ void AllgaeuMap::Init()
 	this->water->GetRootPlacement()->TranslateDelta(CHVector(300, 0, 300));
 	this->placement.AddPlacement(this->water->GetRootPlacement());
 }
-CPlacement* AllgaeuMap::GetRootPlacement()
+CPlacement* CAllgaeuMap::GetRootPlacement()
 {
 	return &this->placement;
 }
-CHVector AllgaeuMap::GetStartPosition()
+CHVector CAllgaeuMap::GetStartPosition()
 {
 	return CHVector(0, 0, 0);
 }

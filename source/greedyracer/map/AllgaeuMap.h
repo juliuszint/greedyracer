@@ -9,14 +9,14 @@
 
 using namespace Vektoria;
 
-class AllgaeuMap : public Map
+class CAllgaeuMap : public CMap
 {
 private:
 	CPlacement placement;
-	Ground * ground;
-	Water * water;
+	CGround * ground;
+	CWater * water;
 public:
-	~AllgaeuMap();
+	~CAllgaeuMap();
 
 	void Init();
 

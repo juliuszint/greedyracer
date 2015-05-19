@@ -6,7 +6,7 @@
 
 using namespace Vektoria;
 
-class Entity
+class CEntity
 {
 public:
 	// Note (julius): Initialisiert und lädt das Entity und seine darstellung in den Speicher

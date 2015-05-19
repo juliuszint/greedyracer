@@ -41,7 +41,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// Note (julius): lade die startmap (in dem fall die allgaeuMap weils die einzige ist ^^
 	// zu dem zeitpunkt läuft noch kein gamecode nur de map wird in den szene graphen geladen
 	// um das menue anzuzeigen was etwas transparent angezeigt wird
-	this->currentMap = new AllgaeuMap();
+	this->currentMap = new CAllgaeuMap();
 	this->currentMap->Init();
 	this->m_zscene.AddPlacement(this->currentMap->GetRootPlacement());
 
