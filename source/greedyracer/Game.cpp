@@ -27,7 +27,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zviewport.InitFull(&m_zcamera);
 	m_zframe.AddDeviceKeyboard(&this->keyboard);
 
-	m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
+	m_zlight.Init(CHVector(0.9, 1, 0.9), CColor(1, 1, 1));
 
 	//skyBox
 	m_zmSkybox.MakeTextureSky("textures\\Day_Skybox.jpg");
@@ -48,16 +48,16 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zgLittleHouse.GetLittleHousePlacement()->RotateYDelta(0.0f);
 	m_zgLittleHouse.GetLittleHousePlacement()->TranslateXDelta(1.0f);
 	m_zgLittleHouse.GetLittleHousePlacement()->TranslateZDelta(-10.0f);
-
+	*/
 	m_zgBrewery.InitBrewery();
 	m_zgBrewery.GetBreweryPlacement()->ScaleDelta(6.0f);
 	m_zgBrewery.GetBreweryPlacement()->RotateYDelta(HALFPI-0.5);
 	m_zgBrewery.GetBreweryPlacement()->TranslateXDelta(5.0f);
 	m_zgBrewery.GetBreweryPlacement()->TranslateZDelta(-10.0f);
 
-	m_zscene.AddPlacement(m_zgBigHouse.GetBigHousePlacement());
-	m_zscene.AddPlacement(m_zgLittleHouse.GetLittleHousePlacement());
-	m_zscene.AddPlacement(m_zgBrewery.GetBreweryPlacement());*/
+	//m_zscene.AddPlacement(m_zgBigHouse.GetBigHousePlacement());
+	//m_zscene.AddPlacement(m_zgLittleHouse.GetLittleHousePlacement());
+	m_zscene.AddPlacement(m_zgBrewery.GetBreweryPlacement());
 	//Note(Peter): Aufruf der Autos
 	/*m_zgPorsche.InitPorsche();
 	m_zgPorsche.GetPlacement()->Scale(0.04f);
@@ -92,11 +92,12 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	//Note(peter): Aufruf Track
 	/*m_zgTrack.InitTrack();
 	m_zgTrack.GetPlacement()->Scale(0.2f);
-	m_zgTrack.GetPlacement()->TranslateYDelta(0.1f);
+	m_zgTrack.GetPlacement()->TranslateYDelta(0.1f);*/
 
-	m_zscene.AddPlacement(m_zgTrack.GetPlacement());*/
+	m_zscene.AddPlacement(m_zgTrack.GetPlacement());
 	//Note(peter): Ground
 	m_zmGrass.MakeTextureDiffuse("textures\\Natur\\Gras_512.png");
+	m_zmGrass.MakeTextureSpecular("textures\\Natur\\Gras_512_spec.png");
 	m_zgGround.Init(20.0f, 20.0f, &m_zmGrass,0.0f,0.0f,5.0f,5.0f);
 	m_zpGround.AddGeo(&m_zgGround);
 	m_zpGround.RotateX(-HALFPI);
