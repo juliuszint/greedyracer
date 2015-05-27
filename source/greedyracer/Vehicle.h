@@ -6,13 +6,13 @@ class CVehicle
 {
 public:
 	//CVehicle(int imass, float fLeistung, float fO_IOODauer);
-	CVehicle(int imass, float fLeistung);
+	CVehicle();
 	~CVehicle();
 
 	int getaktSpeed();
 	float getdeceleration();
 	float getacceleration();
-	int UpdateSpeed();
+	void UpdateSpeed(int iNeu);
 
 
 private:

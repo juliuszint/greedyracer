@@ -43,8 +43,14 @@ public:
 	CMaterial m_zmRearLights;
 	CMaterial m_zmTires;
 
+//	CVehicle * m_zvAuto;
+
+
 	void InitCamaro();
+//	void addVehicle(CVehicle * Fahrzeug) { m_zvAuto = Fahrzeug; };
+
 
 	CPlacement* GetPlacement();
+//	CVehicle** GetVehicle();
 };
 

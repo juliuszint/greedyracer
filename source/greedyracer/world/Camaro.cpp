@@ -60,3 +60,8 @@ void CCamaro::InitCamaro(){
 CPlacement* CCamaro::GetPlacement(){
 	return &m_zpCamaro;
 }
+
+//CVehicle** CCamaro::GetVehicle()
+//{
+//	return &m_zvAuto;
+//}

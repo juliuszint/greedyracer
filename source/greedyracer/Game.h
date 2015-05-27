@@ -102,6 +102,7 @@ private:
 	CParallelLight m_zlight;
 
 	CCharacterController Cont1;
+	CVehicle VCamaro;
 
 };
 

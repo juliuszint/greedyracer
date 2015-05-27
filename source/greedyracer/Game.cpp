@@ -57,6 +57,8 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	Cont1.addCharacter(camaro.GetPlacement());
 	Cont1.addKeyboard(&keyboard);
+//	camaro.addVehicle(&VCamaro);
+	Cont1.setKeybinding(DIK_U, DIK_J, DIK_H, DIK_K);
 
 
 	m_zscene.AddPlacement(&m_zpCamera);
