@@ -1,10 +1,10 @@
 #include "Vehicle.h"
 
 
-CVehicle::CVehicle(int imass, float fLeistung)
+CVehicle::CVehicle()
 {
-	iMasse = imass;
-	fMotorleistung = fLeistung;
+	iMasse = 1700;
+	fMotorleistung = 0;
 	fAcceleration = 5.7917f;
 	fDeceleration = 1.8f;
 }
@@ -29,7 +29,7 @@ int CVehicle::getaktSpeed()
 	return iaktSpeed;
 }
 
-int CVehicle::UpdateSpeed()
+void CVehicle::UpdateSpeed(int iNeu)
 {
-	return 0;
+	iaktSpeed = iNeu;
 }
