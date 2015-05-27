@@ -1,0 +1,21 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Overlay und Game-Code architektur
+
+Bisher wurde der meiste code nur in der Game.h und Game.cpp datei geschrieben. Maps wurden 
+da zusammengebastelt usw. Jetzt gibt es zwei abstrakte basisklassen für die welt. Einmal
+die CMap klasse welche die geladene map repräsentiert. Zum starten gibt es davon erstmal nur
+eine und zwar die AllgaeuMap. Die zweite basisklasse ist die CEntity klasse welche Entities auf
+der Map repräsentiert wie z.B. ein Baum. alle Elemente auf der Map erben davon.
+
+game.cpp so modifiziert das erst die allgäu map geladen wird. 
+
+einen umschalter hinzugefügt um mehrere kameramodi zu unterstüzten. es gibt den "freien"
+entwicklermodus und den game modus wo eine fixe kameraperspektive verwedent wird, umgeschaltet
+wird das ganze auf C
+
+Einarbeitung in Overlay und die Cursoreingabe. die Klasse CGameMenu erstellt die das game menu
+repräsentiert. 
+
+
+

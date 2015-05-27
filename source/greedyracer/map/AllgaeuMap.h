@@ -22,6 +22,13 @@ public:
 
 	CPlacement* GetRootPlacement();
 
+
 	CHVector GetStartPosition();
+
+	int IsOnCheckpoint(CHVector position);
+
+	CHVector IsOnTrack(CHVector position);
+
+	bool IsOnFinish(CHVector position);
 };
 

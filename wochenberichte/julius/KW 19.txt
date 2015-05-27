@@ -1,0 +1,15 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Prozedurale generierung der Map
+
+Erste ideen zur prozeduralen modellierung der map liefen auf ein Lego konzept hinaus wonach die Strecke
+einfach zusammengestöpselt wird über vorgefertigte teile wie z.B. eine 90 Grad kurve, und gerade Strecken.
+Gerade Abschnitte werden einfach über CGeoQuad dargestellt mit einer Textur.
+
+Versuch eine 90 Grad kurve durch mathematische annäherung mit mehreren Quads zu erstellen. Alles
+aufgezeichent und durch rechnen probiert auf die lösung zu kommen für die Quads. hat so nicht
+ganz funktioniert und sah schrecklich aus für den Zeitaufwand der reingeflossen ist -> Entscheidung
+die strecke auch in Maya generieren und importieren.
+
+
+

@@ -1,0 +1,15 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Animierte Texturen und Map
+
+Angeschaut wie das mit animierten Texturen funktioniert. Aus dem Internet testweise eine Wasser
+gif textur heruntergeladen mit photoshop so angepasst das es in einem passenden format für Vektoria
+ist und mit ins Game genommen. Hat alles recht Problemlos geklappt.
+
+Auf dem masterbranch in git mal alle elemente zusammengepackt die zu der ersten map gehörten.
+Den Boden der Prozedural generiert wird, die Strecke die importiert wird aus Maya, und den
+Camaro das Fahrzeug.
+
+
+
+

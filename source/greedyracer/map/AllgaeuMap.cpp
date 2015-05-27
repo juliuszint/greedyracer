@@ -30,3 +30,19 @@ CHVector CAllgaeuMap::GetStartPosition()
 {
 	return CHVector(0, 0, 0);
 }
+
+
+int CAllgaeuMap::IsOnCheckpoint(CHVector position)
+{
+	return 0;
+}
+
+CHVector CAllgaeuMap::IsOnTrack(CHVector position)
+{
+	return CHVector(0, 0, 0);
+}
+
+bool CAllgaeuMap::IsOnFinish(CHVector position)
+{
+	return false;
+}

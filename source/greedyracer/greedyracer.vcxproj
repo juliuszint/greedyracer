@@ -138,6 +138,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Match.h" />
+    <ClInclude Include="menu\GameMenu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="map\AllgaeuMap.h" />
     <ClInclude Include="CharacterController.h" />
     <ClInclude Include="map\entities\Entity.h" />
@@ -164,6 +168,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Match.cpp" />
+    <ClCompile Include="menu\GameMenu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="map\AllgaeuMap.cpp" />
     <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="Vehicle.cpp" />

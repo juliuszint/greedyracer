@@ -63,6 +63,7 @@
 #include "Vehicle.h"
 #include "map\Map.h"
 #include "map\AllgaeuMap.h"
+#include "menu\GameMenu.h"
 
 using namespace Vektoria;
 
@@ -91,14 +92,18 @@ private:
 	CHardware m_zh;
 	CFrame m_zframe;
 	CViewport m_zviewport;
-	CDeviceKeyboard keyboard;
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
 
+	CDeviceKeyboard keyboard;
+	CDeviceCursor cursor;
+
+	CGameMenu gameMenu;
 	CMap* currentMap;
 
 	void ToggleCameraMode();
+	void MakeGameMenuVisible();
 };
 
 

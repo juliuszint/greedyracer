@@ -14,29 +14,32 @@ CGame::CGame(void)
 CGame::~CGame(void)
 {
 	// Hier eventuelle Nachinitialisierungen Deiner Vektoria-Objekte einfügen:
+	free(this->currentMap);
 }
 
 void CGame::Init(HWND hwnd, CSplash * psplash)
 {
-	m_hwnd = hwnd;
-	m_bReSized = false;
-	fixedCameraMode = false;
-	cKeyReleased = true;
+	this->m_hwnd = hwnd;
+	this->m_bReSized = false;
+	this->fixedCameraMode = false;
+	this->cKeyReleased = true;
 
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
-	m_zroot.Init(psplash);
-	m_zcamera.Init();
-	m_zframe.Init(hwnd, eApiRender_DirectX11_Shadermodel50);
-	m_zviewport.InitFull(&m_zcamera);
+	this->m_zroot.Init(psplash);
+	this->m_zcamera.Init();
+	this->m_zframe.Init(hwnd, eApiRender_DirectX11_Shadermodel50);
+	this->m_zviewport.InitFull(&m_zcamera);
 
-	m_zframe.AddDeviceKeyboard(&this->keyboard);
+	this->m_zframe.AddDeviceKeyboard(&this->keyboard);
+	this->m_zframe.AddDeviceCursor(&this->cursor);
+
 	this->keyboard.SetWASDTranslationSensitivity(20);
 
-	m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
+	this->m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
 
-	m_zroot.AddFrameHere(&m_zframe);
-	m_zframe.AddViewport(&m_zviewport);
-	m_zroot.AddScene(&m_zscene);
+	this->m_zroot.AddFrameHere(&m_zframe);
+	this->m_zframe.AddViewport(&m_zviewport);
+	this->m_zroot.AddScene(&m_zscene);
 
 	// Note (julius): lade die startmap (in dem fall die allgaeuMap weils die einzige ist ^^
 	// zu dem zeitpunkt läuft noch kein gamecode nur de map wird in den szene graphen geladen
@@ -45,6 +48,12 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->currentMap->Init();
 	this->m_zscene.AddPlacement(this->currentMap->GetRootPlacement());
 
+	// Note (julius): das game menu wird direkt am start angezeigt deswegen wirds hier direkt
+	// eingehängt und anschließend kann man es über die funktion CGameMenu.MakeVisible() wieder 
+	// sichtbar machen
+	this->gameMenu.Init(&this->cursor);
+	this->m_zviewport.AddOverlay(this->gameMenu.GetRootOverlay());
+	
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
@@ -82,6 +91,16 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	{
 		this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
 	}
+
+	if (this->gameMenu.GetIsVisible())
+	{
+		this->gameMenu.Tick();
+	}
+	else if (this->keyboard.KeyPressed(DIK_ESCAPE))
+	{
+		this->gameMenu.SetIsVisible(true);
+	}
+
 }
 
 void CGame::Fini()

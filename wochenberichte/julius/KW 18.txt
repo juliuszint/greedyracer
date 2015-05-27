@@ -1,0 +1,14 @@
+Julius Zint									16.04.15 - 10.04.15
+
+Kamera Modi und Prozedurale Map generierung
+
+Langer versuch die Kamera richtung über die rotation vom Placement hinzubekommen. Danach doch
+nochmal in die Doku reingeschaut und rausgefunden das man über SetPointing() der Kamera eine
+Richtung geben kann. Rumspielen mit mehreren Kamera positionen und richtungen.
+
+Prozedurale generierung des Bodens. Erstmals hinzufügen eines CGeoQuads (hat ein weilche gebraucht
+weil ich face culling aus hatte und in die falsche Richtung rotiert hab). Test Graß textur
+erstellt in photoshop und zum quad hinzugefügt. 
+
+Algorithmus geschrieben der mit einer Width und einer Height einen bereich mit diesen Quads eindeckt
+um eine größere Bodenfläche zu haben.
