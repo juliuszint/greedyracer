@@ -67,6 +67,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	Cont1.addCharacter(&carPlacement);
 	Cont1.addKeyboard(&keyboard);
+	Cont1.setKeybinding(DIK_U, DIK_J, DIK_H, DIK_K);
 
 
 	for (int i = 0; i < RELEM; i++)
