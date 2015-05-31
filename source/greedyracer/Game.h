@@ -110,15 +110,28 @@ private:
 
 	//Note(Peter): Inizialisierung der Häuser
 	CBigHouse m_zgBigHouse;
+	CBigHouse m_zgBigHouse2;
+	CBigHouse m_zgBigHouse3;
+	CBigHouse m_zgBigHouse4;
 	CLittleHouse m_zgLittleHouse;
+	CLittleHouse m_zgLittleHouse2;
+	CLittleHouse m_zgLittleHouse3;
 	CBrewery m_zgBrewery;
-	//Note(Peter): Ende der Inizialisierung
 	//Note(Peter): Inizialisierung Autos
 	CPorsche m_zgPorsche;
 	CCamaro m_zgCamaro;
 	//Note(Peter): Inizialisierung Enviroment
 	CTree m_zgTree;
+	CTree m_zgTree2;
+	CTree m_zgTree3;
+	CTree m_zgTree4;
 	CTree m_zgTreeBush;
+	CTree m_zgTreeBush2;
+	CTree m_zgTreeBush3;
+	CTree m_zgTreeBush4;
+	CTree m_zgTreeRound;
+
+
 	CTrack m_zgTrack;
 	CGeoQuad m_zgGround;
 	CPlacement m_zpGround;

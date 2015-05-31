@@ -25,6 +25,10 @@ void CCamaro::InitCamaro(){
 	m_pzgRearRim = m_zgRearRim.LoadGeo("meshes\\Camaro\\CamaroRimRear.obj");
 	m_pzgMirrors = m_zgMirrors.LoadGeo("meshes\\Camaro\\CamaroMirrors.obj");
 	m_pzgExhaust = m_zgExhaust.LoadGeo("meshes\\Camaro\\CamaroExhaust.obj");
+	CHMat mUrsprung;
+	mUrsprung.Translate(1.5f,-0.7,-3.0);
+	m_pzgFrontRimL->Transform(mUrsprung);
+	m_pzgFrontTireL->Transform(mUrsprung);
 
 	m_zmBodywork.MakeTextureDiffuse("textures\\blue_image.jpg");
 	m_zmPlastic.MakeTextureDiffuse("textures\\black_image.jpg");
@@ -65,19 +69,22 @@ void CCamaro::InitCamaro(){
 	m_zpRearTires.AddGeo(m_pzgRearTires);
 	m_zpRearTires.AddGeo(m_pzgRearRim);
 
+
 	//m_zpFrontTireR.TranslateZDelta(3.0f);
 	//m_zpFrontTireR.TranslateYDelta(-0.7f);
 	//m_zpFrontTireR.TranslateXDelta(-1.5f);
-	//m_zpFrontTireL.TranslateZDelta(3.0f);
-	//m_zpFrontTireL.TranslateYDelta(-0.7f);
-	//m_zpFrontTireL.TranslateXDelta(1.5f);
+	m_zpFrontTireL.Translate(1.5f, -0.7f, -3.0f);
+	/*
+	m_zpFrontTireL.TranslateZ(3.0f);
+	m_zpFrontTireL.TranslateY(-0.7f);
+	m_zpFrontTireL.TranslateX(1.5f);*/
 	//m_zpRearTires.TranslateZDelta(-2.8f);
 	//m_zpRearTires.TranslateYDelta(-0.6f);
 
 	m_zpCamaro.AddPlacement(&m_zpBodywork);
-	m_zpCamaro.AddPlacement(&m_zpFrontTireR);
+//	m_zpCamaro.AddPlacement(&m_zpFrontTireR);
 	m_zpCamaro.AddPlacement(&m_zpFrontTireL);
-	m_zpCamaro.AddPlacement(&m_zpRearTires);
+	//m_zpCamaro.AddPlacement(&m_zpRearTires);
 }
 
 CPlacement* CCamaro::GetPlacement(){
@@ -85,18 +92,34 @@ CPlacement* CCamaro::GetPlacement(){
 }
 
 void CCamaro::RotateFrontTiresX(){
+	//CHVector buffer;
+	//buffer = m_zpFrontTireL.GetTranslation();
+
+	//m_zpFrontTireL.Translate(-buffer);
+	
 	m_zpFrontTireR.RotateXDelta(HALFPI/4);
 	m_zpFrontTireL.RotateXDelta(HALFPI/4);
 	m_zpRearTires.RotateXDelta(HALFPI/4);
+	//m_zpFrontTireL.Translate(buffer);
 }
 
 void CCamaro::RotateFrontTiresY(bool rotRight){
+	CHVector bufferR;
+	CHVector bufferL;
+	bufferR = m_zpFrontTireR.GetTranslation();
+	bufferL = m_zpFrontTireL.GetTranslation();
+	m_zpFrontTireR.Translate(-bufferR);
+	m_zpFrontTireL.Translate(-bufferL);
+
 	if (rotRight == true){
-		m_zpFrontTireR.RotateYDelta(-HALFPI / 8);
-		m_zpFrontTireL.RotateYDelta(-HALFPI / 8);
+		m_zpFrontTireR.RotateY(-HALFPI / 8);
+		m_zpFrontTireL.RotateY(-HALFPI / 8);
 	}
 	else if (rotRight == false){
-		m_zpFrontTireR.RotateYDelta(HALFPI / 8);
-		m_zpFrontTireL.RotateYDelta(HALFPI / 8);
+		m_zpFrontTireR.RotateY(HALFPI / 8);
+		m_zpFrontTireL.RotateY(HALFPI / 8);
 	}
+
+	m_zpFrontTireR.Translate(bufferR);
+	m_zpFrontTireL.Translate(bufferL);
 }
