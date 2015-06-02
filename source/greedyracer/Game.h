@@ -129,13 +129,28 @@ private:
 	CTree m_zgTreeBush2;
 	CTree m_zgTreeBush3;
 	CTree m_zgTreeBush4;
-	CTree m_zgTreeRound;
+	//CTree m_zgTreeRound;
 
 
 	CTrack m_zgTrack;
 	CGeoQuad m_zgGround;
 	CPlacement m_zpGround;
 	CMaterial m_zmGrass;
+	CMaterial m_zmLog;
+
+	CGeo* m_pzgLandscape;
+	CGeo* m_pzgTreeFir;
+	CGeo* m_pzgTreeRound;
+	CGeo* m_pzgTreeBobblig;
+	CGeo* m_pzgLog;
+	CFileWavefront m_zgLandscape;
+	CFileWavefront m_zgTreeFir;
+	CFileWavefront m_zgTreeRound;
+	CFileWavefront m_zgTreeBobblig;
+	CFileWavefront m_zgLog;
+
+	CPlacement m_zpLandscape;
+
 
 	CGeoCube m_zgSkybox;
 	CPlacement m_zpSkybox;

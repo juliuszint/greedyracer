@@ -41,50 +41,50 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zgBigHouse.InitBigHouse();
 	m_zgBigHouse.GetBigHousePlacement()->ScaleDelta(11.0f);
 	m_zgBigHouse.GetBigHousePlacement()->RotateYDelta(PI + 0.35f);
-	m_zgBigHouse.GetBigHousePlacement()->TranslateXDelta(13.0f);
-	m_zgBigHouse.GetBigHousePlacement()->TranslateZDelta(-2.0f);
+	m_zgBigHouse.GetBigHousePlacement()->TranslateXDelta(10.0f);
+	m_zgBigHouse.GetBigHousePlacement()->TranslateZDelta(1.0f);
 
 	m_zgBigHouse2.InitBigHouse();
 	m_zgBigHouse2.GetBigHousePlacement()->ScaleDelta(11.0f);
 	m_zgBigHouse2.GetBigHousePlacement()->RotateYDelta(HALFPI+0.5f);
-	m_zgBigHouse2.GetBigHousePlacement()->TranslateXDelta(14.0f);
-	m_zgBigHouse2.GetBigHousePlacement()->TranslateZDelta(2.0f);
+	m_zgBigHouse2.GetBigHousePlacement()->TranslateXDelta(11.0f);
+	m_zgBigHouse2.GetBigHousePlacement()->TranslateZDelta(5.0f);
 
 	m_zgBigHouse3.InitBigHouse();
 	m_zgBigHouse3.GetBigHousePlacement()->ScaleDelta(11.0f);
 	m_zgBigHouse3.GetBigHousePlacement()->RotateYDelta(HALFPI-0.9f);
-	m_zgBigHouse3.GetBigHousePlacement()->TranslateXDelta(5.0f);
-	m_zgBigHouse3.GetBigHousePlacement()->TranslateZDelta(3.0f);
+	m_zgBigHouse3.GetBigHousePlacement()->TranslateXDelta(2.0f);
+	m_zgBigHouse3.GetBigHousePlacement()->TranslateZDelta(6.0f);
 
 	m_zgBigHouse4.InitBigHouse();
 	m_zgBigHouse4.GetBigHousePlacement()->ScaleDelta(11.0f);
 	m_zgBigHouse4.GetBigHousePlacement()->RotateYDelta(HALFPI - 0.5f);
-	m_zgBigHouse4.GetBigHousePlacement()->TranslateXDelta(6.0f);
-	m_zgBigHouse4.GetBigHousePlacement()->TranslateZDelta(-4.5f);
+	m_zgBigHouse4.GetBigHousePlacement()->TranslateXDelta(3.0f);
+	m_zgBigHouse4.GetBigHousePlacement()->TranslateZDelta(-1.5f);
 
 	m_zgLittleHouse.InitLittleHouse();
 	m_zgLittleHouse.GetLittleHousePlacement()->ScaleDelta(11.0f);
 	m_zgLittleHouse.GetLittleHousePlacement()->RotateYDelta(HALFPI - 0.5f);
-	m_zgLittleHouse.GetLittleHousePlacement()->TranslateXDelta(8.0f);
-	m_zgLittleHouse.GetLittleHousePlacement()->TranslateZDelta(-8.0f);
+	m_zgLittleHouse.GetLittleHousePlacement()->TranslateXDelta(5.0f);
+	m_zgLittleHouse.GetLittleHousePlacement()->TranslateZDelta(-5.0f);
 
 	m_zgLittleHouse2.InitLittleHouse();
 	m_zgLittleHouse2.GetLittleHousePlacement()->ScaleDelta(11.0f);
 	m_zgLittleHouse2.GetLittleHousePlacement()->RotateYDelta(HALFPI);
-	m_zgLittleHouse2.GetLittleHousePlacement()->TranslateXDelta(10.0f);
-	m_zgLittleHouse2.GetLittleHousePlacement()->TranslateZDelta(5.0f);
+	m_zgLittleHouse2.GetLittleHousePlacement()->TranslateXDelta(7.0f);
+	m_zgLittleHouse2.GetLittleHousePlacement()->TranslateZDelta(8.0f);
 
 	m_zgLittleHouse3.InitLittleHouse();
 	m_zgLittleHouse3.GetLittleHousePlacement()->ScaleDelta(11.0f);
 	m_zgLittleHouse3.GetLittleHousePlacement()->RotateYDelta(HALFPI - 0.5f);
-	m_zgLittleHouse3.GetLittleHousePlacement()->TranslateXDelta(4.0f);
-	m_zgLittleHouse3.GetLittleHousePlacement()->TranslateZDelta(-1.0f);
+	m_zgLittleHouse3.GetLittleHousePlacement()->TranslateXDelta(1.0f);
+	m_zgLittleHouse3.GetLittleHousePlacement()->TranslateZDelta(2.0f);
 
 	m_zgBrewery.InitBrewery();
 	m_zgBrewery.GetBreweryPlacement()->ScaleDelta(10.0f);
 	m_zgBrewery.GetBreweryPlacement()->RotateYDelta(PI-0.15f);
-	m_zgBrewery.GetBreweryPlacement()->TranslateXDelta(12.0f);
-	m_zgBrewery.GetBreweryPlacement()->TranslateZDelta(-8.0f);
+	m_zgBrewery.GetBreweryPlacement()->TranslateXDelta(9.0f);
+	m_zgBrewery.GetBreweryPlacement()->TranslateZDelta(-5.0f);
 
 	m_zscene.AddPlacement(m_zgBigHouse.GetBigHousePlacement());
 	m_zscene.AddPlacement(m_zgBigHouse2.GetBigHousePlacement());
@@ -97,45 +97,43 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	//Note(Peter): Aufruf Tree
 	m_zgTree.InitTree();
 	m_zgTree.GetPlacementTree()->Scale(0.2f);
-	m_zgTree.GetPlacementTree()->TranslateXDelta(12.0f);
-	m_zgTree.GetPlacementTree()->TranslateZDelta(1.0f);
+	m_zgTree.GetPlacementTree()->TranslateXDelta(6.0f);
+	m_zgTree.GetPlacementTree()->TranslateZDelta(7.0f);
 
 	m_zgTree2.InitTree();
 	m_zgTree2.GetPlacementTree()->Scale(0.2f);
-	m_zgTree2.GetPlacementTree()->TranslateXDelta(8.0f);
-	m_zgTree2.GetPlacementTree()->TranslateZDelta(-1.0f);
+	m_zgTree2.GetPlacementTree()->TranslateXDelta(5.0f);
+	m_zgTree2.GetPlacementTree()->TranslateZDelta(2.0f);
 
 	m_zgTree3.InitTree();
 	m_zgTree3.GetPlacementTree()->Scale(0.2f);
-	m_zgTree3.GetPlacementTree()->TranslateXDelta(7.0f);
-	m_zgTree3.GetPlacementTree()->TranslateZDelta(2.0f);
+	m_zgTree3.GetPlacementTree()->TranslateXDelta(4.0f);
+	m_zgTree3.GetPlacementTree()->TranslateZDelta(5.0f);
 
 	m_zgTree4.InitTree();
 	m_zgTree4.GetPlacementTree()->Scale(0.2f);
-	m_zgTree4.GetPlacementTree()->TranslateXDelta(8.0f);
-	m_zgTree4.GetPlacementTree()->TranslateZDelta(5.0f);
+	m_zgTree4.GetPlacementTree()->TranslateXDelta(5.0f);
+	m_zgTree4.GetPlacementTree()->TranslateZDelta(8.0f);
 
-	m_zgTreeRound.InitTreeRound();
+	/*m_zgTreeRound.InitTreeRound();
 	m_zgTreeRound.GetPlacementTree()->Scale(0.2f);
 	m_zgTreeRound.GetPlacementTree()->TranslateXDelta(14.0f);
-	m_zgTreeRound.GetPlacementTree()->TranslateZDelta(4.5f);
+	m_zgTreeRound.GetPlacementTree()->TranslateZDelta(4.5f);*/
 
 	m_zgTreeBush.InitTreeBush();
 	m_zgTreeBush.GetPlacementTree()->Scale(0.2f);
-	m_zgTreeBush.GetPlacementTree()->TranslateXDelta(17.0f);
-	m_zgTreeBush.GetPlacementTree()->TranslateZDelta(3.0f);
+	m_zgTreeBush.GetPlacementTree()->TranslateXDelta(14.0f);
+	m_zgTreeBush.GetPlacementTree()->TranslateZDelta(6.0f);
 
 	m_zscene.AddPlacement(m_zgTree.GetPlacementTree());
 	m_zscene.AddPlacement(m_zgTree2.GetPlacementTree());
 	m_zscene.AddPlacement(m_zgTree3.GetPlacementTree());
 	m_zscene.AddPlacement(m_zgTree4.GetPlacementTree());
-	m_zscene.AddPlacement(m_zgTreeRound.GetPlacementTree());
+	//m_zscene.AddPlacement(m_zgTreeRound.GetPlacementTree());
 	m_zscene.AddPlacement(m_zgTreeBush.GetPlacementTree());
 	//Note(peter): Aufruf Track
 	m_zgTrack.InitTrack();
-	m_zgTrack.GetPlacement()->TranslateXDelta(3.0f);
 	m_zgTrack.GetPlacement()->TranslateYDelta(0.1f);
-	m_zgTrack.GetPlacement()->TranslateZDelta(-3.0f);
 
 	m_zscene.AddPlacement(m_zgTrack.GetPlacement());
 	//Note(Peter): Aufruf der Autos
@@ -157,12 +155,39 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	m_zscene.AddPlacement(m_zgCamaro.GetPlacement());*/
 	//Note(peter): Ground
-	m_zmGrass.MakeTextureDiffuse("textures\\Natur\\Gras_512.png");
-	m_zgGround.Init(45.0f, 45.0f, &m_zmGrass,0.0f,0.0f,5.0f,5.0f);
-	m_zpGround.AddGeo(&m_zgGround);
-	m_zpGround.RotateX(-HALFPI);
+	//m_zmGrass.MakeTextureDiffuse("textures\\Natur\\Gras_512.png");
+	//m_zgGround.Init(45.0f, 45.0f, &m_zmGrass,0.0f,0.0f,5.0f,5.0f);
+	//m_zpGround.AddGeo(&m_zgGround);
+	//m_zpGround.RotateX(-HALFPI);
 
-	m_zscene.AddPlacement(&m_zpGround);
+	//m_zscene.AddPlacement(&m_zpGround);
+	//Landscape
+	m_pzgLandscape = m_zgLandscape.LoadGeo("meshes\\Enviroment\\Landscape.obj");
+	m_pzgTreeFir = m_zgTreeFir.LoadGeo("meshes\\Enviroment\\Landscape_TreeFir.obj");
+	m_pzgTreeRound = m_zgTreeRound.LoadGeo("meshes\\Enviroment\\Landscape_TreeRound.obj");
+	m_pzgTreeBobblig = m_zgTreeBobblig.LoadGeo("meshes\\Enviroment\\Landscape_TreeBobblig.obj");
+	m_pzgLog = m_zgLog.LoadGeo("meshes\\Enviroment\\Landscape_Log.obj");
+
+	m_zmGrass.MakeTextureDiffuse("textures\\Natur\\Gras_Texture.jpg");
+	m_zmLog.MakeTextureDiffuse("textures\\image_black");
+
+	m_pzgLandscape->SetMaterial(&m_zmGrass);
+	m_pzgTreeFir->SetMaterial(&m_zmGrass);
+	m_pzgTreeRound->SetMaterial(&m_zmGrass);
+	m_pzgTreeBobblig->SetMaterial(&m_zmGrass);
+	m_pzgLog->SetMaterial(&m_zmLog);
+
+	m_zpLandscape.AddGeo(m_pzgLandscape);
+	m_zpLandscape.AddGeo(m_pzgTreeFir);
+	m_zpLandscape.AddGeo(m_pzgTreeRound);
+	m_zpLandscape.AddGeo(m_pzgTreeBobblig);
+	m_zpLandscape.AddGeo(m_pzgLog);
+
+
+	m_zscene.AddPlacement(&m_zpLandscape);
+
+
+
 	//Note(peter): Ray
 	/*m_zrRay.Init(CHVector(0, 1, -5, 1), CHVector(0, -1, 0,0));
 	
@@ -182,6 +207,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zpCamera.AddCamera(&m_zcamera);
 
 	m_zviewport.SetBackfaceCullingOn();
+	
 }
 
 

@@ -15,11 +15,13 @@ void CBrewery::InitBrewery(){
 	//Brewery
 	m_zmFacade.MakeTextureDiffuse("textures\\Haus\\Fassade_512.png");
 	m_zmFacade.MakeTextureBump("textures\\Haus\\Fassade_512_n.png");
+	m_zmFacade.MakeTextureSpecular("textures\\Haus\\Fassade_512_spec.png");
 	m_zmRoof.MakeTextureDiffuse("textures\\Haus\\Dachziegel_Rot_512.png");
 	m_zmRoof.MakeTextureBump("textures\\Haus\\Dachziegel_Rot_512_n.png");
+	m_zmRoof.MakeTextureSpecular("textures\\Haus\\Dachziegel_Rot_512_spec.png");
 
-	m_zmFacade.SetBumpStrength(2.0f);
-	m_zmRoof.SetBumpStrength(0.1f);
+	m_zmFacade.SetBumpStrength(1.0f);
+	m_zmRoof.SetBumpStrength(0.3f);
 	m_zgBrewery.SetTextureRepeat(5.0f, 1.0f);
 
 	m_zgBrewery.SetMaterialFacade(&m_zmFacade);
@@ -36,14 +38,16 @@ void CBrewery::InitBrewery(){
 	m_zpBrewery.AddGeo(&m_zgBrewery);
 	m_zpBrewery.Scale(0.05f);
 	//BreweryTower
-	m_zmFacadeTower.MakeTextureDiffuse("textures\\Haus\\Fassade_512.png");
-	m_zmFacadeTower.MakeTextureBump("textures\\Haus\\Fassade_512_n.png");
-	m_zmRoofTower.MakeTextureDiffuse("textures\\Haus\\Fassade_512.png");
-	m_zmRoofTower.MakeTextureBump("textures\\Haus\\Fassade_512_n.png");
+	m_zmFacadeTower.MakeTextureDiffuse("textures\\Haus\\Metall_256.png");
+	m_zmFacadeTower.MakeTextureBump("textures\\Haus\\Metall_256_n.png");
+	m_zmRoofTower.MakeTextureDiffuse("textures\\Haus\\Metall_256.png");
+	m_zmRoofTower.MakeTextureBump("textures\\Haus\\Metall_256_n.png");
+	m_zmFacadeTower.SetMetallic(0.3f);
+	m_zmRoofTower.SetMetallic(0.3f);
 
-	m_zmFacadeTower.SetBumpStrength(7.0f);
-	m_zmRoofTower.SetBumpStrength(5.0f);
-	m_zgTower.SetTextureRepeat(10.0f, 5.0f);
+	m_zmFacadeTower.SetBumpStrength(1.0f);
+	m_zmRoofTower.SetBumpStrength(1.0f);
+	m_zgTower.SetTextureRepeat(10.0f, 8.0f);
 
 	m_zgTower.SetMaterialFacade(&m_zmFacadeTower);
 	m_zgTower.SetMaterialRoof(&m_zmRoofTower);
@@ -61,13 +65,14 @@ void CBrewery::InitBrewery(){
 	m_zpTower2.Scale(0.05f);
 	m_zpTower2.TranslateXDelta(-0.2f);
 	//BrewerySupply
-	m_zmFacadeSupply.MakeTextureDiffuse("textures\\Haus\\Fassade_512.png");
-	m_zmFacadeSupply.MakeTextureBump("textures\\Haus\\Fassade_512_n.png");
-	m_zmFacadeSupply.SetBumpStrength(7.0f);
+	m_zmFacadeSupply.MakeTextureDiffuse("textures\\Haus\\Metall_256.png");
+	m_zmFacadeSupply.MakeTextureBump("textures\\Haus\\Metall_256_n.png");
+	m_zmFacadeSupply.SetBumpStrength(1.0f);
+	m_zmFacadeSupply.SetMetallic(0.3f);
 
 	m_zgSupply.SetMaterial(&m_zmFacadeSupply);
-	m_zgSupply.SetTextureRepeat(1.0f, 6.0f);
-	m_zgSupply.SetTextureRepeat(1.0f, 6.0f);
+	m_zgSupply.SetTextureRepeat(2.0f, 6.0f);
+	m_zgSupply.SetTextureRepeat(2.0f, 6.0f);
 
 	m_zgSupply.InitArc(0.9f, 1.0f, 10.0f, HALFPI, &m_zmFacadeSupply);
 	m_zpSupply.AddGeo(&m_zgSupply);
