@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "entities\common\Ground.h"
 #include "entities\common\Water.h"
+#include "entities\allgaeumap\Strecke.h"
 
 using namespace Vektoria;
 
@@ -15,6 +16,8 @@ private:
 	CPlacement placement;
 	CGround * ground;
 	CWater * water;
+	CStrecke * strecke;
+
 public:
 	~CAllgaeuMap();
 
@@ -22,6 +25,7 @@ public:
 
 	CPlacement* GetRootPlacement();
 
+	//Felix: Die Funktionen reichen die von der Strecke einfach durch, passt das so?
 
 	CHVector GetStartPosition();
 
