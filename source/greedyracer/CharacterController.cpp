@@ -48,9 +48,9 @@ void CCharacterController::Move(float DeltaTime)
 	
 	if (this->playerKeyboard->KeyPressed(keyUP))
 	{
-		if (fSpeed <= 50)
+		if (fSpeed <= 20)
 		{
-			fSpeed += 2;
+			fSpeed += 1;
 		}
 		Character->TranslateDelta(sin(angle_y) * (fSpeed / 10), 0.0f, cos(angle_y) * (fSpeed / 10));
 
@@ -78,7 +78,7 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (this->playerKeyboard->KeyPressed(keyLEFT) && (fSpeed != 0))
 	{
-		angle_y += 0.2  *DeltaTime;
+		angle_y += 2  *DeltaTime;
 		CHVector buffer;
 		buffer = Character->GetTranslation();
 		Character->TranslateDelta(-buffer);
@@ -88,7 +88,7 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (this->playerKeyboard->KeyPressed(keyRIGHT)&&(fSpeed != 0))
 	{
-		angle_y -= 0.2  *DeltaTime;
+		angle_y -= 2  *DeltaTime;
 		
 		CHVector buffer;
 		buffer = Character->GetTranslation();

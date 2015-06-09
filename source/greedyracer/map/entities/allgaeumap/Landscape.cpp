@@ -36,19 +36,13 @@ void CLandscape::Init()
 	m_zpTreeBobblig.AddGeo(m_pzgTreeBobblig);
 	m_zpTreeLog.AddGeo(m_pzgTreeLog);
 
-	/*m_zpLandscape.Fasten();
-	m_zpTreeFir.Fasten();
-	m_zpTreeRound.Fasten();
-	m_zpTreeBobblig.Fasten();
-	m_zpTreeLog.Fasten();*/
-
 	m_zpOverallPlacement.AddPlacement(&m_zpLandscape);
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeFir);
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeRound);
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeBobblig);
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeLog);
 
-	//m_zpOverallPlacement.Fasten();
+	m_zpOverallPlacement.Fasten();
 
 }
 

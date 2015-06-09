@@ -113,7 +113,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			// Todo: game starten
 			this->gameMenu.SetIsVisible(false);
 			this->CleanCurrentMatch();
-			this->currentMatch = new CMatch();
+			this->currentMatch = new CMatch(&keyboard);
 			this->currentMatch->Init(this->currentMap);
 			this->currentMatch->Start();
 

@@ -79,6 +79,9 @@ public:
 	void Tick(float fTime, float fTimeDelta);
 	void Fini();
 
+	CMatch* currentMatch;
+	CDeviceKeyboard keyboard;
+	
 	void WindowReSize(int iNewWidth, int iNewHeight); // WindowsReSize wird immer dann aufgerufen, wenn der Benutzer die Fenstergröße verändert hat
 
 private:
@@ -97,17 +100,18 @@ private:
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
 
-	CDeviceKeyboard keyboard;
+	
 	CDeviceCursor cursor;
 
 	CGameMenu gameMenu;
 	CMap* currentMap;
-	CMatch* currentMatch;
+	
 
 	void ToggleCameraMode();
 	void MakeGameMenuVisible();
 	void PositionCamera();
 	void CleanCurrentMatch();
+	
 };
 
 
