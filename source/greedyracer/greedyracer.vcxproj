@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="map\entities\allgaeumap\Landscape.h" />
     <ClInclude Include="map\entities\allgaeumap\Abkuerzung.h" />
     <ClInclude Include="map\entities\allgaeumap\Checkpoint.h" />
     <ClInclude Include="Match.h" />
@@ -173,6 +174,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="map\entities\allgaeumap\Landscape.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Abkuerzung.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Checkpoint.cpp" />
     <ClCompile Include="Match.cpp" />

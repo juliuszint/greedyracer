@@ -7,6 +7,7 @@
 #include "entities\common\Ground.h"
 #include "entities\common\Water.h"
 #include "entities\allgaeumap\Strecke.h"
+#include "entities\allgaeumap\Landscape.h"
 
 using namespace Vektoria;
 
@@ -17,6 +18,7 @@ private:
 	CGround * ground;
 	CWater * water;
 	CStrecke * strecke;
+	CLandscape * landscape;
 
 public:
 	~CAllgaeuMap();

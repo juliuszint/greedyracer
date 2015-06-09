@@ -75,6 +75,9 @@ void CStrecke::Init()
 	this->Sektor3 = new CSektor();
 	this->Sektor3->Init("meshes\\allgaeumap\\strecke\\14_Sekt_3.obj");
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
+
+	//Strecke verschieben
+	root.Translate(CHVector(0, 0.1, 0));
 }
 
 CPlacement * CStrecke::GetRootPlacement()
