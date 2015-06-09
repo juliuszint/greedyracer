@@ -5,6 +5,14 @@
 
 using namespace Vektoria;
 
+enum EGameMenuButton
+{
+	EGameMenuButtonNone,
+	EGameMenuButtonStart,
+	EGameMenuButtonHighscore,
+	EGameMenuButtonQuit
+};
+
 class CGameMenu
 {
 private:
@@ -26,7 +34,7 @@ public:
 	void Init(CDeviceCursor * cursor);
 	bool GetIsVisible();
 	void SetIsVisible(bool value);
-	void Tick();
+	EGameMenuButton Tick();
 	COverlay* GetRootOverlay();
 };
 

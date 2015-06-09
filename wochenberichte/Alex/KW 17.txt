@@ -1,0 +1,13 @@
+Baur Alexander
+20.04.2015 - 24.04.2015
+
+Einarbeitung in Musik- und Soundeffektsoftware
+
+Ich habe mich in dieser Woche hauptsächlich mit der Erstellung von Hintergrundmusik und Soundeffekten
+beschäftigt und mich in einige Programme diesbezüglich Eingearbeitet (LMMS und Music Maker 17)
+Erste Grobentwürfe für eine Menü-Melodie bzw Musik liegen vor.
+
+Für Soundeffekte habe ich im Internet recherchiert, inwiefern im Internet zur Verfügung gestellte 
+Soundeffekte (z.B. Freesound.org) Urheberrechlich geschützt sind.
+Im Endeffekt gibts auf der oben genannten Platform viele Soundeffekte, die insofern geschützt sind,
+dass man den Titel des Soundeffekts und den Ersteller in seinen Credits erwähnen muss. 

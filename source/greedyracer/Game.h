@@ -64,6 +64,7 @@
 #include "map\Map.h"
 #include "map\AllgaeuMap.h"
 #include "menu\GameMenu.h"
+#include "Match.h"
 
 using namespace Vektoria;
 
@@ -101,9 +102,12 @@ private:
 
 	CGameMenu gameMenu;
 	CMap* currentMap;
+	CMatch* currentMatch;
 
 	void ToggleCameraMode();
 	void MakeGameMenuVisible();
+	void PositionCamera();
+	void CleanCurrentMatch();
 };
 
 

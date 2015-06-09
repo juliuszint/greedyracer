@@ -1,3 +1,4 @@
+//#include "GameMenu.h"
 #include "GameMenu.h"
 
 
@@ -24,11 +25,11 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	float buttonLeft = 0.5 - (buttonWidth / 2);
 
 	this->startButtonOverlay.Init(&this->startButtonImage, CFloatRect(buttonLeft, 0, buttonWidth, buttonHeight));
-	this->startButtonOverlay.SetLayer(0.5f);
+	//this->startButtonOverlay.SetLayer(0.5f);
 	this->creditsButtonOverlay.Init(&this->creditsButtonImage, CFloatRect(buttonLeft, 0.4, buttonWidth, buttonHeight));
-	this->creditsButtonOverlay.SetLayer(0.5f);
+	//this->creditsButtonOverlay.SetLayer(0.5f);
 	this->stopButtonOverlay.Init(&this->stopButtonImage, CFloatRect(buttonLeft, 0.7, buttonWidth, buttonHeight));
-	this->stopButtonOverlay.SetLayer(0.5f);
+	//this->stopButtonOverlay.SetLayer(0.5f);
 
 	this->rootOverlay.AddOverlay(&this->startButtonOverlay);
 
@@ -52,17 +53,22 @@ void CGameMenu::SetIsVisible(bool value)
 	else	   this->rootOverlay.SwitchOff();
 } 
 
-void CGameMenu::Tick()
+EGameMenuButton CGameMenu::Tick()
 {
 	COverlay* currentOverlay = this->cursor->PickOverlay();
 	bool leftMousePressed = this->cursor->ButtonPressedLeft();
 
 	if (currentOverlay == &this->startButtonOverlay && leftMousePressed)
 	{
-		this->SetIsVisible(false);
+		return EGameMenuButtonStart;
+	}
+	if (currentOverlay == &this->creditsButtonOverlay && leftMousePressed)
+	{
+		return EGameMenuButtonHighscore;
 	}
 	if (currentOverlay == &this->stopButtonOverlay && leftMousePressed) 
 	{
-		PostQuitMessage(0);
+		return EGameMenuButtonQuit;
 	}
+	return EGameMenuButtonNone;
 }

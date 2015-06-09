@@ -46,13 +46,7 @@ public:
 	void Init();
 
 	CPlacement* GetRootPlacement();
-//	CVehicle * m_zvAuto;
-
 
 	void InitCamaro();
-//	void addVehicle(CVehicle * Fahrzeug) { m_zvAuto = Fahrzeug; };
-
-	CPlacement* GetPlacement();
-//	CVehicle** GetVehicle();
 };
 

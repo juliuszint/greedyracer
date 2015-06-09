@@ -1,6 +1,5 @@
 #include "Strecke.h"
 
-
 CStrecke::~CStrecke()
 {
 	free(this->Start);
@@ -21,7 +20,6 @@ CStrecke::~CStrecke()
 
 void CStrecke::Init()
 {
-
 	this->Start = new CStart();
 	this->Start->Init();
 	this->root.AddPlacement(this->Start->GetRootPlacement());
@@ -80,7 +78,6 @@ void CStrecke::Init()
 
 	//Strecke verschieben
 	root.Translate(CHVector(0, 0.1, 0));
-
 }
 
 CPlacement * CStrecke::GetRootPlacement()
@@ -91,7 +88,7 @@ CPlacement * CStrecke::GetRootPlacement()
 
 CHVector CStrecke::GetStartPosition()
 {
-	return CHVector(0, 0, 0);
+	return this->Start->GetRootPlacement()->GetTranslation();
 }
 
 
