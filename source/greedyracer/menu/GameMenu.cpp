@@ -53,17 +53,22 @@ void CGameMenu::SetIsVisible(bool value)
 	else	   this->rootOverlay.SwitchOff();
 } 
 
-void CGameMenu::Tick()
+EGameMenuButton CGameMenu::Tick()
 {
 	COverlay* currentOverlay = this->cursor->PickOverlay();
 	bool leftMousePressed = this->cursor->ButtonPressedLeft();
 
 	if (currentOverlay == &this->startButtonOverlay && leftMousePressed)
 	{
-		this->SetIsVisible(false);
+		return EGameMenuButtonStart;
+	}
+	if (currentOverlay == &this->creditsButtonOverlay && leftMousePressed)
+	{
+		return EGameMenuButtonHighscore;
 	}
 	if (currentOverlay == &this->stopButtonOverlay && leftMousePressed) 
 	{
-		PostQuitMessage(0);
+		return EGameMenuButtonQuit;
 	}
+	return EGameMenuButtonNone;
 }

@@ -2,6 +2,7 @@
 
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
+#include <string>
 
 
 using namespace Vektoria;
