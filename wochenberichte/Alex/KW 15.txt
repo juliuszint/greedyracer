@@ -1,0 +1,20 @@
+Baur Alexander
+06.04.2015 - 10.04.2015 
+
+Spielidee zum Genre "3D-Farhsimulation":
+
+Anfangs haben wir darüber innerhalb der Gruppe diskutiert, in welche Richtung wir 
+gehen möchten, was das Spielkonzept betrifft. Da die meisten der Ansicht waren, ein 
+Spiel zu entwickeln, das man auf einem Bildschirm mit mehreren Spielern (Karboom, GangBeasts), 
+haben wir uns auf diese Art des Spiels festgelegt. 
+
+Grundlegende Spielidee: 
+
+Nach weiteren Überlegungen kann man das Spielkonzept wie folgt zusammenfassen:
+	- Rundenbasiertes Rennspiel
+	- Kameraführung aus der Vogelperspektive
+	- Rundkurs hat Abkürzungen, die Fallen / Hindernisse enthalten
+	- Abkürzungen können zeitlichen Vorteil / Nachteil bewirken
+	- evtl. Zusatzinhalte sind: 
+		- Waffen zum aufsammeln um Gegner auszuschalten
+		- Collectables, wie Boostflaschen, Fallen (Bananen) etc. 

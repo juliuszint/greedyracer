@@ -1,0 +1,27 @@
+Baur Alexander
+13.04.2015 - 17.04.2015
+
+Genauere Spielkonzeption:
+
+In dieser Woche haben wir über ein genaueres Konzept des Spiels diskutiert, welche Inhalte und
+Funktionen in dem Spiel gegeben sein sollten. Disukssionsthemen waren:
+	- Autotypen
+	- Grafik
+	- Map
+	- Physik
+	- Menü und Hudsystem
+	- Sound
+
+Aufgabenverteilung:
+
+Wir haben eine Grobe Arbeits- und Aufgabenverteilung durchgeführt, wer aus der Gruppe für welches
+Themengebiet (z.B. Texturerstellung & Sound, GUI + 2D-Interaktion, KI + Physik, prozedurale Mo-
+dellierung, prozedurale Modellierung und Animation) zuständig ist.
+
+Grober Map-Entwurf:
+
+Ich habe einige Streckenentwürfe erstellt, wie die Strecke aussehen könnte. Dabei berücksichtig sind
+die Abkürzungen, welche bestimmte Fallen oder Hindernisse mit sich bringen. 
+Überlegungen zu Steckeneigenschaften wie Erhöhungen, Absenkungen, Jumps, Szenerie waren ebenfalls Teil
+der Entwürfe. Mithilfe der Händischen Zeichnungen haben wir uns dann für einen Steckenentwurf entschieden,
+welcher aber noch nicht komplett fest gesetzt ist sondern Änderungen vorbehalten ist.
