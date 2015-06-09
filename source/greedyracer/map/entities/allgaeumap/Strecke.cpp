@@ -1,6 +1,5 @@
 #include "Strecke.h"
 
-
 CStrecke::~CStrecke()
 {
 	free(this->Start);
@@ -21,7 +20,6 @@ CStrecke::~CStrecke()
 
 void CStrecke::Init()
 {
-
 	this->Start = new CStart();
 	this->Start->Init();
 	this->root.AddPlacement(this->Start->GetRootPlacement());
@@ -77,10 +75,6 @@ void CStrecke::Init()
 	this->Sektor3 = new CSektor();
 	this->Sektor3->Init("meshes\\allgaeumap\\strecke\\14_Sekt_3.obj");
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
-
-	//Strecke verschieben
-	root.Translate(CHVector(80, 0, 50));
-
 }
 
 CPlacement * CStrecke::GetRootPlacement()
@@ -91,7 +85,7 @@ CPlacement * CStrecke::GetRootPlacement()
 
 CHVector CStrecke::GetStartPosition()
 {
-	return CHVector(0, 0, 0);
+	return this->Start->GetRootPlacement()->GetTranslation();
 }
 
 

@@ -21,8 +21,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 {
 	this->m_hwnd = hwnd;
 	this->m_bReSized = false;
-	this->fixedCameraMode = false;
+	this->fixedCameraMode = true;
 	this->cKeyReleased = true;
+	this->currentMatch = NULL;
 
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
 	this->m_zroot.Init(psplash);
@@ -53,7 +54,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// sichtbar machen
 	this->gameMenu.Init(&this->cursor);
 	this->m_zviewport.AddOverlay(this->gameMenu.GetRootOverlay());
-	
+
+	this->PositionCamera();
+
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
@@ -94,13 +97,42 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	if (this->gameMenu.GetIsVisible())
 	{
-		this->gameMenu.Tick();
+		this->CleanCurrentMatch();
+
+		EGameMenuButton result = this->gameMenu.Tick();
+		switch (result)
+		{
+		case EGameMenuButtonQuit:
+			PostQuitMessage(0);
+			break;
+		case EGameMenuButtonStart:
+			// Todo: game starten
+			this->gameMenu.SetIsVisible(false);
+			this->CleanCurrentMatch();
+			this->currentMatch = new CMatch();
+			this->currentMatch->Init(this->currentMap);
+			this->currentMatch->Start();
+
+			break;
+		}
 	}
+
 	else if (this->keyboard.KeyPressed(DIK_ESCAPE))
 	{
 		this->gameMenu.SetIsVisible(true);
 	}
-
+	if (this->currentMatch != NULL)
+	{
+		this->currentMatch->Tick(fTimeDelta);
+	}
+}
+void CGame::CleanCurrentMatch()
+{
+	if (this->currentMatch != NULL)
+	{
+		this->currentMatch->Stop();
+		free(this->currentMatch);
+	}
 }
 
 void CGame::Fini()
@@ -123,9 +155,14 @@ void CGame::ToggleCameraMode()
 	}
 	else
 	{
-		this->m_zpCamera.Translate(CHVector(300, 150, 300));
-		this->m_zpCamera.SetPointing(new CHVector(300, 1, 300));
+		this->PositionCamera();
 	}
 	fixedCameraMode = !fixedCameraMode;
+}
+
+void CGame::PositionCamera()
+{
+	this->m_zpCamera.Translate(CHVector(80, 50, 55));
+	this->m_zpCamera.SetPointing(new CHVector(80, 1, 55));
 }
 
