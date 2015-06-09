@@ -27,6 +27,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
 	this->m_zroot.Init(psplash);
 	this->m_zcamera.Init();
+
 	this->m_zframe.Init(hwnd, eApiRender_DirectX11_Shadermodel50);
 	this->m_zviewport.InitFull(&m_zcamera);
 
@@ -57,6 +58,8 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
+	m_zpCamera.Translate(CHVector(0, 50, 50));
+	m_zpCamera.RotateX(HALFPI / 2);
 	
 }
 
@@ -101,6 +104,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	{
 		this->gameMenu.SetIsVisible(true);
 	}
+	
 
 }
 

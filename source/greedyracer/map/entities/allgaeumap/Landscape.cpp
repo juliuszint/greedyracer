@@ -12,11 +12,11 @@ CLandscape::~CLandscape()
 
 void CLandscape::Init()
 {
-	m_pzgLandscape = m_zgLandscape.LoadGeo("meshes\\enviroment\\Landscape.obj");
-	m_pzgTreeFir = m_zgTreeFir.LoadGeo("meshes\\enviroment\\Landscape_TreeFir.obj");
-	m_pzgTreeRound = m_zgTreeRound.LoadGeo("meshes\\enviroment\\Landscape_TreeRound.obj");
-	m_pzgTreeBobblig = m_zgTreeBobblig.LoadGeo("meshes\\enviroment\\Landscape_TreeBobblig.obj");
-	m_pzgTreeLog = m_zgTreeLog.LoadGeo("meshes\\enviroment\\Landscape_Log.obj");
+	m_pzgLandscape = m_zgLandscape.LoadGeo("meshes\\enviroment\\Landscape_reduced.obj");
+	m_pzgTreeFir = m_zgTreeFir.LoadGeo("meshes\\enviroment\\Landscape_TreeFir_reduced.obj");
+	m_pzgTreeRound = m_zgTreeRound.LoadGeo("meshes\\enviroment\\Landscape_TreeRound_reduced.obj");
+	m_pzgTreeBobblig = m_zgTreeBobblig.LoadGeo("meshes\\enviroment\\Landscape_TreeBobblig_reduced.obj");
+	m_pzgTreeLog = m_zgTreeLog.LoadGeo("meshes\\enviroment\\Landscape_Log_reduced.obj");
 
 	m_zmLandscape.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
 	m_zmTreeFir.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
@@ -48,7 +48,7 @@ void CLandscape::Init()
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeBobblig);
 	m_zpOverallPlacement.AddPlacement(&m_zpTreeLog);
 
-	//m_zpOverallPlacement.FixAndFasten();
+	//m_zpOverallPlacement.Fasten();
 
 }
 
