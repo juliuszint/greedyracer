@@ -138,7 +138,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Hud.h" />
+    <ClInclude Include="map\entities\allgaeumap\Landscape.h" />
+    <ClInclude Include="map\entities\allgaeumap\Abkuerzung.h" />
+    <ClInclude Include="map\entities\allgaeumap\Checkpoint.h" />
     <ClInclude Include="Match.h" />
     <ClInclude Include="menu\GameMenu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -147,6 +149,9 @@
     <ClInclude Include="CharacterController.h" />
     <ClInclude Include="map\entities\Entity.h" />
     <ClInclude Include="map\Map.h" />
+    <ClInclude Include="map\entities\allgaeumap\Start.h" />
+    <ClInclude Include="map\entities\allgaeumap\Sektor.h" />
+    <ClInclude Include="map\entities\allgaeumap\Strecke.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="map\entities\common\Ground.h" />
     <ClInclude Include="map\entities\common\BigHouse.h" />
@@ -169,13 +174,18 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hud.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Landscape.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Abkuerzung.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Checkpoint.cpp" />
     <ClCompile Include="Match.cpp" />
     <ClCompile Include="menu\GameMenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="map\AllgaeuMap.cpp" />
     <ClCompile Include="CharacterController.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Start.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Sektor.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Strecke.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="map\entities\common\Ground.cpp" />
     <ClCompile Include="map\entities\common\BigHouse.cpp" />
