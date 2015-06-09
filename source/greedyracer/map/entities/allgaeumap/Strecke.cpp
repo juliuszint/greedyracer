@@ -79,7 +79,7 @@ void CStrecke::Init()
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
 
 	//Strecke verschieben
-	root.Translate(CHVector(80, 0, 50));
+	root.Translate(CHVector(0, 0.1, 0));
 
 }
 

@@ -4,6 +4,7 @@
 CAllgaeuMap::~CAllgaeuMap()
 {
 	free(this->ground);
+	free(this->landscape);
 	free(this->water);
 	free(this->strecke);
 }
@@ -11,12 +12,17 @@ CAllgaeuMap::~CAllgaeuMap()
 void CAllgaeuMap::Init()
 {
 	this->water = new CWater();
-	this->ground = new CGround();
+	//this->ground = new CGround();
+	this->landscape = new CLandscape();
 	this->strecke = new CStrecke();
 
-	this->ground->Configure(10, 10, 60, 40);
-	this->ground->Init();
-	this->placement.AddPlacement(this->ground->GetRootPlacement());
+	//this->ground->Configure(10, 10, 60, 40);
+	//this->ground->Init();
+	//this->placement.AddPlacement(this->ground->GetRootPlacement());
+
+	this->landscape->Init();
+	//this->placement.Fasten();
+	this->placement.AddPlacement(this->landscape->GetRootPlacement());
 	
 	this->water->Configure(20, 80);
 	this->water->Init();

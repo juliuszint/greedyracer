@@ -57,6 +57,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
+	
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
