@@ -18,3 +18,7 @@ void CSektor::Init(char* GeoPath){
 CPlacement* CSektor::GetRootPlacement(){
 	return &m_zpSektor;
 }
+
+CGeo * CSektor::GetGeo(){
+	return m_pzgSektor;
+}

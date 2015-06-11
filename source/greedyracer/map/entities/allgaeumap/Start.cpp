@@ -15,3 +15,7 @@ void CStart::Init(){
 CPlacement* CStart::GetRootPlacement(){
 	return &m_zpStart;
 }
+
+CGeo * CStart::GetGeo(){
+	return m_pzgStart;
+}

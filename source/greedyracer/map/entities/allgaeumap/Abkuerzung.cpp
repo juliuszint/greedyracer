@@ -18,3 +18,7 @@ void CAbkuerzung::Init(char * GeoPath){
 CPlacement* CAbkuerzung::GetRootPlacement(){
 	return &m_zpAbkuerzung;
 }
+
+CGeo * CAbkuerzung::GetGeo(){
+	return m_pzgAbkuerzung;
+}

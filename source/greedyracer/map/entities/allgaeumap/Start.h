@@ -16,4 +16,5 @@ private:
 public:
 	void Init();
 	CPlacement* GetRootPlacement();
+	CGeo * GetGeo();
 };

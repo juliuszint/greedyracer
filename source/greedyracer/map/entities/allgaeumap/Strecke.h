@@ -45,5 +45,10 @@ public:
 	CHVector IsOnTrack(CHVector position);
 
 	bool IsOnFinish(CHVector position);
+
+	CGeo * getStartGeo();
+	CGeo * getCheckpointGeo(int pos);
+	CGeo * getSektorGeo(int pos);
+	CGeo * getAbkuerzungGeo(int pos);
 };
 

@@ -18,3 +18,7 @@ void CCheckpoint::Init( char * GeoPath){
 CPlacement* CCheckpoint::GetRootPlacement(){
 	return &m_zpCheckpoint;
 }
+
+CGeo * CCheckpoint::GetGeo(){
+	return m_pzgCheckpoint;
+}

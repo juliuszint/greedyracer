@@ -17,4 +17,5 @@ public:
 	void Init();
 	void Init(char* GeoPath);
 	CPlacement* GetRootPlacement();
+	CGeo * GetGeo();
 };
