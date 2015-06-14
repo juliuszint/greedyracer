@@ -22,3 +22,7 @@ CPlacement* CSektor::GetRootPlacement(){
 CGeo * CSektor::GetGeo(){
 	return m_pzgSektor;
 }
+
+void CSektor::Translate(CHVector Vektor){
+	m_zpSektor.Translate(Vektor);
+}

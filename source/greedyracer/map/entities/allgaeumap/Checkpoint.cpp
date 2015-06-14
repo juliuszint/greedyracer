@@ -22,3 +22,7 @@ CPlacement* CCheckpoint::GetRootPlacement(){
 CGeo * CCheckpoint::GetGeo(){
 	return m_pzgCheckpoint;
 }
+
+void CCheckpoint::Translate(CHVector Vektor){
+	m_zpCheckpoint.Translate(Vektor);
+}

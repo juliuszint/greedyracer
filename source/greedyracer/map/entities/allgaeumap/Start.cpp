@@ -19,3 +19,7 @@ CPlacement* CStart::GetRootPlacement(){
 CGeo * CStart::GetGeo(){
 	return m_pzgStart;
 }
+
+void CStart::Translate(CHVector Vektor){
+	m_zpStart.Translate(Vektor);
+}

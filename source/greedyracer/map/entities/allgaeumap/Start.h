@@ -17,4 +17,5 @@ public:
 	void Init();
 	CPlacement* GetRootPlacement();
 	CGeo * GetGeo();
+	void Translate(CHVector Vektor);
 };

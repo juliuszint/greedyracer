@@ -18,4 +18,5 @@ public:
 	void Init(char* GeoPath);
 	CPlacement* GetRootPlacement();
 	CGeo * GetGeo();
+	void Translate(CHVector Vektor);
 };

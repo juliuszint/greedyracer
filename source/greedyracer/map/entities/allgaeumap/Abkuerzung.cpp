@@ -22,3 +22,7 @@ CPlacement* CAbkuerzung::GetRootPlacement(){
 CGeo * CAbkuerzung::GetGeo(){
 	return m_pzgAbkuerzung;
 }
+
+void CAbkuerzung::Translate(CHVector Vektor){
+	m_zpAbkuerzung.Translate(Vektor);
+}
