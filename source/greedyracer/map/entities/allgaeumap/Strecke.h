@@ -28,6 +28,11 @@ private:
 	CSektor * Sektor2;
 	CSektor * Sektor3;
 
+	CCheckpoint * aCheckpoints[5];
+	CAbkuerzung * aAbkuerzungen[5];
+	CSektor * aSektoren[3];
+
+
 public:
 	~CStrecke();
 
@@ -46,9 +51,9 @@ public:
 
 	bool IsOnFinish(CHVector position);
 
-	CGeo * getStartGeo();
-	CGeo * getCheckpointGeo(int pos);
-	CGeo * getSektorGeo(int pos);
-	CGeo * getAbkuerzungGeo(int pos);
+	CStart * getStartGeo();
+	CCheckpoint * getCheckpointGeo(int iarraypos);
+	CSektor * getSektorGeo(int iarraypos);
+	CAbkuerzung * getAbkuerzungGeo(int iarraypos);
 };
 

@@ -47,15 +47,74 @@ CHVector CAllgaeuMap::GetStartPosition()
 
 int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 {
-	return strecke->IsOnCheckpoint(position);
+	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
+	float dist = 10.0f;
+
+	//Abfrage Intersect mit Checkpoints
+	for (int i = 0; i < 5; i++)
+	{
+		CGeo* geo = this->strecke->getCheckpointGeo(i)->GetGeo();
+		if (geo->Intersects(position, dir, &dist))
+		{
+			return i + 1;
+		}
+	}
+
 }
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 {
-	return strecke->IsOnTrack(position);
+	//CRay raytoRoad;
+	//raytoRoad.Init(position, CHVector(0.0f, -1.0f, 0.0f, 0.0f));
+	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
+	float dist = 10.0f;
+
+	//Abfrage Intersect mit Checkpoints
+	for (int i = 0; i < 5; i++)
+	{
+		CGeo* geo = this->strecke->getCheckpointGeo(i)->GetGeo();
+		if (geo->Intersects(position, dir, &dist))
+		{
+			return CHVector(0.0f, 0.0f, 0.0f);
+		}
+	}
+
+	//Abfrage Intersect mit Sektoren
+	for (int i = 0; i < 5; i++)
+	{
+		CGeo* geo = this->strecke->getSektorGeo(i)->GetGeo();
+		if (geo->Intersects(position, dir, &dist))
+		{
+			return CHVector(0.0f, 0.0f, 0.0f);
+		}
+	}
+
+	//Abfrage Intersect mit Abkürzungen
+	for (int i = 0; i < 5; i++)
+	{
+		CGeo* geo = this->strecke->getAbkuerzungGeo(i)->GetGeo();
+		if (geo->Intersects(position, dir, &dist))
+		{
+			return CHVector(0.0f, 0.0f, 0.0f);
+		}
+	}
+
+	return CHVector(1.0f, 1.0f, 1.0f);
+
 }
 
 bool CAllgaeuMap::IsOnFinish(CHVector position)
 {
-	return strecke->IsOnFinish(position);
+
+	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
+	float dist = 10.0f;
+
+	CGeo* geo = this->strecke->getStartGeo()->GetGeo();
+	if (geo->Intersects(position, dir, &dist))
+	{
+		return true;
+	}
+	else
+		return false;
+
 }

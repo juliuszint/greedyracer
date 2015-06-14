@@ -78,6 +78,23 @@ void CStrecke::Init()
 
 	//Strecke verschieben
 	root.Translate(CHVector(0, 0.1, 0));
+
+	this->aCheckpoints[0] = CP1;
+	this->aCheckpoints[1] = CP2;
+	this->aCheckpoints[2] = CP3;
+	this->aCheckpoints[3] = CP4;
+	this->aCheckpoints[4] = CP5;
+
+	this->aAbkuerzungen[0] = Cut1_1;
+	this->aAbkuerzungen[1] = Cut1_2;
+	this->aAbkuerzungen[2] = Cut2_1;
+	this->aAbkuerzungen[3] = Cut2_2;
+	this->aAbkuerzungen[4] = Cut3;
+
+	this->aSektoren[0] = Sektor1;
+	this->aSektoren[1] = Sektor2;
+	this->aSektoren[2] = Sektor3;
+
 }
 
 CPlacement * CStrecke::GetRootPlacement()
@@ -106,6 +123,27 @@ bool CStrecke::IsOnFinish(CHVector position)
 {
 	return false;
 }
+
+CStart* CStrecke::getStartGeo()
+{
+	return this->Start;
+}
+
+CCheckpoint* CStrecke::getCheckpointGeo(int iarraypos)
+{
+	return this->aCheckpoints[iarraypos];
+}
+
+CSektor* CStrecke::getSektorGeo(int iarraypos)
+{
+	return this->aSektoren[iarraypos];
+}
+
+CAbkuerzung* CStrecke::getAbkuerzungGeo(int iarraypos)
+{
+	return this->aAbkuerzungen[iarraypos];
+}
+
 
 /*
 CGeo * CStrecke::getStartGeo(){
