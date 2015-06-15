@@ -35,7 +35,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->m_zframe.AddDeviceKeyboard(&this->keyboard);
 	this->m_zframe.AddDeviceCursor(&this->cursor);
 
-	this->keyboard.SetWASDTranslationSensitivity(20);
+	this->keyboard.SetWASDTranslationSensitivity(10);
 
 	this->m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
 
@@ -53,17 +53,17 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// Note (julius): das game menu wird direkt am start angezeigt deswegen wirds hier direkt
 	// eingehängt und anschließend kann man es über die funktion CGameMenu.MakeVisible() wieder 
 	// sichtbar machen
-	/*this->gameMenu.Init(&this->cursor);
+	this->gameMenu.Init(&this->cursor);
 	this->m_zviewport.AddOverlay(this->gameMenu.GetRootOverlay());
 
-	this->PositionCamera();*/
+	this->PositionCamera();
 
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
 	m_zpCamera.Translate(CHVector(0, 50, 50));
 	m_zpCamera.RotateX(HALFPI / 2);
-	
+	m_zviewport.SetWireframeOff();
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
@@ -99,37 +99,37 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
 	}
 
-	//if (this->gameMenu.GetIsVisible())
-	//{
-	//	this->CleanCurrentMatch();
+	if (this->gameMenu.GetIsVisible())
+	{
+		this->CleanCurrentMatch();
 
-	//	EGameMenuButton result = this->gameMenu.Tick();
-	//	switch (result)
-	//	{
-	//	case EGameMenuButtonQuit:
-	//		PostQuitMessage(0);
-	//		break;
-	//	case EGameMenuButtonStart:
-	//		// Todo: game starten
-	//		this->gameMenu.SetIsVisible(false);
-	//		this->CleanCurrentMatch();
-	//		this->currentMatch = new CMatch(&keyboard);
-	//		this->currentMatch->Init(this->currentMap);
-	//		this->currentMatch->Start();
+		EGameMenuButton result = this->gameMenu.Tick();
+		switch (result)
+		{
+		case EGameMenuButtonQuit:
+			PostQuitMessage(0);
+			break;
+		case EGameMenuButtonStart:
+			// Todo: game starten
+			this->gameMenu.SetIsVisible(false);
+			this->CleanCurrentMatch();
+			this->currentMatch = new CMatch(&keyboard);
+			this->currentMatch->Init(this->currentMap);
+			this->currentMatch->Start();
 
-	//		break;
-	//	}
-	//}
+			break;
+		}
+	}
 
-	//else if (this->keyboard.KeyPressed(DIK_ESCAPE))
-	//{
-	//	this->gameMenu.SetIsVisible(true);
-	//}
+	else if (this->keyboard.KeyPressed(DIK_ESCAPE))
+	{
+		this->gameMenu.SetIsVisible(true);
+	}
 
-	//if (this->currentMatch != NULL)
-	//{
-	//	this->currentMatch->Tick(fTimeDelta);
-	//}
+	if (this->currentMatch != NULL)
+	{
+		this->currentMatch->Tick(fTimeDelta);
+	}
 }
 void CGame::CleanCurrentMatch()
 {

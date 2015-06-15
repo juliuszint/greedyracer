@@ -32,7 +32,6 @@ void CMatch::Init(CMap* map)
 	this->player1Vehicle = new CCamaro();
 	this->player1Vehicle->Init();
 	this->player1Placement = this->player1Vehicle->GetRootPlacement();
-
 	
 	Cont1.addCharacter(this->player1Placement);
 	Cont1.addKeyboard(m_pkeyboard);

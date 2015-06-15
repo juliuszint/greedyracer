@@ -21,88 +21,75 @@ CStrecke::~CStrecke()
 void CStrecke::Init()
 {
 	this->Start = new CStart();
-	this->Start->Translate(CHVector(0, 0, 0));
+	this->Start->Translate(CHVector(25.11, 0, 26.1));
 	this->Start->Init();
 	this->root.AddPlacement(this->Start->GetRootPlacement());
-	this->Start->GetRootPlacement()->Translate(CHVector(20, 0, 60));
 
 	this->CP1 = new CCheckpoint();
-	this->CP1->Translate(CHVector(100, 0, 0));
+	this->CP1->Translate(CHVector(2.47, 0, 36.46));
 	this->CP1->Init("meshes\\allgaeumap\\strecke\\03_CP_1.obj");
 	this->root.AddPlacement(this->CP1->GetRootPlacement());
-	this->CP1->GetRootPlacement()->Translate(CHVector(30, 0, 30));
 
 	this->CP2 = new CCheckpoint();
-	this->CP2->Translate(CHVector(100, 0, 0));
+	this->CP2->Translate(CHVector(-22.231, 0, -4.751));
 	this->CP2->Init("meshes\\allgaeumap\\strecke\\06_CP_2.obj");
 	this->root.AddPlacement(this->CP2->GetRootPlacement());
-	this->CP2->GetRootPlacement()->Translate(CHVector(30, 0, 30));
 
 	this->CP3 = new CCheckpoint();
-	this->CP3->Translate(CHVector(100, 0, 0));
+	this->CP3->Translate(CHVector(-17.915, 0, -27.665));
 	this->CP3->Init("meshes\\allgaeumap\\strecke\\08_CP_3.obj");
 	this->root.AddPlacement(this->CP3->GetRootPlacement());
-	this->CP3->GetRootPlacement()->Translate(CHVector(30, 0, 30));
 
 	this->CP4 = new CCheckpoint();
-	this->CP4->Translate(CHVector(100, 0, 0));
+	this->CP4->Translate(CHVector(25.844, 0, -10.3));
 	this->CP4->Init("meshes\\allgaeumap\\strecke\\11_CP_4.obj");
 	this->root.AddPlacement(this->CP4->GetRootPlacement());
-	this->CP4->GetRootPlacement()->Translate(CHVector(30, 0, 30));
 
 	this->CP5 = new CCheckpoint();
-	this->CP5->Translate(CHVector(100, 0, 0));
+	this->CP5->Translate(CHVector(22.27, 0, 6.97));
 	this->CP5->Init("meshes\\allgaeumap\\strecke\\13_CP_5.obj");
 	this->root.AddPlacement(this->CP5->GetRootPlacement());
-	this->CP5->GetRootPlacement()->Translate(CHVector(30, 0, 30));
 
 	this->Cut1_1 = new CAbkuerzung();
-	this->Cut1_1->Translate(CHVector(100, 0, 0));
+	this->Cut1_1->Translate(CHVector(1.25, 0, 34.78));
 	this->Cut1_1->Init("meshes\\allgaeumap\\strecke\\04_Abkz_1_p1.obj");
 	this->root.AddPlacement(this->Cut1_1->GetRootPlacement());
-	this->Cut1_1->GetRootPlacement()->Translate(CHVector(170, 0, 30));
 
 	this->Cut1_2 = new CAbkuerzung();
-	this->Cut1_2->Translate(CHVector(100, 0, 0));
+	this->Cut1_2->Translate(CHVector(-41.66, 0, 15.438));
 	this->Cut1_2->Init("meshes\\allgaeumap\\strecke\\05_Abkz_1_p2.obj");
 	this->root.AddPlacement(this->Cut1_2->GetRootPlacement());
-	this->Cut1_2->GetRootPlacement()->Translate(CHVector(160, 0, 30));
 
 	this->Cut2_1 = new CAbkuerzung();
-	this->Cut2_1->Translate(CHVector(100, 0, 0));
+	this->Cut2_1->Translate(CHVector(-16.507, 0, -27.478));
 	this->Cut2_1->Init("meshes\\allgaeumap\\strecke\\09_Abkz_2_p1.obj");
 	this->root.AddPlacement(this->Cut2_1->GetRootPlacement());
-	this->Cut2_1->GetRootPlacement()->Translate(CHVector(-16.5, 0, -27.5));
 
 	this->Cut2_2 = new CAbkuerzung();
-	this->Cut2_2->Translate(CHVector(100, 0, 0));
+	this->Cut2_2->Translate(CHVector(14.47, 0, -26.164));
 	this->Cut2_2->Init("meshes\\allgaeumap\\strecke\\10_Abkz_2_p2.obj");
 	this->root.AddPlacement(this->Cut2_2->GetRootPlacement());
-	this->Cut2_2->GetRootPlacement()->Translate(CHVector(15, 0, -26));
 
 	this->Cut3 = new CAbkuerzung();
-	this->Cut3->Translate(CHVector(100, 0, 0));
+	this->Cut3->Translate(CHVector(24.25, 0, -10.58));
 	this->Cut3->Init("meshes\\allgaeumap\\strecke\\12_Abkz_3.obj");
 	this->root.AddPlacement(this->Cut3->GetRootPlacement());
-	this->Cut3->GetRootPlacement()->Translate(CHVector(25, 0, -10));
 
 	this->Sektor1 = new CSektor();
-	this->Sektor1->Translate(CHVector(100, 0, 0));
+	this->Sektor1->Translate(CHVector(24.715, 0, 28.29));
 	this->Sektor1->Init("meshes\\allgaeumap\\strecke\\02_Sekt_1.obj");
 	this->root.AddPlacement(this->Sektor1->GetRootPlacement());
-	this->Sektor1->GetRootPlacement()->Translate(CHVector(25, 0, -10));
 
 	this->Sektor2 = new CSektor();
-	this->Sektor2->Translate(CHVector(100, 0, 0));
+	this->Sektor2->Translate(CHVector(-23.268, 0, -6.07));
 	this->Sektor2->Init("meshes\\allgaeumap\\strecke\\07_Sekt_2.obj");
 	this->root.AddPlacement(this->Sektor2->GetRootPlacement());
-	this->Sektor2->GetRootPlacement()->Translate(CHVector(-120, 0, 40));
 
 	this->Sektor3 = new CSektor();
-	this->Sektor3->Translate(CHVector(100, 0, 0));
+	this->Sektor3->Translate(CHVector(23.677, 0, 7.535));
 	this->Sektor3->Init("meshes\\allgaeumap\\strecke\\14_Sekt_3.obj");
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
-	this->Sektor3->GetRootPlacement()->Translate(CHVector(25, 0, -10));
+	
 
 	//Strecke verschieben
 	root.Translate(CHVector(0, 0.1, 0));
