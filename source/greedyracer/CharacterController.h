@@ -22,7 +22,7 @@ public:
 	void setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, int KeyRIGHT);
 	float getaktSpeed(){ return faktSpeed; };
 	void UpdateSpeed(int iNeue) { faktSpeed = iNeue; };
-
+	void UpdateFactor(float factor);
 private:
 	
 	int keyUP;
@@ -30,8 +30,10 @@ private:
 	int keyLEFT;
 	int keyRIGHT;
 
+	float factor;
 	float faktSpeed;
 
+	float angle_y;
 
 	CPlacement * Character;
 	CVehicle * Vehicle;

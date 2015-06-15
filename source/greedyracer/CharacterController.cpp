@@ -8,6 +8,8 @@ CCharacterController::CCharacterController()
 	this->Character = NULL;
 	this->Vehicle = NULL;
 	this->faktSpeed = 0;
+	this->factor = .03f;
+	this->angle_y = 0;
 }
 
 
@@ -34,26 +36,21 @@ void CCharacterController::setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, in
 	this->keyRIGHT = KeyRIGHT;
 }
 
-
-
-
 void CCharacterController::Move(float DeltaTime)
 {
 	//int iSpeed = this->Auto->getaktSpeed();
 	float fSpeed = this->getaktSpeed();
 
-
-	static float angle_y = 0; 
-
-	
 	if (this->playerKeyboard->KeyPressed(keyUP))
 	{
 		if (fSpeed <= 20)
 		{
 			fSpeed += 1;
 		}
-		Character->TranslateDelta(sin(angle_y) * (fSpeed / 10), 0.0f, cos(angle_y) * (fSpeed / 10));
-
+		float fRelSpeed = this->factor * fSpeed;
+		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
+		Character->TranslateXDelta(translation.x);
+		Character->TranslateZDelta(translation.z);
 	}
 
 	if (this->playerKeyboard->KeyPressed(keyDOWN))
@@ -62,15 +59,22 @@ void CCharacterController::Move(float DeltaTime)
 		{
 			fSpeed -= 2.5;
 		}
-		Character->TranslateDelta(sin(angle_y) * (fSpeed / 10), 0.0f, cos(angle_y) * (fSpeed / 10));
-		
+		float fRelSpeed = this->factor * fSpeed;
+		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fSpeed / 10));
+		Character->TranslateXDelta(translation.x);
+		Character->TranslateZDelta(translation.z);
 	}
 
 	if (!(this->playerKeyboard->KeyPressed(keyUP)) && !(this->playerKeyboard->KeyPressed(keyDOWN)))
 	{
 		if (fSpeed < 0){ fSpeed += 0.5; }
 		else if (fSpeed > 0){ fSpeed -= 1; }
-		Character->TranslateDelta(sin(angle_y) * (fSpeed / 10), 0.0f, cos(angle_y) *(fSpeed / 10));
+
+		float fRelSpeed = this->factor * fSpeed;
+		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) *(fRelSpeed / 10));
+
+		Character->TranslateXDelta(translation.x);
+		Character->TranslateZDelta(translation.z);
 	}
 
 	this->UpdateSpeed(fSpeed);
@@ -78,24 +82,47 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (this->playerKeyboard->KeyPressed(keyLEFT) && (fSpeed != 0))
 	{
-		angle_y += 2  *DeltaTime;
+		float faAngle = UM_DEG2RAD(10 * this->factor);
+		angle_y += faAngle;
+
 		CHVector buffer;
 		buffer = Character->GetTranslation();
-		Character->TranslateDelta(-buffer);
-		Character->RotateY((angle_y));
-		Character->TranslateDelta(buffer);
+		//Character->TranslateDelta(-buffer);
+
+		Character->TranslateXDelta(-buffer.x);
+		Character->TranslateZDelta(-buffer.z);
+
+		Character->RotateYDelta(faAngle);
+
+		Character->TranslateXDelta(buffer.x);
+		Character->TranslateZDelta(buffer.z);
+
+		//Character->TranslateDelta(buffer);
 	}
 
-	if (this->playerKeyboard->KeyPressed(keyRIGHT)&&(fSpeed != 0))
+	if (this->playerKeyboard->KeyPressed(keyRIGHT) && (fSpeed != 0))
 	{
-		angle_y -= 2  *DeltaTime;
-		
+		float faAngle = -UM_DEG2RAD(10 * this->factor);
+		angle_y += faAngle;
+
 		CHVector buffer;
 		buffer = Character->GetTranslation();
-		Character->TranslateDelta(-buffer);
-			Character->RotateY((angle_y));
-		Character->TranslateDelta(buffer);
-		
+		// Character->TranslateDelta(-buffer);
+
+		Character->TranslateXDelta(-buffer.x);
+		Character->TranslateZDelta(-buffer.z);
+
+		Character->RotateYDelta(faAngle);
+
+		Character->TranslateXDelta(buffer.x);
+		Character->TranslateZDelta(buffer.z);
+		//Character->TranslateDelta(buffer);
+
 	}
 
+}
+
+void CCharacterController::UpdateFactor(float factor)
+{
+	this->factor = factor;
 }

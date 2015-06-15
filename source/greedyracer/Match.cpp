@@ -16,7 +16,8 @@ void CMatch::Start()
 	this->mapPlacement->AddPlacement(this->player1Placement);
 	CHVector startPosition = this->map->GetStartPosition();
 
-	this->player1Placement->TranslateDelta(startPosition);
+	this->player1Placement->TranslateXDelta(startPosition.x);
+	this->player1Placement->TranslateZDelta(startPosition.z);
 }
 
 void CMatch::Stop()
