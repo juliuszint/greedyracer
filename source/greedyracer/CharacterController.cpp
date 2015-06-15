@@ -8,7 +8,7 @@ CCharacterController::CCharacterController()
 	this->Character = NULL;
 	this->Vehicle = NULL;
 	this->faktSpeed = 0;
-	this->factor = .02f;
+	this->factor = .08f;
 	this->angle_y = 0;
 }
 

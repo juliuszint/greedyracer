@@ -23,10 +23,16 @@ void CMatch::Tick(float fTimeDelta)
 
 		// Note (julius): process movement
 		int checkPoint = 0;
-		if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0)
+		if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
+			checkPoint > playerData->CheckpointCount)
 		{
 			playerData->CheckpointCount++;
 		}
+
+		// Note (julius): player info update
+		char buffer[100];
+		sprintf(buffer, "%d", playerData->CheckpointCount);
+		this->hud->SetRoundPlayer1(buffer);
 
 		// Note (julius): camera support code
 		carCenterPosition.SetX(carCenterPosition.x + playerPosition.x + i);
@@ -58,7 +64,7 @@ void CMatch::Tick(float fTimeDelta)
 		this->cameraPlacement->SetPointing(new CHVector(newCameraP.x, 1, newCameraP.z));
 
 		float zHeight = ((maxZCarDistance / 2) + 0.5) / tan(0.5625);
-		float xHeight = ((maxXCarDistance / 2) + 0.5) / tan(1);
+		float xHeight = ((maxXCarDistance / 2) + 2) / tan(1);
 		float height = max(zHeight, xHeight);
 		height = max(height, 5);
 
@@ -70,10 +76,6 @@ void CMatch::Tick(float fTimeDelta)
 	{
 		this->m_pkeyboard->PlaceWASD(*this->cameraPlacement, fTimeDelta, true);
 	}
-	// Note (julius): player info update
-	//char buffer[5];
-	//sprintf(buffer, "%d", this->player1Data.CheckpointCount);
-	//this->hud->SetRoundPlayer1(buffer);
 
 	// Note (julius): für debug zwecke hab ich hier ein kleine code schnipsel reingemacht
 	// der es möglich macht das man zwischen 2 kamera modi hin und her springt. 1 der freie modus
@@ -152,7 +154,7 @@ void CMatch::Init(CMap* map, CPlacement* cameraPlacement, CHud* hud)
 	this->players[0].CarPosition = this->players[0].CarEntity->GetRootPlacement();
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
-	this->players[0].Controller->setKeybinding(DIK_Z, DIK_H, DIK_G, DIK_J);
+	this->players[0].Controller->setKeybinding(DIK_Y, DIK_H, DIK_G, DIK_J);
 	this->players[0].Controller->addCharacter(this->players[0].CarPosition);
 
 	this->players[1].CarEntity = new CPorsche();
