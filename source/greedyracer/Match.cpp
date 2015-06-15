@@ -32,7 +32,10 @@ void CMatch::Init(CMap* map)
 	this->player1Vehicle = new CCamaro();
 	this->player1Vehicle->Init();
 	this->player1Placement = this->player1Vehicle->GetRootPlacement();
-	
+	this->player1Placement->ScaleDelta(0.1f);
+	this->player1Placement->TranslateYDelta(0.2f);
+
+
 	Cont1.addCharacter(this->player1Placement);
 	Cont1.addKeyboard(m_pkeyboard);
 	Cont1.setKeybinding(DIK_U, DIK_J, DIK_H, DIK_K);
