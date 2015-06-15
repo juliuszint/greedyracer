@@ -8,7 +8,7 @@ CCharacterController::CCharacterController()
 	this->Character = NULL;
 	this->Vehicle = NULL;
 	this->faktSpeed = 0;
-	this->factor = .03f;
+	this->factor = .02f;
 	this->angle_y = 0;
 }
 
@@ -60,7 +60,7 @@ void CCharacterController::Move(float DeltaTime)
 			fSpeed -= 2.5;
 		}
 		float fRelSpeed = this->factor * fSpeed;
-		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fSpeed / 10));
+		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
 		Character->TranslateXDelta(translation.x);
 		Character->TranslateZDelta(translation.z);
 	}
@@ -82,7 +82,7 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (this->playerKeyboard->KeyPressed(keyLEFT) && (fSpeed != 0))
 	{
-		float faAngle = UM_DEG2RAD(10 * this->factor);
+		float faAngle = UM_DEG2RAD(25 * this->factor);
 		angle_y += faAngle;
 
 		CHVector buffer;
@@ -102,7 +102,7 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (this->playerKeyboard->KeyPressed(keyRIGHT) && (fSpeed != 0))
 	{
-		float faAngle = -UM_DEG2RAD(10 * this->factor);
+		float faAngle = -UM_DEG2RAD(25 * this->factor);
 		angle_y += faAngle;
 
 		CHVector buffer;

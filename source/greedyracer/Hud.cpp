@@ -14,6 +14,11 @@ void CHud::InitHud()								//complete Hud Initialisation
 	m_zwRoundPlayer1.Init(CFloatRect(0.11f, 0.11f, 0.1f, 0.1f), 2, &m_zwFont);	
 	m_zwRoundPlayer2.Init(CFloatRect(0.21f, 0.21f, 0.1f, 0.1f), 2, &m_zwFont);	
 	m_zwTime.Init(CFloatRect(0.95f, 0.95f, 0.1f, 0.1f), 6, &m_zwFont);			
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer1);
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer2);
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwRoundPlayer1);
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwRoundPlayer2);
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwTime);
 }
 
 //-------------------------------------------------------------------------------------
@@ -75,6 +80,12 @@ string CHud::GetRoundPlayer2() //returns laps of Player 2
 string CHud::GetTime() //returns current time count
 {
 	return m_zsTime;
+}
+
+void CHud::SetVisible(bool visible)
+{
+	if (visible) this->m_zoHudRootOverlay.SwitchOn();
+	else this->m_zoHudRootOverlay.SwitchOff();
 }
 
 //void CHud::Tick()

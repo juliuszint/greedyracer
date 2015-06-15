@@ -39,6 +39,8 @@ public:
 	string GetRoundPlayer1();
 	string GetRoundPlayer2();
 	string GetTime();
+
+	void SetVisible(bool);
 	//void Tick();
 };
 

@@ -32,6 +32,10 @@ void CPorsche::Init(){
 	m_zpPorsche.AddPlacement(&m_zpRearLights);
 	m_zpPorsche.AddPlacement(&m_zpFrontTires);
 	m_zpPorsche.AddPlacement(&m_zpRearTires);
+
+
+	m_zpPorsche.TranslateDelta(CHVector(0, 2.5, 0));
+	m_zpPorsche.ScaleDelta(0.1f);
 }
 
 CPlacement* CPorsche::GetRootPlacement(){
