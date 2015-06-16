@@ -7,9 +7,9 @@ void CBrewery::Init(){
 	m_zmRoof.MakeTextureDiffuse("textures\\haus\\Dachziegel_Rot_512.png");
 	m_zmRoof.MakeTextureBump("textures\\haus\\Dachziegel_Rot_512_n.png");
 
-	/*m_zmFacade.SetBumpStrength(7.0f);
+	m_zmFacade.SetBumpStrength(7.0f);
 	m_zmRoof.SetBumpStrength(5.0f);
-	m_zgBrewery.SetTextureRepeat(10.0f, 5.0f);*/
+	m_zgBrewery.SetTextureRepeat(4.0f, 1.0f);
 
 	m_zgBrewery.SetMaterialFacade(&m_zmFacade);
 	m_zgBrewery.SetMaterialRoof(&m_zmRoof);
@@ -25,14 +25,14 @@ void CBrewery::Init(){
 	m_zpBrewery.AddGeo(&m_zgBrewery);
 	m_zpBrewery.Scale(0.05f);
 	//BreweryTower
-	m_zmFacadeTower.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
-	m_zmFacadeTower.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
-	m_zmRoofTower.MakeTextureDiffuse("textures\\dachplatten_notFinal.jpg");
-	m_zmRoofTower.MakeTextureBump("textures\\dachplatten_Bump_notFinal.jpg");
+	m_zmFacadeTower.MakeTextureDiffuse("textures\\sonstiges\\Metall_256.png");
+	m_zmFacadeTower.MakeTextureBump("textures\\sonstiges\\Metall_256_n.png");
+	m_zmRoofTower.MakeTextureDiffuse("textures\\sonstiges\\Metall_256.png");
+	m_zmRoofTower.MakeTextureBump("textures\\sonstiges\\Metall_256_n.png");
 
-	/*m_zmFacadeTower.SetBumpStrength(7.0f);
+	m_zmFacadeTower.SetBumpStrength(7.0f);
 	m_zmRoofTower.SetBumpStrength(5.0f);
-	m_zgTower.SetTextureRepeat(10.0f, 5.0f);*/
+	m_zgTower.SetTextureRepeat(10.0f, 5.0f);
 
 	m_zgTower.SetMaterialFacade(&m_zmFacadeTower);
 	m_zgTower.SetMaterialRoof(&m_zmRoofTower);
@@ -50,13 +50,13 @@ void CBrewery::Init(){
 	m_zpTower2.Scale(0.05f);
 	m_zpTower2.TranslateXDelta(-0.2f);
 	//BrewerySupply
-	m_zmFacadeSupply.MakeTextureDiffuse("textures\\brickwall_notFinal.jpg");
-	m_zmFacadeSupply.MakeTextureBump("textures\\brickwall_Bump_notFinal.jpg");
+	m_zmFacadeSupply.MakeTextureDiffuse("textures\\sonstiges\\Metall_256.png");
+	m_zmFacadeSupply.MakeTextureBump("textures\\sonstiges\\Metall_256_n.png");
 	m_zmFacadeSupply.SetBumpStrength(7.0f);
 
 	m_zgSupply.SetMaterial(&m_zmFacadeSupply);
-	/*m_zgSupply.SetTextureRepeat(1.0f, 6.0f);
-	m_zgSupply.SetTextureRepeat(1.0f, 6.0f);*/
+	m_zgSupply.SetTextureRepeat(1.0f, 6.0f);
+	m_zgSupply.SetTextureRepeat(1.0f, 6.0f);
 
 	m_zgSupply.InitArc(0.9f, 1.0f, 10.0f, HALFPI, &m_zmFacadeSupply);
 	m_zpSupply.AddGeo(&m_zgSupply);
@@ -78,8 +78,8 @@ void CBrewery::Init(){
 	m_zmFacadeChimney.SetBumpStrength(7.0f);
 
 	m_zgChimney.SetMaterial(&m_zmFacadeChimney);
-	/*m_zgChimney.SetTextureRepeat(1.0f, 6.0f);
-	m_zgChimney.SetTextureRepeat(1.0f, 6.0f);*/
+	m_zgChimney.SetTextureRepeat(1.0f, 6.0f);
+	m_zgChimney.SetTextureRepeat(1.0f, 6.0f);
 
 	m_zgChimney.InitTubeSine(3.0f, 1.5f, 40.0f, 0.5f, &m_zmFacadeChimney);
 	m_zpChimney.AddGeo(&m_zgChimney);
