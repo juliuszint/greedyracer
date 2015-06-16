@@ -45,6 +45,8 @@ void CCamaro::Init(){
 	//m_zpCamaro.AddPlacement(&m_zpFrontHeadlights);
 	//m_zpCamaro.AddPlacement(&m_zpRearLights);
 	m_zpCamaro.AddPlacement(&m_zpFrontTires);
+	m_zpCamaro.TranslateDelta(CHVector(0, 2.5, 0));
+	m_zpCamaro.ScaleDelta(0.1f);
 	//m_zpCamaro.AddPlacement(&m_zpRearTires);
 
 	//m_zpCamaro.ScaleDelta(0.1f);

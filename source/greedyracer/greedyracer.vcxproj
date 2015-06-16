@@ -142,7 +142,7 @@
     <ClInclude Include="map\entities\allgaeumap\Landscape.h" />
     <ClInclude Include="map\entities\allgaeumap\Abkuerzung.h" />
     <ClInclude Include="map\entities\allgaeumap\Checkpoint.h" />
-    <ClInclude Include="Match.h" />
+    <ClInclude Include="match\Match.h" />
     <ClInclude Include="menu\GameMenu.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -179,7 +179,7 @@
     <ClCompile Include="map\entities\allgaeumap\Landscape.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Abkuerzung.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Checkpoint.cpp" />
-    <ClCompile Include="Match.cpp" />
+    <ClCompile Include="match\Match.cpp" />
     <ClCompile Include="menu\GameMenu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
