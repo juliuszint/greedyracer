@@ -4,11 +4,14 @@
 void CBigHouse::Init(){
 	m_zmFacade.MakeTextureDiffuse("textures\\haus\\Fassade_512.png");
 	m_zmFacade.MakeTextureBump("textures\\haus\\Fassade_512_n.png");
+	m_zmFacade.MakeTextureSpecular("textures\\haus\\Fassade_512_spec.png");
 	m_zmRoof.MakeTextureDiffuse("textures\\haus\\Dachziegel_Rot_512.png");
 	m_zmRoof.MakeTextureBump("textures\\haus\\Dachziegel_Rot_512_n.png");
+	m_zmRoof.MakeTextureSpecular("textures\\haus\\Dachziegel_Rot_512_spec.png");
 
-	m_zmFacade.SetBumpStrength(7.0f);
-	m_zmRoof.SetBumpStrength(5.0f);
+	m_zmFacade.SetBumpStrength(1.0f);
+	m_zmRoof.SetBumpStrength(1.0f);
+	m_zmRoof.SetSpecular(0.1f);
 	m_zgBigHouse.SetTextureRepeat(5.0f, 1.0f);
 
 	m_zgBigHouse.SetMaterialFacade(&m_zmFacade);

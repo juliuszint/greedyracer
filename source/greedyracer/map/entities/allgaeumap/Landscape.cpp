@@ -24,6 +24,8 @@ void CLandscape::Init()
 	m_zmTreeBobblig.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
 	m_zmTreeLog.MakeTextureDiffuse("textures\\image_black.jpg");
 
+	m_zmLandscape.MakeTextureSpecular("textures\\natur\\Gras_512_spec.png");
+
 	m_pzgLandscape->SetMaterial(&m_zmLandscape);
 	m_pzgTreeFir->SetMaterial(&m_zmTreeFir);
 	m_pzgTreeRound->SetMaterial(&m_zmTreeRound);

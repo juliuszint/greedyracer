@@ -35,9 +35,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->m_zframe.AddDeviceKeyboard(&this->keyboard);
 	this->m_zframe.AddDeviceCursor(&this->cursor);
 
-	this->keyboard.SetWASDTranslationSensitivity(10);
+	this->keyboard.SetWASDTranslationSensitivity(5);
 
-	this->m_zlight.Init(CHVector(0, 1, 0), CColor(1, 1, 1));
+	this->m_zlight.Init(CHVector(0.5, 1, 0), CColor(1, 1, 1));
 
 	this->m_zroot.AddFrameHere(&m_zframe);
 	this->m_zframe.AddViewport(&m_zviewport);
