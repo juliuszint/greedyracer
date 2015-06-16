@@ -83,7 +83,9 @@ void CCharacterController::Move(float DeltaTime)
 		buffer = Character->GetTranslation();
 		Character->TranslateDelta(-buffer);
 		Character->RotateY((angle_y));
-		Character->TranslateDelta(buffer);
+		Character->ScaleDelta(0.1f);
+		Character->TranslateDelta(buffer); 
+		//Character->RotateYDelta(angle_y);
 	}
 
 	if (this->playerKeyboard->KeyPressed(keyRIGHT)&&(fSpeed != 0))
@@ -93,8 +95,10 @@ void CCharacterController::Move(float DeltaTime)
 		CHVector buffer;
 		buffer = Character->GetTranslation();
 		Character->TranslateDelta(-buffer);
-			Character->RotateY((angle_y));
-		Character->TranslateDelta(buffer);
+		Character->RotateY((angle_y));
+		Character->ScaleDelta(0.1f);
+		Character->TranslateDelta(buffer); 
+		//Character->RotateYDelta(angle_y);
 		
 	}
 

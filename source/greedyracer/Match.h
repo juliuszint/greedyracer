@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "map\Map.h"
 #include "map\entities\common\Camaro.h"
+#include "map\entities\common\Porsche.h"
 #include "CharacterController.h"
 // #include "Game.h"
 
@@ -20,7 +21,7 @@ private:
 	CPlacement* mapPlacement;
 	
 	CCamaro* player1Vehicle;
-	CGeo* player2Vehicle;
+	CPorsche* player2Vehicle;
 
 	CPlacement* player1Placement;
 	CPlacement* player2Placement;
@@ -33,7 +34,12 @@ public:
 	void Stop();
 
 	CCharacterController Cont1;
+	CCharacterController Cont2;
 	CDeviceKeyboard *m_pkeyboard;
 	CMatch(CDeviceKeyboard * pkeyboard);
+
+	CHVector MapCont;
+	int Kontrollvar;
+	int Kontrollvar2;
 };
 

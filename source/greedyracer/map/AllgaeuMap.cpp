@@ -47,14 +47,14 @@ CHVector CAllgaeuMap::GetStartPosition()
 
 int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 {
-	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
-	float dist = 10.0f;
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 
 	//Abfrage Intersect mit Checkpoints
 	for (int i = 0; i < 5; i++)
 	{
 		CGeo* geo = this->strecke->getCheckpointGeo(i)->GetGeo();
-		if (geo->Intersects(position, dir, &dist))
+		CTriangleList* List = (CTriangleList*)geo;
+		if (List->IsIntersecting(raytoRoad))
 		{
 			return i + 1;
 		}
@@ -64,36 +64,38 @@ int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 {
-	//CRay raytoRoad;
-	//raytoRoad.Init(position, CHVector(0.0f, -1.0f, 0.0f, 0.0f));
-	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
-	float dist = 10.0f;
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
+
 
 	//Abfrage Intersect mit Checkpoints
 	for (int i = 0; i < 5; i++)
 	{
 		CGeo* geo = this->strecke->getCheckpointGeo(i)->GetGeo();
-		if (geo->Intersects(position, dir, &dist))
+		CTriangleList* List = (CTriangleList*)geo;
+		if (List->IsIntersecting(raytoRoad))
 		{
 			return CHVector(0.0f, 0.0f, 0.0f);
 		}
 	}
-
+	
 	//Abfrage Intersect mit Sektoren
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		CGeo* geo = this->strecke->getSektorGeo(i)->GetGeo();
-		if (geo->Intersects(position, dir, &dist))
+		CTriangleList* List = (CTriangleList*)geo;
+		
+		if (List->IsIntersecting(raytoRoad))
 		{
 			return CHVector(0.0f, 0.0f, 0.0f);
 		}
 	}
-
+	
 	//Abfrage Intersect mit Abkürzungen
 	for (int i = 0; i < 5; i++)
 	{
 		CGeo* geo = this->strecke->getAbkuerzungGeo(i)->GetGeo();
-		if (geo->Intersects(position, dir, &dist))
+		CTriangleList* List = (CTriangleList*)geo;
+		if (List->IsIntersecting(raytoRoad))
 		{
 			return CHVector(0.0f, 0.0f, 0.0f);
 		}
@@ -106,11 +108,11 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 bool CAllgaeuMap::IsOnFinish(CHVector position)
 {
 
-	CHVector dir(0.0f, -1.0f, 0.0f, 0.0f);
-	float dist = 10.0f;
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 
 	CGeo* geo = this->strecke->getStartGeo()->GetGeo();
-	if (geo->Intersects(position, dir, &dist))
+	CTriangleList* List = (CTriangleList*)geo;
+	if (List->IsIntersecting(raytoRoad))
 	{
 		return true;
 	}

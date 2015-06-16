@@ -46,6 +46,9 @@ void CCamaro::Init(){
 	//m_zpCamaro.AddPlacement(&m_zpRearLights);
 	m_zpCamaro.AddPlacement(&m_zpFrontTires);
 	//m_zpCamaro.AddPlacement(&m_zpRearTires);
+
+	//m_zpCamaro.ScaleDelta(0.1f);
+	m_zpCamaro.Scale(0.1f);
 }
 
 CPlacement* CCamaro::GetRootPlacement(){

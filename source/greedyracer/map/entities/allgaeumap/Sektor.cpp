@@ -20,7 +20,9 @@ CPlacement* CSektor::GetRootPlacement(){
 }
 
 CGeo * CSektor::GetGeo(){
+	
 	return m_pzgSektor;
+	//return 0;
 }
 
 void CSektor::Translate(CHVector Vektor){
