@@ -7,12 +7,12 @@ using namespace Vektoria;
 class CBigHouse : public CEntity
 {
 private:
+	
+public:
 	CGeoWing m_zgBigHouse;
-	CPlacement m_zpBigHouse;
 	CMaterial m_zmFacade;
 	CMaterial m_zmRoof;
-public:
-
+	CPlacement m_zpBigHouse;
 	CPlacement* GetRootPlacement();
 
 	void Init();

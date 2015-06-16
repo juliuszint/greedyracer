@@ -3,6 +3,9 @@
 #include "Vektoria\Root.h"
 #include "VektoriaMath\Util.h"
 #include "..\Entity.h"
+#include "Brewery.h"
+#include "..\common\BigHouse.h"
+#include "..\common\LittleHouse.h"
 
 using namespace Vektoria;
 
@@ -34,9 +37,21 @@ private:
 	CMaterial m_zmTreeRound;
 	CMaterial m_zmTreeBobblig;
 	CMaterial m_zmTreeLog;
+
+	CBrewery m_zgBrewery;
+	CBigHouse m_zgBigHouse;
+	CBigHouse m_zgBigHouse2;
+	CBigHouse m_zgBigHouse3;
+	CBigHouse m_zgBigHouse4;
+	CLittleHouse m_zgLittleHouse;
+	CLittleHouse m_zgLittleHouse2;
+	CLittleHouse m_zgLittleHouse3;
+	
 public:
 	CLandscape();
 	~CLandscape();
+
+	
 
 	void Init();
 
