@@ -13,9 +13,11 @@ void CWater::Init()
 	this->material.SetTextureSpecularBlack();
 	this->material.SetAni(4, 4, 10);
 
-	this->quad.Init(this->width, this->height, &this->material);
-	this->placement.AddGeo(&this->quad);
-	this->placement.RotateXDelta(-HALFPI);
+	//this->quad.Init(this->width, this->height, &this->material);
+	this->m_pzgBay = m_zgBay.LoadGeo("meshes\\enviroment\\Bay.obj");
+	this->m_pzgBay->SetMaterial(&material);
+	this->placement.AddGeo(this->m_pzgBay);
+	//this->placement.RotateXDelta(-HALFPI);
 }
 
 CPlacement* CWater::GetRootPlacement()

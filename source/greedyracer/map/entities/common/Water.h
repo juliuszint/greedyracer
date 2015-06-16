@@ -12,6 +12,8 @@ private:
 	CGeoQuad quad;
 	CMaterial material;
 	CPlacement placement;
+	CFileWavefront m_zgBay;
+	CGeo* m_pzgBay;
 
 	int width;
 	int height;
