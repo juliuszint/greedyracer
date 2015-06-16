@@ -64,7 +64,8 @@
 #include "map\Map.h"
 #include "map\AllgaeuMap.h"
 #include "menu\GameMenu.h"
-#include "Match.h"
+#include "match\Match.h"
+#include "Hud.h"
 
 using namespace Vektoria;
 
@@ -87,8 +88,6 @@ public:
 private:
 	HWND m_hwnd;
 	bool m_bReSized;
-	bool fixedCameraMode;
-	bool cKeyReleased;
 
 	// Hier ist Platz für Deine Vektoriaobjekte:
 	CRoot m_zroot;
@@ -103,15 +102,14 @@ private:
 	
 	CDeviceCursor cursor;
 
+	CHud hud;
 	CGameMenu gameMenu;
 	CMap* currentMap;
 	
 
 	void ToggleCameraMode();
 	void MakeGameMenuVisible();
-	void PositionCamera();
 	void CleanCurrentMatch();
-	
 };
 
 

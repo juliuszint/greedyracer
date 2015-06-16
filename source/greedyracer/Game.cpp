@@ -21,8 +21,6 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 {
 	this->m_hwnd = hwnd;
 	this->m_bReSized = false;
-	this->fixedCameraMode = true;
-	this->cKeyReleased = true;
 	this->currentMatch = NULL;
 
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
@@ -56,13 +54,13 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->gameMenu.Init(&this->cursor);
 	this->m_zviewport.AddOverlay(this->gameMenu.GetRootOverlay());
 
-	this->PositionCamera();
-
+	this->hud.InitHud();
+	this->hud.SetVisible(false);
+	this->m_zviewport.AddOverlay(this->hud.GetRootOverlay());
+	
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
-	m_zpCamera.Translate(CHVector(0, 50, 50));
-	m_zpCamera.RotateX(HALFPI / 2);
 	m_zviewport.SetWireframeOff();
 }
 
@@ -71,33 +69,6 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	// Hier die Echtzeit-Veränderungen einfügen:
 	m_zroot.Tick(fTimeDelta);
 	float res = fTimeDelta * 5;
-
-	// Note (julius): für debug zwecke hab ich hier ein kleine code schnipsel reingemacht
-	// der es möglich macht das man zwischen 2 kamera modi hin und her springt. 1 der freie modus
-	// für die entwicklung und 2 der feste modus wo die kamera fix ausgerichtet ist. 
-	// getoggeld wird das ganze mit C
-	if (this->keyboard.KeyPressed(DIK_C))
-	{
-		if (cKeyReleased)
-		{
-			cKeyReleased = false;
-			this->ToggleCameraMode();
-			OutputDebugStringA("C Pressed Toggled Camera mode\n");
-		}
-	}
-	else
-	{
-		if (!cKeyReleased)
-		{
-			cKeyReleased = true;
-			OutputDebugStringA("C Released\n");
-		}
-	}
-
-	if (!fixedCameraMode)
-	{
-		this->keyboard.PlaceWASD(this->m_zpCamera, res, true);
-	}
 
 	if (this->gameMenu.GetIsVisible())
 	{
@@ -114,7 +85,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			this->gameMenu.SetIsVisible(false);
 			this->CleanCurrentMatch();
 			this->currentMatch = new CMatch(&keyboard);
-			this->currentMatch->Init(this->currentMap);
+			this->currentMatch->Init(this->currentMap, &this->m_zpCamera, &this->hud);
 			this->currentMatch->Start();
 
 			break;
@@ -152,23 +123,3 @@ void CGame::WindowReSize(int iNewWidth, int iNewHeight)
 	// Hier kannst Du dann die Auflösung des Viewports neu einstellen:
 
 }
-
-void CGame::ToggleCameraMode()
-{
-	if (fixedCameraMode)
-	{
-		this->m_zpCamera.SetPointingOff();
-	}
-	else
-	{
-		this->PositionCamera();
-	}
-	fixedCameraMode = !fixedCameraMode;
-}
-
-void CGame::PositionCamera()
-{
-	this->m_zpCamera.Translate(CHVector(80, 50, 55));
-	this->m_zpCamera.SetPointing(new CHVector(80, 1, 55));
-}
-

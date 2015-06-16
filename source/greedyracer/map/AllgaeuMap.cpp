@@ -20,15 +20,17 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	this->landscape->Init();
+	//this->landscape->Init();
 	//this->placement.Fasten();
-	this->placement.AddPlacement(this->landscape->GetRootPlacement());
+	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
 	
+
 	this->water->Configure(20, 80);
 	this->water->Init();
 	this->water->GetRootPlacement()->TranslateYDelta(0.1);
 	this->water->GetRootPlacement()->TranslateDelta(CHVector(1, 0, 0));
 	this->placement.AddPlacement(this->water->GetRootPlacement());
+
 
 	this->strecke->Init();
 	this->placement.AddPlacement(this->strecke->GetRootPlacement());
@@ -59,7 +61,7 @@ int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 			return i + 1;
 		}
 	}
-
+	return -1;
 }
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
