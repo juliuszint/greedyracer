@@ -76,7 +76,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		CTriangleList* List = (CTriangleList*)geo;
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return CHVector(0.0f, 0.0f, 0.0f);
+			return this->strecke->getCheckpointGeo(i)->GetRootPlacement()->GetTranslation();
 		}
 	}
 	
@@ -88,7 +88,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return CHVector(0.0f, 0.0f, 0.0f);
+			return this->strecke->getSektorGeo(i)->GetRootPlacement()->GetTranslation();
 		}
 	}
 	
@@ -99,7 +99,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		CTriangleList* List = (CTriangleList*)geo;
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return CHVector(0.0f, 0.0f, 0.0f);
+			return this->strecke->getAbkuerzungGeo(i)->GetRootPlacement()->GetTranslation();
 		}
 	}
 

@@ -87,7 +87,7 @@ void CCharacterController::Move(float DeltaTime)
 
 		CHVector buffer;
 		buffer = Character->GetTranslation();
-<<<<<<< HEAD
+
 		Character->TranslateDelta(-buffer);
 		Character->RotateY((angle_y));
 		Character->ScaleDelta(0.1f);
@@ -115,7 +115,7 @@ void CCharacterController::Move(float DeltaTime)
 
 		CHVector buffer;
 		buffer = Character->GetTranslation();
-<<<<<<< HEAD
+
 		Character->TranslateDelta(-buffer);
 		Character->RotateY((angle_y));
 		Character->ScaleDelta(0.1f);
