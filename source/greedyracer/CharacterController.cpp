@@ -83,7 +83,15 @@ void CCharacterController::Move(float DeltaTime)
 	if (this->playerKeyboard->KeyPressed(keyLEFT) && (fSpeed != 0))
 	{
 		float faAngle = UM_DEG2RAD(25 * this->factor);
-		angle_y += faAngle;
+		
+		if (fSpeed > 0)
+		{
+			angle_y += faAngle;
+		}
+		else if (fSpeed < 0)
+		{
+			angle_y -= faAngle;
+		}
 
 		CHVector buffer;
 		buffer = Character->GetTranslation();
@@ -111,7 +119,15 @@ void CCharacterController::Move(float DeltaTime)
 	if (this->playerKeyboard->KeyPressed(keyRIGHT) && (fSpeed != 0))
 	{
 		float faAngle = -UM_DEG2RAD(25 * this->factor);
-		angle_y += faAngle;
+		
+		if (fSpeed > 0)
+		{
+			angle_y += faAngle;
+		}
+		else if (fSpeed < 0)
+		{
+			angle_y -= faAngle;
+		}
 
 		CHVector buffer;
 		buffer = Character->GetTranslation();
