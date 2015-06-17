@@ -155,6 +155,11 @@ void CCharacterController::Move(float DeltaTime)
 
 }
 
+void CCharacterController::UpdateAngle(int iChangeValueRAD)
+{
+	this->angle_y += iChangeValueRAD;
+}
+
 void CCharacterController::UpdateFactor(float factor)
 {
 	this->factor = factor;

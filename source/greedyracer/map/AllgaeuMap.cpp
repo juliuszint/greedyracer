@@ -111,7 +111,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		{
 			return this->strecke->getStartGeo()->GetRootPlacement()->GetTranslation();
 		}
-		CHVector Hilfvar2 = this->strecke->getSektorGeo(2)->GetRootPlacement()->GetTranslation();
+
 
 	return CHVector(1.0f, 1.0f, 1.0f);
 

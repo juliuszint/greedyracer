@@ -24,6 +24,50 @@ void CMatch::Tick(float fTimeDelta)
 			playerData->Controller->Move(fTimeDelta);
 		}
 
+		/*
+		// Note (Michael): Collision detection among cars
+		for (int j = 0; j < this->playerCount; j++)
+		{
+			PlayerData* otherPlayer = &this->players[j];
+			if (playerData->CarPosition->IsColliding(otherPlayer->CarPosition))
+			{
+				CHVector vPos = playerData->CarPosition->m_amGlobal[0].GetTranslation();
+				CHVector vDirFront = playerData->CarPosition->m_amGlobal[0] * CHVector(0.0f, 0.0f, -1.0, 0.0f);
+				CHVector vDirRear = playerData->CarPosition->m_amGlobal[0] * CHVector(0.0f, 0.0f, 1.0f, 0.0f);
+				CHVector vDirLeft = playerData->CarPosition->m_amGlobal[0] * CHVector(-1.0f, 0.0f, 0.0f, 0.0f);
+				CHVector vDirRight = playerData->CarPosition->m_amGlobal[0] * CHVector(1.0f, 0.0f, 0.0f, 0.0f);
+
+				CRay rFront(vPos, vDirFront, QUASI_ZERO, F_MAX);
+				CRay rRear(vPos, vDirFront, QUASI_ZERO, F_MAX);
+				CRay rLeft(vPos, vDirFront, QUASI_ZERO, F_MAX);
+				CRay rRight(vPos, vDirFront, QUASI_ZERO, F_MAX);
+
+				if (otherPlayer->CarPosition->IsIntersecting(rFront))
+				{
+					float fSpeedbuffer = playerData->Controller->getaktSpeed();
+					playerData->Controller->UpdateSpeed(otherPlayer->Controller->getaktSpeed());
+					otherPlayer->Controller->UpdateSpeed(fSpeedbuffer);
+				}
+				else if (otherPlayer->CarPosition->IsIntersecting(rRear))
+				{
+					float fSpeedbuffer = otherPlayer->Controller->getaktSpeed();
+					otherPlayer->Controller->UpdateSpeed(playerData->Controller->getaktSpeed());
+					playerData->Controller->UpdateSpeed(fSpeedbuffer);
+				}
+				else if (otherPlayer->CarPosition->IsIntersecting(rLeft))
+				{
+					otherPlayer->Controller->UpdateAngle(0.2);
+					playerData->Controller->UpdateAngle(-0.2);
+				}
+				else if (otherPlayer->CarPosition->IsIntersecting(rRight))
+				{
+					otherPlayer->Controller->UpdateAngle(-0.2);
+					playerData->Controller->UpdateAngle(0.2);
+				}
+
+			}
+		}*/
+
 		// Note (julius): process movement
 		CHVector isOnTrack = this->map->IsOnTrack(playerPosition);
 		
@@ -36,7 +80,7 @@ void CMatch::Tick(float fTimeDelta)
 		{
 			//CHVector delta = isOnTrack - playerPosition;
 			CHVector delta = avLastPlacement[i] - playerPosition;
-			playerData->CarPosition->TranslateDelta(delta);
+			playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
 			
 		}
 
@@ -138,10 +182,11 @@ void CMatch::Start()
 	{
 		PlayerData* player = &this->players[i];
 		player->CarPosition->TranslateXDelta(startPosition.x + i);
+		player->CarPosition->TranslateYDelta(startPosition.y);
 		player->CarPosition->TranslateZDelta(startPosition.z);
 		this->mapPlacement->AddPlacement(player->CarPosition);
 	}
-
+	
 	this->cameraPlacement->Translate(CHVector(startPosition.x, 10, startPosition.z));
 	this->cameraPlacement->SetPointing(new CHVector(startPosition.x, 1, startPosition.z));
 
