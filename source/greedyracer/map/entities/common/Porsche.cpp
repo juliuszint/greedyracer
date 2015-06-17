@@ -43,7 +43,7 @@ void CPorsche::Init(){
 	m_zpPorsche.AddPlacement(&m_zpWindows);
 	m_zpPorsche.AddPlacement(&m_zpExhaust);
 
-
+	m_zpPorsche.Fasten();
 
 	m_zpPorsche.TranslateDelta(CHVector(0, 2.5, 0));
 
