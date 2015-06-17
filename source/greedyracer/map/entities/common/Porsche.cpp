@@ -47,7 +47,7 @@ void CPorsche::Init(){
 
 	m_zpPorsche.TranslateDelta(CHVector(0, 2.5, 0));
 
-	m_zpPorsche.ScaleDelta(0.1f);
+	m_zpPorsche.Scale(0.1f);
 }
 
 CPlacement* CPorsche::GetRootPlacement(){

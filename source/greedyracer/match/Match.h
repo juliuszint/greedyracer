@@ -56,6 +56,7 @@ private:
 
 	int playerCount = 2;
 	PlayerData players[2];
+	CHVector avLastPlacement[2];
 	
 	void ToggleCameraMode();
 public:

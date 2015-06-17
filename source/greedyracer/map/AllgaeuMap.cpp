@@ -76,7 +76,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		CTriangleList* List = (CTriangleList*)geo;
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return this->strecke->getCheckpointGeo(i)->GetRootPlacement()->GetTranslation();
+			return this->strecke->getCheckpointGeo(i)->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 2.5f, 0.0f);
 		}
 	}
 	
@@ -88,7 +88,8 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return this->strecke->getSektorGeo(i)->GetRootPlacement()->GetTranslation();
+			CHVector Hilfsvar = this->strecke->getSektorGeo(i)->GetRootPlacement()->GetTranslation();
+			return this->strecke->getSektorGeo(i)->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 2.5f, 0.0f);
 		}
 	}
 	
@@ -99,9 +100,18 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		CTriangleList* List = (CTriangleList*)geo;
 		if (List->IsIntersecting(raytoRoad))
 		{
-			return this->strecke->getAbkuerzungGeo(i)->GetRootPlacement()->GetTranslation();
+			return this->strecke->getAbkuerzungGeo(i)->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 2.5f, 0.0f);
 		}
 	}
+
+	//Abfrage Intersect mit Finish
+		CGeo* geoFinish = this->strecke->getStartGeo()->GetGeo();
+		CTriangleList* List = (CTriangleList*)geoFinish;
+		if (List->IsIntersecting(raytoRoad))
+		{
+			return this->strecke->getStartGeo()->GetRootPlacement()->GetTranslation(); + CHVector(0.0f, 2.5f, 0.0f);
+		}
+		CHVector Hilfvar2 = this->strecke->getSektorGeo(2)->GetRootPlacement()->GetTranslation();
 
 	return CHVector(1.0f, 1.0f, 1.0f);
 
