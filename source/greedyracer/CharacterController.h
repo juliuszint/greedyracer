@@ -22,6 +22,7 @@ public:
 	void setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, int KeyRIGHT);
 	float getaktSpeed(){ return faktSpeed; };
 	void UpdateSpeed(int iNeue) { faktSpeed = iNeue; };
+	void UpdateAngle(int iChangeValueRAD);
 	void UpdateFactor(float factor);
 private:
 	

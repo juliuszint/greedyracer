@@ -120,7 +120,9 @@ CPlacement * CStrecke::GetRootPlacement()
 
 CHVector CStrecke::GetStartPosition()
 {
-	return (this->Start->GetRootPlacement()->GetTranslation() + CHVector(0,0.255,0,0));
+
+	return (this->Start->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 0.255f, 0.0f, 0.0f));
+
 }
 
 
