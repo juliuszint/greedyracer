@@ -25,6 +25,14 @@ void CMatch::Tick(float fTimeDelta)
 		}
 
 		// Note (julius): process movement
+		CHVector isOnTrack = this->map->IsOnTrack(playerPosition);
+		if (isOnTrack != CHVector(1, 1, 1))
+		{
+			CHVector delta = isOnTrack - playerPosition;
+			playerData->CarPosition->TranslateDelta(delta);
+			playerPosition = isOnTrack;
+		}
+
 		int checkPoint = 0;
 		if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
 			checkPoint > playerData->CheckpointCount)
