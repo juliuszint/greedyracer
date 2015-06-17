@@ -19,7 +19,10 @@ void CMatch::Tick(float fTimeDelta)
 		CHVector playerPosition = playerData->CarPosition->GetTranslation();
 
 		// Note (julius): move
-		playerData->Controller->Move(fTimeDelta);
+		if (!ended)
+		{
+			playerData->Controller->Move(fTimeDelta);
+		}
 
 		// Note (julius): process movement
 		int checkPoint = 0;
@@ -29,9 +32,20 @@ void CMatch::Tick(float fTimeDelta)
 			playerData->CheckpointCount++;
 		}
 
+		if (playerData->CheckpointCount >= 5 && this->map->IsOnFinish(playerPosition))
+		{
+			playerData->RoundCount++;
+			playerData->CheckpointCount = 0;
+		}
+		if (playerData->RoundCount == 3)
+		{
+			ended = true;
+			this->hud->SetWinningBanner(playerData->PlayerName);
+		}
+
 		// Note (julius): player info update
 		char buffer[100];
-		sprintf(buffer, "%d", playerData->CheckpointCount);
+		sprintf(buffer, "%d", playerData->RoundCount);
 		this->hud->SetRoundPlayer1(buffer);
 
 		// Note (julius): camera support code
@@ -63,7 +77,7 @@ void CMatch::Tick(float fTimeDelta)
 		CHVector newCameraP = this->cameraPlacement->GetTranslation();
 		this->cameraPlacement->SetPointing(new CHVector(newCameraP.x, 1, newCameraP.z));
 
-		float zHeight = ((maxZCarDistance / 2) + 0.5) / tan(0.5625);
+		float zHeight = ((maxZCarDistance / 2) + 1) / tan(0.5625);
 		float xHeight = ((maxXCarDistance / 2) + 2) / tan(1);
 		float height = max(zHeight, xHeight);
 		height = max(height, 5);
@@ -116,14 +130,15 @@ void CMatch::Start()
 	this->cameraPlacement->Translate(CHVector(startPosition.x, 10, startPosition.z));
 	this->cameraPlacement->SetPointing(new CHVector(startPosition.x, 1, startPosition.z));
 
-	this->hud->SetPlayerName1("Player1");
-	this->hud->SetPlayerName2("Player2");
+	this->hud->SetPlayerName1(this->players[0].PlayerName);
+	this->hud->SetPlayerName2(this->players[1].PlayerName);
 	this->hud->SetRoundPlayer1("0");
 	this->hud->SetRoundPlayer2("0");
 	//this->hud->SetTime("00:05:00");
 	this->hud->SetVisible(true);
 
 	this->running = true;
+	this->ended = false;
 }
 
 void CMatch::Stop()
@@ -151,6 +166,7 @@ void CMatch::Init(CMap* map, CPlacement* cameraPlacement, CHud* hud)
 
 	this->players[0].CarEntity = new CCamaro();
 	this->players[0].CarEntity->Init();
+	this->players[0].PlayerName = "Player 1";
 	this->players[0].CarPosition = this->players[0].CarEntity->GetRootPlacement();
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
@@ -159,6 +175,7 @@ void CMatch::Init(CMap* map, CPlacement* cameraPlacement, CHud* hud)
 
 	this->players[1].CarEntity = new CPorsche();
 	this->players[1].CarEntity->Init();
+	this->players[1].PlayerName = "Player 2";
 	this->players[1].CarPosition = this->players[1].CarEntity->GetRootPlacement();
 	this->players[1].Controller = new CCharacterController();
 	this->players[1].Controller->addKeyboard(this->m_pkeyboard);

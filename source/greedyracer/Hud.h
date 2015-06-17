@@ -19,12 +19,14 @@ private:
 	CWriting m_zwRoundPlayer1;
 	CWriting m_zwRoundPlayer2;
 	CWriting m_zwTime;
+	CWriting m_zwWiningBanner;
 
 	string m_zsNamePlayer1;
 	string m_zsNamePlayer2;
 	string m_zsRoundPlayer1;
 	string m_zsRoundPlayer2;
 	string m_zsTime;
+	string m_zsWinningBanner;
 
 public:
 	COverlay* GetRootOverlay();
@@ -34,6 +36,8 @@ public:
 	void SetRoundPlayer1(string roundp1);
 	void SetRoundPlayer2(string roundp2);
 	void SetTime(string time);
+	void SetWinningBanner(string winningBanner);
+
 	string GetPlayerName1();
 	string GetPlayerName2();
 	string GetRoundPlayer1();
@@ -41,6 +45,5 @@ public:
 	string GetTime();
 
 	void SetVisible(bool);
-	//void Tick();
 };
 

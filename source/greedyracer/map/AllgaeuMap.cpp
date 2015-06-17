@@ -109,7 +109,6 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 
 bool CAllgaeuMap::IsOnFinish(CHVector position)
 {
-
 	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 
 	CGeo* geo = this->strecke->getStartGeo()->GetGeo();

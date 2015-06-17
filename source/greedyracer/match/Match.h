@@ -46,6 +46,7 @@ private:
 	bool running;
 	bool cKeyReleased;
 	bool fixedCameraMode;
+	bool ended;
 
 	CHud* hud;
 	CMap* map;

@@ -27,8 +27,11 @@ private:
 	
 	CDeviceCursor * cursor;
 
+	CFloatRect startButtonRect;
 	CImage startButtonImage;
+	CFloatRect creditsButtonRect;
 	CImage creditsButtonImage;
+	CFloatRect stopButtonRect;
 	CImage stopButtonImage;
 public:
 	void Init(CDeviceCursor * cursor);

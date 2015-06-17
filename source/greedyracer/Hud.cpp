@@ -9,11 +9,16 @@ void CHud::InitHud()								//complete Hud Initialisation
 {
 	m_zwFont.Init("fonts\\FontArialShadow.png", false);							
 	m_zwFont.SetTableSize(16, 6);												
-	m_zwPlayer1.Init(CFloatRect(0.01f, 0.01f, 0.1f, 0.1f), 10, &m_zwFont);		
-	m_zwPlayer2.Init(CFloatRect(0.02f, 0.02f, 0.1f, 0.1f), 10, &m_zwFont);		
-	m_zwRoundPlayer1.Init(CFloatRect(0.11f, 0.11f, 0.1f, 0.1f), 2, &m_zwFont);	
-	m_zwRoundPlayer2.Init(CFloatRect(0.21f, 0.21f, 0.1f, 0.1f), 2, &m_zwFont);	
+	m_zwPlayer1.Init(CFloatRect(0.01f, 0.01f, 0.2f, 0.1f), 10, &m_zwFont);		
+	m_zwPlayer2.Init(CFloatRect(0.01f, 0.12f, 0.2f, 0.1f), 10, &m_zwFont);		
+
+	m_zwRoundPlayer1.Init(CFloatRect(0.21f, 0.01f, 0.1f, 0.1f), 2, &m_zwFont);	
+	m_zwRoundPlayer2.Init(CFloatRect(0.21f, 0.12f, 0.1f, 0.1f), 2, &m_zwFont);	
+
 	m_zwTime.Init(CFloatRect(0.95f, 0.95f, 0.1f, 0.1f), 6, &m_zwFont);			
+	m_zwWiningBanner.Init(CFloatRect(0.25f, 0.4f, 0.5f, 0.2f), 18, &m_zwFont);			
+
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwWiningBanner);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer1);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer2);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwRoundPlayer1);
@@ -53,6 +58,12 @@ void CHud::SetTime(string time)
 	this->m_zsTime = time;							//setting the current time
 	this->m_zwTime.PrintF(time.data());				//printing the current time on Overlay
 };
+
+void CHud::SetWinningBanner(string winningBanner)
+{
+	this-> m_zsWinningBanner = winningBanner;
+	this->m_zwWiningBanner.PrintF(winningBanner.data());
+}
 
 //-------------------------------------------------------------------------------------
 //Get Methoden

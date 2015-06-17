@@ -29,19 +29,19 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	float buttonHeight = 0.075f;
 	float buttonLeft = 0.475f - (buttonWidth / 2);
 
-	this->startButtonOverlay.Init(&this->startButtonImage, CFloatRect(buttonLeft, 0.4, buttonWidth, buttonHeight));
-	//this->startButtonOverlay.SetLayer(0.5f);
-	this->creditsButtonOverlay.Init(&this->creditsButtonImage, CFloatRect(buttonLeft, 0.5, buttonWidth, buttonHeight));
-	//this->creditsButtonOverlay.SetLayer(0.5f);
-	this->stopButtonOverlay.Init(&this->stopButtonImage, CFloatRect(buttonLeft, 0.6, buttonWidth, buttonHeight));
-	//this->stopButtonOverlay.SetLayer(0.5f);
+	this->startButtonRect.Init(buttonLeft, 0.4, buttonWidth, buttonHeight);
+	this->creditsButtonRect.Init(buttonLeft, 0.5, buttonWidth, buttonHeight);
+	this->stopButtonRect.Init(buttonLeft, 0.6, buttonWidth, buttonHeight);
+
+	this->startButtonOverlay.Init(&this->startButtonImage, this->startButtonRect);
+	this->creditsButtonOverlay.Init(&this->creditsButtonImage, this->creditsButtonRect);
+	this->stopButtonOverlay.Init(&this->stopButtonImage, this->stopButtonRect);
 
 	this->rootOverlay.AddOverlay(&this->startButtonOverlay);
-
 	this->rootOverlay.AddOverlay(&this->creditsButtonOverlay);
 	this->rootOverlay.AddOverlay(&this->stopButtonOverlay);
 }
-	
+
 COverlay* CGameMenu::GetRootOverlay()
 {
 	return &this->rootOverlay;
@@ -53,25 +53,39 @@ bool CGameMenu::GetIsVisible()
 }
 void CGameMenu::SetIsVisible(bool value)
 {
-	this->isVisible = value; 
+	this->isVisible = value;
 	if (value) this->rootOverlay.SwitchOn();
 	else	   this->rootOverlay.SwitchOff();
-} 
+}
 
 EGameMenuButton CGameMenu::Tick()
 {
 	COverlay* currentOverlay = this->cursor->PickOverlay();
 	bool leftMousePressed = this->cursor->ButtonPressedLeft();
 
-	if (currentOverlay == &this->startButtonOverlay && leftMousePressed)
+	if (currentOverlay == &this->startButtonOverlay)
 	{
-		return EGameMenuButtonStart;
+		if (leftMousePressed)
+		{
+			CFloatRect rect;
+			rect.Init(this->startButtonRect.m_fxPos + 0.01,
+				this->startButtonRect.m_fyPos + 0.01,
+				this->startButtonRect.m_fxSize - 0.02,
+				this->startButtonRect.m_fySize - 0.02);
+
+			this->startButtonOverlay.SetRect(rect);
+
+			return EGameMenuButtonStart;
+		}
 	}
-	if (currentOverlay == &this->creditsButtonOverlay && leftMousePressed)
+	if (currentOverlay == &this->creditsButtonOverlay)
 	{
-		return EGameMenuButtonHighscore;
+		if (leftMousePressed)
+		{
+			return EGameMenuButtonHighscore;
+		}
 	}
-	if (currentOverlay == &this->stopButtonOverlay && leftMousePressed) 
+	if (currentOverlay == &this->stopButtonOverlay && leftMousePressed)
 	{
 		return EGameMenuButtonQuit;
 	}
