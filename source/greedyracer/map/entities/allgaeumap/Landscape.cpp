@@ -18,7 +18,7 @@ void CLandscape::Init()
 	m_pzgTreeBobblig = m_zgTreeBobblig.LoadGeo("meshes\\enviroment\\Landscape_TreeBobblig_reduced.obj");
 	m_pzgTreeLog = m_zgTreeLog.LoadGeo("meshes\\enviroment\\Landscape_Log_reduced.obj");
 
-	m_zmLandscape.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
+	m_zmLandscape.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Landscape_4098.jpg");
 	m_zmTreeFir.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
 	m_zmTreeRound.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
 	m_zmTreeBobblig.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
