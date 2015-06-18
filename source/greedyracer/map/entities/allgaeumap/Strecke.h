@@ -27,6 +27,7 @@ private:
 	CSektor * Sektor1;
 	CSektor * Sektor2;
 	CSektor * Sektor3;
+	
 
 	CCheckpoint * aCheckpoints[5];
 	CAbkuerzung * aAbkuerzungen[5];

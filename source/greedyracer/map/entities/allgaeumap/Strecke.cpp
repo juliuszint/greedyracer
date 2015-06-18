@@ -21,7 +21,7 @@ CStrecke::~CStrecke()
 void CStrecke::Init()
 {
 	this->Start = new CStart();
-	this->Start->Translate(CHVector(25.11, 0, 26.1));
+	this->Start->Translate(CHVector(25.11, 0, 26.101));
 	this->Start->Init();
 	this->root.AddPlacement(this->Start->GetRootPlacement());
 
@@ -52,11 +52,15 @@ void CStrecke::Init()
 
 	this->Cut1_1 = new CAbkuerzung();
 	this->Cut1_1->Translate(CHVector(1.25, 0, 34.78));
+	this->Cut1_1->RotateTrigger(-HALFPI);
+	this->Cut1_1->TranslateTrigger(CHVector(-14.3, -0.1, -9.5));
 	this->Cut1_1->Init("meshes\\allgaeumap\\strecke\\04_Abkz_1_p1.obj");
 	this->root.AddPlacement(this->Cut1_1->GetRootPlacement());
 
 	this->Cut1_2 = new CAbkuerzung();
 	this->Cut1_2->Translate(CHVector(-41.66, 0, 15.438));
+	this->Cut1_2->RotateTrigger(-HALFPI);
+	this->Cut1_2->TranslateTrigger(CHVector(10, 0.2, 10));
 	this->Cut1_2->Init("meshes\\allgaeumap\\strecke\\05_Abkz_1_p2.obj");
 	this->root.AddPlacement(this->Cut1_2->GetRootPlacement());
 
@@ -76,7 +80,7 @@ void CStrecke::Init()
 	this->root.AddPlacement(this->Cut3->GetRootPlacement());
 
 	this->Sektor1 = new CSektor();
-	this->Sektor1->Translate(CHVector(24.715, 0, 28.29));
+	this->Sektor1->Translate(CHVector(24.715, 0, 28.284));
 	this->Sektor1->Init("meshes\\allgaeumap\\strecke\\02_Sekt_1.obj");
 	this->root.AddPlacement(this->Sektor1->GetRootPlacement());
 
@@ -89,7 +93,6 @@ void CStrecke::Init()
 	this->Sektor3->Translate(CHVector(23.677, 0, 7.535));
 	this->Sektor3->Init("meshes\\allgaeumap\\strecke\\14_Sekt_3.obj");
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
-	
 
 	//Strecke verschieben
 	root.Translate(CHVector(0, 0.1, 0));

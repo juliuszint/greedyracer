@@ -12,6 +12,9 @@ private:
 	CFileWavefront m_zgAbkuerzung;
 	CPlacement m_zpAbkuerzung;
 	CMaterial m_zmAbkuerzung;
+	//Quad für Abkürzungseingang
+	CGeoQuad m_zgTrigger;
+	CPlacement m_zpTrigger;
 
 public:
 	void Init();
@@ -19,4 +22,6 @@ public:
 	CPlacement* GetRootPlacement();
 	CGeo * GetGeo();
 	void Translate(CHVector Vektor);
+	void TranslateTrigger(CHVector Vektor);
+	void RotateTrigger(float Rotate);
 };
