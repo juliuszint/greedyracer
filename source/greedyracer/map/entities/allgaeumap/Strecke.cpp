@@ -52,30 +52,45 @@ void CStrecke::Init()
 
 	this->Cut1_1 = new CAbkuerzung();
 	this->Cut1_1->Translate(CHVector(1.25, 0, 34.78));
-	this->Cut1_1->RotateTrigger(-HALFPI);
-	this->Cut1_1->TranslateTrigger(CHVector(-14.3, -0.1, -9.5));
+	this->Cut1_1->RotateTriggerX(-HALFPI);
+	this->Cut1_1->RotateTriggerY(0.0f);
+	this->Cut1_1->TranslateTrigger(CHVector(-14.3, -0.2, -9.5));
 	this->Cut1_1->Init("meshes\\allgaeumap\\strecke\\04_Abkz_1_p1.obj");
 	this->root.AddPlacement(this->Cut1_1->GetRootPlacement());
 
 	this->Cut1_2 = new CAbkuerzung();
 	this->Cut1_2->Translate(CHVector(-41.66, 0, 15.438));
-	this->Cut1_2->RotateTrigger(-HALFPI);
-	this->Cut1_2->TranslateTrigger(CHVector(10, 0.2, 10));
+	this->Cut1_2->RotateTriggerX(-HALFPI);
+	this->Cut1_2->RotateTriggerY(1.2f);
+	this->Cut1_2->TranslateTrigger(CHVector(24, -0.2, -13));
 	this->Cut1_2->Init("meshes\\allgaeumap\\strecke\\05_Abkz_1_p2.obj");
 	this->root.AddPlacement(this->Cut1_2->GetRootPlacement());
 
 	this->Cut2_1 = new CAbkuerzung();
 	this->Cut2_1->Translate(CHVector(-16.507, 0, -27.478));
+	this->Cut2_1->RotateTriggerX(-HALFPI);
+	this->Cut2_1->RotateTriggerY(1.8f);
+	this->Cut2_1->TranslateTrigger(CHVector(3, -0.2, -0.8));
 	this->Cut2_1->Init("meshes\\allgaeumap\\strecke\\09_Abkz_2_p1.obj");
 	this->root.AddPlacement(this->Cut2_1->GetRootPlacement());
 
 	this->Cut2_2 = new CAbkuerzung();
 	this->Cut2_2->Translate(CHVector(14.47, 0, -26.164));
+	this->Cut2_2->RotateTriggerX(-HALFPI);
+	this->Cut2_2->RotateTriggerY(0.3f);
+	this->Cut2_2->TranslateTrigger(CHVector(16, -20.2, 2.2));
 	this->Cut2_2->Init("meshes\\allgaeumap\\strecke\\10_Abkz_2_p2.obj");
 	this->root.AddPlacement(this->Cut2_2->GetRootPlacement());
 
 	this->Cut3 = new CAbkuerzung();
 	this->Cut3->Translate(CHVector(24.25, 0, -10.58));
+	this->Cut3->RotateTriggerX(-HALFPI);
+	this->Cut3->RotateTriggerY(-0.5f);
+	this->Cut3->TranslateTrigger(CHVector(-7, -0.2, 1.2));
+	this->Cut3->InitTriggerEnd();
+	this->Cut3->RotateTriggerEndX(-HALFPI);
+	this->Cut3->RotateTriggerEndY(0.3f);
+	this->Cut3->TranslateTriggerEnd(CHVector(-6.1,-0.2,15.8));
 	this->Cut3->Init("meshes\\allgaeumap\\strecke\\12_Abkz_3.obj");
 	this->root.AddPlacement(this->Cut3->GetRootPlacement());
 
