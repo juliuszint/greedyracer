@@ -9,6 +9,7 @@
 CGame::CGame(void)
 {
 	// Hier eventuelle Vorinitialisierungen Deiner Vektoria-Objekte einfügen:
+	this->m_InitFinished = false;
 }
 
 CGame::~CGame(void)
@@ -62,6 +63,8 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zpCamera.AddCamera(&m_zcamera);
 	m_zviewport.SetWireframeOff();
+
+	this->m_InitFinished = true;
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
@@ -121,5 +124,8 @@ void CGame::WindowReSize(int iNewWidth, int iNewHeight)
 {
 	// Windows ReSize wird immer automatisch aufgerufen, wenn die Fenstergröße verändert wurde.
 	// Hier kannst Du dann die Auflösung des Viewports neu einstellen:
-
+	if (this->m_InitFinished)
+	{
+		this->m_zframe.ReSize(iNewWidth, iNewHeight);
+	}
 }

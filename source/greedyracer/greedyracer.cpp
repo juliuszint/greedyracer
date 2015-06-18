@@ -157,7 +157,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)                  /* handle the messages */
 	{
 	case WM_SIZE:
-		g_pgame->WindowReSize(LOWORD(lParam), HIWORD(lParam));
+		if (g_pgame != NULL)
+		{
+			g_pgame->WindowReSize(LOWORD(lParam), HIWORD(lParam));
+		}
 		return 0;
 
 	case WM_KEYDOWN:

@@ -88,6 +88,7 @@ public:
 private:
 	HWND m_hwnd;
 	bool m_bReSized;
+	bool m_InitFinished;
 
 	// Hier ist Platz für Deine Vektoriaobjekte:
 	CRoot m_zroot;

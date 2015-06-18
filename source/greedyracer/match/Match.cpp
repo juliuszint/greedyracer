@@ -136,8 +136,8 @@ void CMatch::Tick(float fTimeDelta)
 		CHVector newCameraP = this->cameraPlacement->GetTranslation();
 		this->cameraPlacement->SetPointing(new CHVector(newCameraP.x, 1, newCameraP.z));
 
-		float zHeight = ((maxZCarDistance / 2) + 1) / tan(0.5625);
-		float xHeight = ((maxXCarDistance / 2) + 2) / tan(1);
+		float zHeight = ((maxZCarDistance / 2) + 5) / tan(0.5625);
+		float xHeight = ((maxXCarDistance / 2) + 5) / tan(1);
 		float height = max(zHeight, xHeight);
 		height = max(height, 5);
 
