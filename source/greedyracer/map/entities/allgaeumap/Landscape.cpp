@@ -19,12 +19,15 @@ void CLandscape::Init()
 	m_pzgTreeLog = m_zgTreeLog.LoadGeo("meshes\\enviroment\\Landscape_Log_reduced.obj");
 
 	m_zmLandscape.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Landscape_4098.jpg");
-	m_zmTreeFir.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
-	m_zmTreeRound.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
-	m_zmTreeBobblig.MakeTextureDiffuse("textures\\natur\\Gras_512.png");
-	m_zmTreeLog.MakeTextureDiffuse("textures\\image_black.jpg");
-
-	m_zmLandscape.MakeTextureSpecular("textures\\natur\\Gras_512_spec.png");
+	m_zmLandscape.MakeTextureSpecular("textures\\allgaeumap\\landscape\\Landscape_4098_spec.jpg");
+	m_zmTreeFir.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Tanne_512.jpg");
+	m_zmTreeFir.MakeTextureSpecular("textures\\allgaeumap\\landscape\\Tanne_512_spec.jpg");
+	m_zmTreeRound.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Lolli_Baum_512.jpg");
+	m_zmTreeRound.MakeTextureSpecular("textures\\allgaeumap\\landscape\\Lolli_Baum_512_spec.jpg");
+	m_zmTreeBobblig.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Baum_512.jpg");
+	m_zmTreeBobblig.MakeTextureSpecular("textures\\allgaeumap\\landscape\\Baum_512_spec.jpg");
+	m_zmTreeLog.MakeTextureDiffuse("textures\\allgaeumap\\landscape\\Holz_512.jpg");
+	m_zmTreeLog.MakeTextureSpecular("textures\\allgaeumap\\landscape\\Holz_512_spec.jpg");
 
 	m_pzgLandscape->SetMaterial(&m_zmLandscape);
 	m_pzgTreeFir->SetMaterial(&m_zmTreeFir);
