@@ -4,6 +4,14 @@ void CAbkuerzung::Init(){
 
 }
 
+
+void CAbkuerzung::ConfigureInit(bool hasStartTrigger, bool hasMiddleTrigger, bool hasEndTrigger)
+{
+	this->hasStartTrigger = hasStartTrigger;
+	this->hasEndTrigger = hasEndTrigger;
+	this->hasMiddleTrigger = hasMiddleTrigger;
+}
+
 void CAbkuerzung::Init(char * GeoPath){
 
 	m_pzgAbkuerzung = m_zgAbkuerzung.LoadGeo(GeoPath);
@@ -12,10 +20,30 @@ void CAbkuerzung::Init(char * GeoPath){
 	m_pzgAbkuerzung->SetMaterial(&m_zmAbkuerzung);
 	m_zpAbkuerzung.AddGeo(m_pzgAbkuerzung);
 
-	m_zgTrigger.Init(1.5f, 0.2f, &m_zmAbkuerzung);
-	m_zpTrigger.AddGeo(&m_zgTrigger);
+	if (this->hasStartTrigger)
+	{
+		m_zgTriggerStart.Init(1.5f, 0.2f, &m_zmAbkuerzung);
+		m_zpTriggerStart.AddGeo(&m_zgTriggerStart);
+		m_zpTriggerStart.RotateX(-HALFPI);
+		m_zpAbkuerzung.AddPlacement(&m_zpTriggerStart);
+	}
 
-	m_zpAbkuerzung.AddPlacement(&m_zpTrigger);
+	if (hasMiddleTrigger)
+	{
+		m_zgTriggerMiddle.Init(1.5f, 0.2, &m_zmAbkuerzung);
+		m_zpTriggerMiddle.AddGeo(&m_zgTriggerMiddle);
+		m_zpTriggerMiddle.RotateX(-HALFPI);
+		m_zpAbkuerzung.AddPlacement(&m_zpTriggerMiddle);
+	}
+
+	if (hasEndTrigger)
+	{
+		m_zgTriggerEnd.Init(1.5f, 0.2, &m_zmAbkuerzung);
+		m_zpTriggerEnd.AddGeo(&m_zgTriggerEnd);
+		m_zpTriggerEnd.RotateX(-HALFPI);
+		m_zpAbkuerzung.AddPlacement(&m_zpTriggerEnd);
+	}
+
 
 }
 
@@ -31,32 +59,42 @@ void CAbkuerzung::Translate(CHVector Vektor){
 	m_zpAbkuerzung.Translate(Vektor);
 }
 
-void CAbkuerzung::TranslateTrigger(CHVector Vektor){
-	m_zpTrigger.TranslateDelta(Vektor);
+void CAbkuerzung::TranslateTrigger(CHVector Vektor, Trigger t)
+{
+	CPlacement* currentTrigger = this->GetTriggerPlacement(t);
+	currentTrigger->TranslateDelta(Vektor);
 }
 
-void CAbkuerzung::RotateTriggerX(float Rotate){
-	m_zpTrigger.RotateX(Rotate);
+void CAbkuerzung::RotateTriggerY(float RotateY, Trigger t)
+{
+	CPlacement* currentTrigger = this->GetTriggerPlacement(t);
+	currentTrigger->RotateYDelta(RotateY);
 }
 
-void CAbkuerzung::RotateTriggerY(float RotateY){
-	m_zpTrigger.RotateYDelta(RotateY);
+CGeoQuad* CAbkuerzung::GetMidTrigger()
+{
+	CGeoQuad* result = NULL;
+	if (this->hasMiddleTrigger)
+	{
+		result = &this->m_zgTriggerMiddle;
+	}
+	return result;
 }
 
-void CAbkuerzung::InitTriggerEnd(){
-	m_zgTriggerEnd.Init(1.5f, 0.2, &m_zmAbkuerzung);
-	m_zpTriggerEnd.AddGeo(&m_zgTriggerEnd);
-	m_zpAbkuerzung.AddPlacement(&m_zpTriggerEnd);
-}
-
-void CAbkuerzung::TranslateTriggerEnd(CHVector Vektor){
-	m_zpTriggerEnd.TranslateDelta(Vektor);
-}
-
-void CAbkuerzung::RotateTriggerEndX(float Rotate){
-	m_zpTriggerEnd.RotateX(Rotate);
-}
-
-void CAbkuerzung::RotateTriggerEndY(float RotateY){
-	m_zpTriggerEnd.RotateYDelta(RotateY);
+CPlacement* CAbkuerzung::GetTriggerPlacement(Trigger t)
+{
+	CPlacement* currentTrigger = NULL;
+	switch (t)
+	{
+	case TRIGGERSTART:
+		currentTrigger = &this->m_zpTriggerStart;
+		break;
+	case TRIGGERMID:
+		currentTrigger = &this->m_zpTriggerMiddle;
+		break;
+	case TRIGGEREND:
+		currentTrigger = &this->m_zpTriggerEnd;
+		break;
+	}
+	return currentTrigger;
 }

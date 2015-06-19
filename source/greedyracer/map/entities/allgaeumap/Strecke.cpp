@@ -51,47 +51,56 @@ void CStrecke::Init()
 	this->root.AddPlacement(this->CP5->GetRootPlacement());
 
 	this->Cut1_1 = new CAbkuerzung();
-	this->Cut1_1->Translate(CHVector(1.25, 0, 34.78));
-	this->Cut1_1->RotateTriggerX(-HALFPI);
-	this->Cut1_1->RotateTriggerY(0.0f);
-	this->Cut1_1->TranslateTrigger(CHVector(-14.3, -0.2, -9.5));
+	this->Cut1_1->ConfigureInit(true, true, false);
 	this->Cut1_1->Init("meshes\\allgaeumap\\strecke\\04_Abkz_1_p1.obj");
+	this->Cut1_1->Translate(CHVector(1.25, 0, 34.78));
+	this->Cut1_1->RotateTriggerY(0.0f, TRIGGERSTART);
+	this->Cut1_1->TranslateTrigger(CHVector(-14.3, -0.2, -9.5), TRIGGERSTART);
+
+	this->Cut1_1->RotateTriggerY(0.2f, TRIGGERMID);
+	this->Cut1_1->TranslateTrigger(CHVector(-19.5, -0.2, -19.5), TRIGGERMID);
 	this->root.AddPlacement(this->Cut1_1->GetRootPlacement());
 
 	this->Cut1_2 = new CAbkuerzung();
-	this->Cut1_2->Translate(CHVector(-41.66, 0, 15.438));
-	this->Cut1_2->RotateTriggerX(-HALFPI);
-	this->Cut1_2->RotateTriggerY(1.2f);
-	this->Cut1_2->TranslateTrigger(CHVector(24, -0.2, -13));
+	this->Cut1_2->ConfigureInit(false, false, true);
 	this->Cut1_2->Init("meshes\\allgaeumap\\strecke\\05_Abkz_1_p2.obj");
+	this->Cut1_2->Translate(CHVector(-41.66, 0, 15.438));
+	this->Cut1_2->RotateTriggerY(1.2f, TRIGGEREND);
+	this->Cut1_2->TranslateTrigger(CHVector(24, -0.2, -13), TRIGGEREND);
 	this->root.AddPlacement(this->Cut1_2->GetRootPlacement());
 
 	this->Cut2_1 = new CAbkuerzung();
-	this->Cut2_1->Translate(CHVector(-16.507, 0, -27.478));
-	this->Cut2_1->RotateTriggerX(-HALFPI);
-	this->Cut2_1->RotateTriggerY(1.8f);
-	this->Cut2_1->TranslateTrigger(CHVector(3, -0.2, -0.8));
+	this->Cut2_1->ConfigureInit(true, true, false);
 	this->Cut2_1->Init("meshes\\allgaeumap\\strecke\\09_Abkz_2_p1.obj");
+	this->Cut2_1->Translate(CHVector(-16.507, 0, -27.478));
+	this->Cut2_1->RotateTriggerY(1.8f, TRIGGERSTART);
+	this->Cut2_1->TranslateTrigger(CHVector(3, -0.2, -0.8), TRIGGERSTART);
+
+	this->Cut2_1->RotateTriggerY(1.6f, TRIGGERMID);
+	this->Cut2_1->TranslateTrigger(CHVector(25, -0.2, -6.5f), TRIGGERMID);
 	this->root.AddPlacement(this->Cut2_1->GetRootPlacement());
 
 	this->Cut2_2 = new CAbkuerzung();
-	this->Cut2_2->Translate(CHVector(14.47, 0, -26.164));
-	this->Cut2_2->RotateTriggerX(-HALFPI);
-	this->Cut2_2->RotateTriggerY(0.3f);
-	this->Cut2_2->TranslateTrigger(CHVector(16, -20.2, 2.2));
+	this->Cut2_2->ConfigureInit(false, false, true);
 	this->Cut2_2->Init("meshes\\allgaeumap\\strecke\\10_Abkz_2_p2.obj");
+	this->Cut2_2->Translate(CHVector(14.47, 0, -26.164));
+	this->Cut2_2->RotateTriggerY(0.3f, TRIGGEREND);
+	this->Cut2_2->TranslateTrigger(CHVector(16, -0.2, 2.2), TRIGGEREND);
 	this->root.AddPlacement(this->Cut2_2->GetRootPlacement());
 
 	this->Cut3 = new CAbkuerzung();
-	this->Cut3->Translate(CHVector(24.25, 0, -10.58));
-	this->Cut3->RotateTriggerX(-HALFPI);
-	this->Cut3->RotateTriggerY(-0.5f);
-	this->Cut3->TranslateTrigger(CHVector(-7, -0.2, 1.2));
-	this->Cut3->InitTriggerEnd();
-	this->Cut3->RotateTriggerEndX(-HALFPI);
-	this->Cut3->RotateTriggerEndY(0.3f);
-	this->Cut3->TranslateTriggerEnd(CHVector(-6.1,-0.2,15.8));
+	this->Cut3->ConfigureInit(true, true, true);
 	this->Cut3->Init("meshes\\allgaeumap\\strecke\\12_Abkz_3.obj");
+	this->Cut3->Translate(CHVector(24.25, 0, -10.58));
+	this->Cut3->RotateTriggerY(-0.5f, TRIGGERSTART);
+	this->Cut3->TranslateTrigger(CHVector(-7, -0.2, 1.2), TRIGGERSTART);
+
+	this->Cut3->RotateTriggerY(0.0f * PI, TRIGGERMID);
+	this->Cut3->TranslateTrigger(CHVector(-12, -0.2, 9.2), TRIGGERMID);
+
+	this->Cut3->RotateTriggerY(0.3f, TRIGGEREND);
+	this->Cut3->TranslateTrigger(CHVector(-6.1,-0.2,15.8), TRIGGEREND);
+
 	this->root.AddPlacement(this->Cut3->GetRootPlacement());
 
 	this->Sektor1 = new CSektor();
@@ -136,13 +145,27 @@ CPlacement * CStrecke::GetRootPlacement()
 }
 
 
-CHVector CStrecke::GetStartPosition()
+int CStrecke::IsOnShortcutTrigger(CHVector position)
 {
-
-	return (this->Start->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 0.255f, 0.0f, 0.0f));
-
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
+	for (int i = 0; i < 5; i++)
+	{
+		CGeoQuad* midTrigger = this->aAbkuerzungen[i]->GetMidTrigger();
+		if (midTrigger != NULL)
+		{
+			if (midTrigger->IsIntersecting(raytoRoad))
+			{
+				return i + 1;
+			}
+		}
+	}
+	return -1;
 }
 
+CHVector CStrecke::GetStartPosition()
+{
+	return (this->Start->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 0.255f, 0.0f, 0.0f));
+}
 
 int CStrecke::IsOnCheckpoint(CHVector position)
 {

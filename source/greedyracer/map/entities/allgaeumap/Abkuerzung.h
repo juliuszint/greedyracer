@@ -4,6 +4,13 @@
 
 using namespace Vektoria;
 
+enum Trigger
+{
+	TRIGGERSTART,
+	TRIGGERMID,
+	TRIGGEREND,
+};
+
 class CAbkuerzung : public CEntity
 {
 private:
@@ -12,24 +19,32 @@ private:
 	CFileWavefront m_zgAbkuerzung;
 	CPlacement m_zpAbkuerzung;
 	CMaterial m_zmAbkuerzung;
+
 	//Quad für Abkürzungseingang
-	CGeoQuad m_zgTrigger;
+	CGeoQuad m_zgTriggerStart;
+	CGeoQuad m_zgTriggerMiddle;
 	CGeoQuad m_zgTriggerEnd;
-	CPlacement m_zpTrigger;
+
+	CPlacement m_zpTriggerStart;
+	CPlacement m_zpTriggerMiddle;
 	CPlacement m_zpTriggerEnd;
 
+	bool hasEndTrigger;
+	bool hasMiddleTrigger;
+	bool hasStartTrigger;
+
+	CPlacement* GetTriggerPlacement(Trigger);
 public:
+	void ConfigureInit(bool, bool, bool);
 	void Init();
+
 	void Init(char* GeoPath);
 	CPlacement* GetRootPlacement();
 	CGeo * GetGeo();
 	void Translate(CHVector Vektor);
-	void TranslateTrigger(CHVector Vektor);
-	void RotateTriggerX(float Rotate);
-	void RotateTriggerY(float RotateY);
-	void InitTriggerEnd();
-	void TranslateTriggerEnd(CHVector Vektor);
-	void RotateTriggerEndX(float Rotate);
-	void RotateTriggerEndY(float RotateY);
 
+	void TranslateTrigger(CHVector Vektor, Trigger t);
+	void RotateTriggerY(float RotateY, Trigger t);
+
+	CGeoQuad* GetMidTrigger();
 };

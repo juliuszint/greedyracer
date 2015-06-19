@@ -41,7 +41,6 @@ public:
 
 	CPlacement* GetRootPlacement();
 
-
 	//Felix Die Funktionen muss man noch implementieren, ich weiﬂ nicht, was genau damit passieren soll :)
 
 	CHVector GetStartPosition();
@@ -51,6 +50,8 @@ public:
 	CHVector IsOnTrack(CHVector position);
 
 	bool IsOnFinish(CHVector position);
+
+	int IsOnShortcutTrigger(CHVector position);
 
 	CStart * getStartGeo();
 	CCheckpoint * getCheckpointGeo(int iarraypos);

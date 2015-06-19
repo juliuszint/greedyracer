@@ -18,5 +18,7 @@ public:
 	virtual CHVector IsOnTrack(CHVector) = 0;
 
 	virtual bool IsOnFinish(CHVector) = 0;
+
+	virtual int IsOnShortcutTrigger(CHVector) = 0;
 };
 

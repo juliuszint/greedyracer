@@ -19,9 +19,13 @@ void CMatch::Tick(float fTimeDelta)
 		CHVector playerPosition = playerData->CarPosition->GetTranslation();
 
 		// Note (julius): move
-		if (!ended)
+		if (!ended && playerData->TimePenalty <= 0)
 		{
 			playerData->Controller->Move(fTimeDelta);
+		}
+		if (playerData->TimePenalty > 0)
+		{
+			playerData->TimePenalty -= fTimeDelta;
 		}
 
 		/*
@@ -68,6 +72,13 @@ void CMatch::Tick(float fTimeDelta)
 			}
 		}*/
 
+		int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
+		if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
+		{
+			playerData->TimePenalty = 50;
+			playerData->LatestShortcutTrigger = shortCutTrigger;
+		}
+
 		// Note (julius): process movement
 		CHVector isOnTrack = this->map->IsOnTrack(playerPosition);
 		
@@ -81,7 +92,6 @@ void CMatch::Tick(float fTimeDelta)
 			//CHVector delta = isOnTrack - playerPosition;
 			CHVector delta = avLastPlacement[i] - playerPosition;
 			playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
-			
 		}
 
 		int checkPoint = 0;

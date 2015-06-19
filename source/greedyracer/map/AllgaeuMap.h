@@ -31,10 +31,12 @@ public:
 
 	CHVector GetStartPosition();
 
-	int IsOnCheckpoint(CHVector position);
+	int IsOnCheckpoint(CHVector);
 
-	CHVector IsOnTrack(CHVector position);
+	CHVector IsOnTrack(CHVector);
 
-	bool IsOnFinish(CHVector position);
+	int IsOnShortcutTrigger(CHVector);
+
+	bool IsOnFinish(CHVector);
 };
 

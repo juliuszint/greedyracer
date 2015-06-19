@@ -24,9 +24,12 @@ public:
 	CCharacterController* Controller;
 
 	string PlayerName;
+	int LatestShortcutTrigger;
 	int LatestCheckpointHit;
 	int CheckpointCount;
 	int RoundCount;
+
+	int TimePenalty;
 
 	PlayerData()
 	{
@@ -36,6 +39,8 @@ public:
 
 		this->CheckpointCount = 0;
 		this->LatestCheckpointHit = 0;
+		this->TimePenalty = 0;
+		this->LatestShortcutTrigger = 0;
 		this->RoundCount = 0;
 	}
 };
