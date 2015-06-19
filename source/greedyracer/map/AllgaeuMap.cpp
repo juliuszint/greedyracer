@@ -20,16 +20,16 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	//this->landscape->Init();
-	//this->placement.Fasten();
-	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
+	this->landscape->Init();
+	this->placement.Fasten();
+	this->placement.AddPlacement(this->landscape->GetRootPlacement());
 	
 
-	//this->water->Configure(20, 80);
-	//this->water->Init();
-	//this->water->GetRootPlacement()->TranslateYDelta(0.1);
-	//this->water->GetRootPlacement()->TranslateDelta(CHVector(1, 0, 0));
-	//this->placement.AddPlacement(this->water->GetRootPlacement());
+	this->water->Configure(20, 80);
+	this->water->Init();
+	this->water->GetRootPlacement()->TranslateYDelta(0.1);
+	this->water->GetRootPlacement()->TranslateDelta(CHVector(1, 0, 0));
+	this->placement.AddPlacement(this->water->GetRootPlacement());
 
 
 	this->strecke->Init();
