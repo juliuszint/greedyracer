@@ -35,6 +35,8 @@ public:
 	void SetPlayerName2(string name2);
 	void SetRoundPlayer1(string roundp1);
 	void SetRoundPlayer2(string roundp2);
+	void SetRound(string round, int playerIndex);
+
 	void SetTime(string time);
 	void SetWinningBanner(string winningBanner);
 

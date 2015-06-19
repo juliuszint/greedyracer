@@ -53,6 +53,19 @@ void CHud::SetRoundPlayer2(string roundp2)
 	this->m_zwRoundPlayer2.PrintF(roundp2.data());	//printing the Player 1 round count on Overlay
 };
 
+void CHud::SetRound(string round, int playerIndex)
+{
+	switch (playerIndex)
+	{
+	case 0:
+		this->SetRoundPlayer1(round);
+		break;
+	case 1:
+		this->SetRoundPlayer2(round);
+		break;
+	}
+};
+
 void CHud::SetTime(string time)
 {
 	this->m_zsTime = time;							//setting the current time

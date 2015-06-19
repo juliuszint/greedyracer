@@ -105,7 +105,7 @@ void CMatch::Tick(float fTimeDelta)
 		// Note (julius): player info update
 		char buffer[100];
 		sprintf(buffer, "%d", playerData->RoundCount);
-		this->hud->SetRoundPlayer1(buffer);
+		this->hud->SetRound(buffer, i);
 
 		// Note (julius): camera support code
 		carCenterPosition.SetX(carCenterPosition.x + playerPosition.x + i);
