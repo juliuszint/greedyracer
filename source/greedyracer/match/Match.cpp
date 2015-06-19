@@ -90,7 +90,7 @@ void CMatch::Tick(float fTimeDelta)
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
-				playerData->TimePenalty = 50;
+				playerData->TimePenalty = 2;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 

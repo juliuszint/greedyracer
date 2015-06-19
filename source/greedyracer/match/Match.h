@@ -29,7 +29,7 @@ public:
 	int CheckpointCount;
 	int RoundCount;
 
-	int TimePenalty;
+	float TimePenalty;
 
 	PlayerData()
 	{
