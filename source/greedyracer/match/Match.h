@@ -52,6 +52,7 @@ private:
 	bool cKeyReleased;
 	bool fixedCameraMode;
 	bool ended;
+	float countingDown;
 
 	CHud* hud;
 	CMap* map;
