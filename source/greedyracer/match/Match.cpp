@@ -53,13 +53,12 @@ void CMatch::Tick(float fTimeDelta)
 			// Note (julius): is on shortcutTrigger?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
-				ShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
+				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
 				if (data->ActiveTime <= 0)
 				{
+					data->CollisionPlacement.Translate(CHVector(0,0,0));
 					data->ActiveTime = data->MaxActiveTime;
-					data->CollisionPlacement.SwitchOn();
 				}
-
 				playerData->TimePenalty = data->ActiveTime;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
@@ -79,6 +78,7 @@ void CMatch::Tick(float fTimeDelta)
 				{
 					playerData->RoundCount++;
 					playerData->CheckpointCount = 0;
+					playerData->LatestShortcutTrigger = 0;
 				}
 			}
 
@@ -102,11 +102,11 @@ void CMatch::Tick(float fTimeDelta)
 
 			for (int i = 0; i < this->map->ShortcutCount; i++)
 			{
-				ShortcutData* data = this->map->GetShortcut(i);
+				CShortcutData* data = this->map->GetShortcut(i);
 				data->ActiveTime -= fTimeDelta;
-				if (data->ActiveTime <= 0 && data->CollisionPlacement.IsOn())
+				if (data->ActiveTime <= 0)
 				{
-					data->CollisionPlacement.SwitchOff();
+					//data->CollisionPlacement.TranslateYDelta(-5000);
 				}
 			}
 			

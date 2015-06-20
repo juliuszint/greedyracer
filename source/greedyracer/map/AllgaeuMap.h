@@ -19,7 +19,7 @@ private:
 	CWater * water;
 	CStrecke * strecke;
 	CLandscape * landscape;
-	ShortcutData shortCuts[3];
+	CShortcutData shortCuts[3];
 public:
 
 	~CAllgaeuMap();
@@ -36,7 +36,7 @@ public:
 
 	int IsOnShortcutTrigger(CHVector);
 
-	ShortcutData* GetShortcut(int);
+	CShortcutData* GetShortcut(int);
 
 	bool IsOnFinish(CHVector);
 };
