@@ -39,13 +39,13 @@ void CCharacterController::setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, in
 void CCharacterController::Move(float DeltaTime)
 {
 	//int iSpeed = this->Auto->getaktSpeed();
-	float fSpeed = this->getaktSpeed();
+	float fSpeed = this->getaktSpeed()*(DeltaTime* 10);
 
 	if (this->playerKeyboard->KeyPressed(keyUP))
 	{
-		if (fSpeed <= 20)
+		if (fSpeed <= 45)
 		{
-			fSpeed += 1;
+			fSpeed += 4;
 		}
 		float fRelSpeed = this->factor * fSpeed;
 		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
@@ -86,11 +86,11 @@ void CCharacterController::Move(float DeltaTime)
 		
 		if (fSpeed > 0)
 		{
-			angle_y += faAngle;
+			angle_y += faAngle * (fSpeed / 15);
 		}
 		else if (fSpeed < 0)
 		{
-			angle_y -= faAngle;
+			angle_y -= faAngle * (fSpeed / 15);
 		}
 
 		CHVector buffer;
@@ -122,11 +122,11 @@ void CCharacterController::Move(float DeltaTime)
 		
 		if (fSpeed > 0)
 		{
-			angle_y += faAngle;
+			angle_y += faAngle * (fSpeed / 15);
 		}
 		else if (fSpeed < 0)
 		{
-			angle_y -= faAngle;
+			angle_y -= faAngle * (fSpeed / 15);
 		}
 
 		CHVector buffer;
