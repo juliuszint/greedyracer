@@ -18,13 +18,13 @@ void CMatch::Tick(float fTimeDelta)
 		int timer = (int)this->countingDown + 1;
 		char buffer[3];
 		sprintf(buffer, "%d", timer);
-		this->hud->SetWinningBanner(buffer);
+		this->hud->SetCountdown(buffer);
 
 		this->countingDown -= fTimeDelta;
 	}
 	else
 	{
-		this->hud->SetWinningBanner("");
+		this->hud->SetCountdown("");
 		CHVector carCenterPosition;
 		float maxXCarDistance = 0;
 		float maxZCarDistance = 0;

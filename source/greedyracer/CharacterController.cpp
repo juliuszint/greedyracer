@@ -101,7 +101,7 @@ void CCharacterController::Move(float DeltaTime)
 		Character->ScaleDelta(0.1f);
 		Character->TranslateDelta(buffer); 
 		//Character->RotateYDelta(angle_y);
-/*=======
+/*
 		//Character->TranslateDelta(-buffer);
 
 		Character->TranslateXDelta(-buffer.x);
@@ -113,7 +113,7 @@ void CCharacterController::Move(float DeltaTime)
 		Character->TranslateZDelta(buffer.z);
 
 		//Character->TranslateDelta(buffer);
->>>>>>> origin/master*/
+*/
 	}
 
 	if (this->playerKeyboard->KeyPressed(keyRIGHT) && (fSpeed != 0))
@@ -138,7 +138,7 @@ void CCharacterController::Move(float DeltaTime)
 		Character->TranslateDelta(buffer); 
 		//Character->RotateYDelta(angle_y);
 		
-/*=======
+/*
 		// Character->TranslateDelta(-buffer);
 
 		Character->TranslateXDelta(-buffer.x);
@@ -150,7 +150,7 @@ void CCharacterController::Move(float DeltaTime)
 		Character->TranslateZDelta(buffer.z);
 		//Character->TranslateDelta(buffer);
 
->>>>>>> origin/master*/
+*/
 	}
 
 }

@@ -13,6 +13,7 @@ private:
 	COverlay m_zoHudRootOverlay;
 
 	CWritingFont m_zwFont;
+	CWritingFont m_zwFontCountdown;
 
 	CWriting m_zwPlayer1;
 	CWriting m_zwPlayer2;
@@ -20,11 +21,13 @@ private:
 	CWriting m_zwRoundPlayer2;
 	CWriting m_zwTime;
 	CWriting m_zwWiningBanner;
+	CWriting m_zwCountdown;
 
 	string m_zsNamePlayer1;
 	string m_zsNamePlayer2;
 	string m_zsRoundPlayer1;
 	string m_zsRoundPlayer2;
+	string m_zsCountdown;
 	string m_zsTime;
 	string m_zsWinningBanner;
 
@@ -39,6 +42,7 @@ public:
 
 	void SetTime(string time);
 	void SetWinningBanner(string winningBanner);
+	void SetCountdown(string countdown);
 
 	string GetPlayerName1();
 	string GetPlayerName2();

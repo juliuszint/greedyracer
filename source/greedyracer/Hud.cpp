@@ -8,7 +8,10 @@ COverlay* CHud::GetRootOverlay()
 void CHud::InitHud()								//complete Hud Initialisation
 {
 	m_zwFont.Init("fonts\\FontArialShadow.png", false);							
+	m_zwFontCountdown.Init("fonts\\FontArialShadowCountdown.png", false);							
 	m_zwFont.SetTableSize(16, 6);												
+	m_zwFontCountdown.SetTableSize(16, 6);												
+
 	m_zwPlayer1.Init(CFloatRect(0.01f, 0.01f, 0.2f, 0.1f), 10, &m_zwFont);		
 	m_zwPlayer2.Init(CFloatRect(0.01f, 0.12f, 0.2f, 0.1f), 10, &m_zwFont);		
 
@@ -17,7 +20,10 @@ void CHud::InitHud()								//complete Hud Initialisation
 
 	m_zwTime.Init(CFloatRect(0.95f, 0.95f, 0.1f, 0.1f), 6, &m_zwFont);			
 	m_zwWiningBanner.Init(CFloatRect(0.25f, 0.4f, 0.5f, 0.2f), 18, &m_zwFont);			
+	m_zwCountdown.Init(CFloatRect(0.425, 0.3, 0.15, 0.4), 1, &m_zwFontCountdown);
 
+
+	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwCountdown);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwWiningBanner);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer1);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwPlayer2);
@@ -65,6 +71,12 @@ void CHud::SetRound(string round, int playerIndex)
 		break;
 	}
 };
+
+void CHud::SetCountdown(string countdown)
+{
+	this->m_zsCountdown = countdown;
+	this->m_zwCountdown.PrintF(countdown.data());
+}
 
 void CHud::SetTime(string time)
 {
