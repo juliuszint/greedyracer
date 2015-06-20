@@ -57,7 +57,7 @@ void CMatch::Tick(float fTimeDelta)
 				if (data->ActiveTime <= 0)
 				{
 					data->ActiveTime = data->MaxActiveTime;
-					this->mapPlacement->AddPlacement(&data->CollisionPlacement);
+					data->CollisionPlacement.SwitchOn();
 				}
 
 				playerData->TimePenalty = data->ActiveTime;
@@ -104,9 +104,9 @@ void CMatch::Tick(float fTimeDelta)
 			{
 				ShortcutData* data = this->map->GetShortcut(i);
 				data->ActiveTime -= fTimeDelta;
-				if (data->ActiveTime <= 0)
+				if (data->ActiveTime <= 0 && data->CollisionPlacement.IsOn())
 				{
-					this->mapPlacement->SubPlacement(&data->CollisionPlacement);
+					data->CollisionPlacement.SwitchOff();
 				}
 			}
 			
@@ -234,6 +234,8 @@ void CMatch::Stop()
 	this->hud->SetRoundPlayer1("");
 	this->hud->SetRoundPlayer2("");
 	this->hud->SetWinningBanner("");
+
+	// Todo (julius): cleanup abkürzungen
 
 	for (int i = 0; i < this->playerCount; i++)
 	{

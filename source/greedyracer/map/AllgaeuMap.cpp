@@ -22,6 +22,8 @@ void CAllgaeuMap::Init()
 	this->shortCuts[0].CollisionMesh = sphere;
 	this->shortCuts[0].CollisionPlacement.AddGeo(this->shortCuts[0].CollisionMesh);
 	this->shortCuts[0].CollisionPlacement.TranslateDelta(CHVector(-17.9, 0.1, 14));
+	this->placement.AddPlacement(&this->shortCuts[0].CollisionPlacement);
+	this->shortCuts[0].CollisionPlacement.SwitchOff();
 
 	// Note (julius): abkürzung in den bergen
 	this->shortCuts[1].MaxActiveTime = 2;
@@ -32,6 +34,8 @@ void CAllgaeuMap::Init()
 	this->shortCuts[1].CollisionMesh = sphere;
 	this->shortCuts[1].CollisionPlacement.AddGeo(this->shortCuts[1].CollisionMesh);
 	this->shortCuts[1].CollisionPlacement.TranslateDelta(CHVector(11, 0.1, -34.5));
+	this->placement.AddPlacement(&this->shortCuts[1].CollisionPlacement);
+	this->shortCuts[1].CollisionPlacement.SwitchOff();
 
 	// Note (julius): abkürzung im dorf
 	this->shortCuts[2].MaxActiveTime = 4;
@@ -42,7 +46,8 @@ void CAllgaeuMap::Init()
 	this->shortCuts[2].CollisionMesh = sphere;
 	this->shortCuts[2].CollisionPlacement.AddGeo(this->shortCuts[2].CollisionMesh);
 	this->shortCuts[2].CollisionPlacement.TranslateDelta(CHVector(12.8, 0.1, .5));
-
+	this->placement.AddPlacement(&this->shortCuts[2].CollisionPlacement);
+	this->shortCuts[2].CollisionPlacement.SwitchOff();
 
 	this->water = new CWater();
 	//this->ground = new CGround();
