@@ -25,6 +25,9 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	//float buttonHeight = buttonWidth * ratio;
 	//float buttonLeft = 0.5 - (buttonWidth / 2);
 
+	this->menuSound.Init("sound\\MenuSound.WAV");
+	this->menuSound.Loop();
+
 	float buttonWidth = 0.15f;
 	float buttonHeight = 0.075f;
 	float buttonLeft = 0.475f - (buttonWidth / 2);
@@ -46,6 +49,10 @@ COverlay* CGameMenu::GetRootOverlay()
 {
 	return &this->rootOverlay;
 }
+CAudio* CGameMenu::GetAudio()
+{
+	return &this->menuSound;
+}
 
 bool CGameMenu::GetIsVisible()
 {
@@ -54,8 +61,16 @@ bool CGameMenu::GetIsVisible()
 void CGameMenu::SetIsVisible(bool value)
 {
 	this->isVisible = value;
-	if (value) this->rootOverlay.SwitchOn();
-	else	   this->rootOverlay.SwitchOff();
+	if (value)
+	{
+		this->rootOverlay.SwitchOn();
+		this->menuSound.Loop();
+	}
+	else
+	{
+		this->rootOverlay.SwitchOff();
+		this->menuSound.Stop();
+	}
 }
 
 EGameMenuButton CGameMenu::Tick()

@@ -53,6 +53,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	// eingehängt und anschließend kann man es über die funktion CGameMenu.MakeVisible() wieder 
 	// sichtbar machen
 	this->gameMenu.Init(&this->cursor);
+	this->m_zscene.AddAudio(this->gameMenu.GetAudio());
 	this->m_zviewport.AddOverlay(this->gameMenu.GetRootOverlay());
 
 	this->hud.InitHud();

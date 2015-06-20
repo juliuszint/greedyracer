@@ -18,6 +18,7 @@ class CGameMenu
 private:
 	bool isVisible;
 	COverlay rootOverlay;
+	CAudio menuSound;
 	
 	COverlay startButtonOverlay;
 	COverlay creditsButtonOverlay;
@@ -39,5 +40,6 @@ public:
 	void SetIsVisible(bool value);
 	EGameMenuButton Tick();
 	COverlay* GetRootOverlay();
+	CAudio* GetAudio();
 };
 
