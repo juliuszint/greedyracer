@@ -19,15 +19,14 @@ private:
 	CWater * water;
 	CStrecke * strecke;
 	CLandscape * landscape;
-
+	ShortcutData shortCuts[3];
 public:
+
 	~CAllgaeuMap();
 
 	void Init();
 
 	CPlacement* GetRootPlacement();
-
-	//Felix: Die Funktionen reichen die von der Strecke einfach durch, passt das so?
 
 	CHVector GetStartPosition();
 
@@ -36,6 +35,8 @@ public:
 	CHVector IsOnTrack(CHVector);
 
 	int IsOnShortcutTrigger(CHVector);
+
+	ShortcutData* GetShortcut(int);
 
 	bool IsOnFinish(CHVector);
 };

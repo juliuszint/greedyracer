@@ -7,9 +7,22 @@
 
 using namespace Vektoria;
 
+struct ShortcutData
+{
+public:
+	float MaxActiveTime;
+	float ActiveTime;
+	CGeo * CollisionMesh;
+	CPlacement CollisionPlacement;
+	CMaterial CollisionMaterial;
+};
+
+
 class CMap : public CEntity
 {
 public:
+	int ShortcutCount;
+
 	// Note (julius): gibt die Startposition für den Spieler auf dieser Strecke zurück
 	virtual CHVector GetStartPosition() = 0;
 
@@ -20,5 +33,7 @@ public:
 	virtual bool IsOnFinish(CHVector) = 0;
 
 	virtual int IsOnShortcutTrigger(CHVector) = 0;
+
+	virtual ShortcutData* GetShortcut(int) = 0;
 };
 

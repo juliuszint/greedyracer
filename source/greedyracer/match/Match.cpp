@@ -53,9 +53,17 @@ void CMatch::Tick(float fTimeDelta)
 			// Note (julius): is on shortcutTrigger?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
-				playerData->TimePenalty = 2;
+				ShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
+				if (data->ActiveTime <= 0)
+				{
+					data->ActiveTime = data->MaxActiveTime;
+					this->mapPlacement->AddPlacement(&data->CollisionPlacement);
+				}
+
+				playerData->TimePenalty = data->ActiveTime;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
+
 
 			// Note (julius): is on checkpoint?
 			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
@@ -75,7 +83,7 @@ void CMatch::Tick(float fTimeDelta)
 			}
 
 			// Note (julius): is on track?
-			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1,1,1))
+			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1, 1, 1))
 			{
 				//if (isOnTrack != CHVector(1.0f, 1.0f, 1.0f))
 				//{
@@ -89,6 +97,20 @@ void CMatch::Tick(float fTimeDelta)
 				//	playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
 				//}
 			}
+
+			// Note (julius): abkürzungstimings etc
+
+			for (int i = 0; i < this->map->ShortcutCount; i++)
+			{
+				ShortcutData* data = this->map->GetShortcut(i);
+				data->ActiveTime -= fTimeDelta;
+				if (data->ActiveTime <= 0)
+				{
+					this->mapPlacement->SubPlacement(&data->CollisionPlacement);
+				}
+			}
+			
+
 			// Note (julius): process movement
 
 			if (playerData->RoundCount == 3)
@@ -191,7 +213,7 @@ void CMatch::Start()
 	this->hud->SetRoundPlayer2("0");
 	//this->hud->SetTime("00:05:00");
 	this->hud->SetVisible(true);
-	
+
 	this->backgroundAudio.Init("sound\\IngameSound.WAV");
 	this->backgroundAudio.SetVolume(.8f);
 	this->backgroundAudio.Loop();

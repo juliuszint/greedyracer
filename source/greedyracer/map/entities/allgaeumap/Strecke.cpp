@@ -147,6 +147,7 @@ CPlacement * CStrecke::GetRootPlacement()
 
 int CStrecke::IsOnShortcutTrigger(CHVector position)
 {
+	int midCount = 0;
 	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 	for (int i = 0; i < 5; i++)
 	{
@@ -155,8 +156,9 @@ int CStrecke::IsOnShortcutTrigger(CHVector position)
 		{
 			if (midTrigger->IsIntersecting(raytoRoad))
 			{
-				return i + 1;
+				return midCount + 1;
 			}
+			midCount++;
 		}
 	}
 	return -1;

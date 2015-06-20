@@ -11,6 +11,39 @@ CAllgaeuMap::~CAllgaeuMap()
 
 void CAllgaeuMap::Init()
 {
+	this->ShortcutCount = 3;
+
+	// Note (julius): abkürzung im waldgebiet
+	this->shortCuts[0].MaxActiveTime = 4;
+	this->shortCuts[0].ActiveTime = 0;
+	this->shortCuts[0].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
+	CGeoSphere* sphere = new CGeoSphere();
+	sphere->Init(.5, &this->shortCuts[0].CollisionMaterial);
+	this->shortCuts[0].CollisionMesh = sphere;
+	this->shortCuts[0].CollisionPlacement.AddGeo(this->shortCuts[0].CollisionMesh);
+	this->shortCuts[0].CollisionPlacement.TranslateDelta(CHVector(-17.9, 0.1, 14));
+
+	// Note (julius): abkürzung in den bergen
+	this->shortCuts[1].MaxActiveTime = 2;
+	this->shortCuts[1].ActiveTime = 0;
+	this->shortCuts[1].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
+	sphere = new CGeoSphere();
+	sphere->Init(1.0, &this->shortCuts[1].CollisionMaterial);
+	this->shortCuts[1].CollisionMesh = sphere;
+	this->shortCuts[1].CollisionPlacement.AddGeo(this->shortCuts[1].CollisionMesh);
+	this->shortCuts[1].CollisionPlacement.TranslateDelta(CHVector(11, 0.1, -34.5));
+
+	// Note (julius): abkürzung im dorf
+	this->shortCuts[2].MaxActiveTime = 4;
+	this->shortCuts[2].ActiveTime = 0;
+	this->shortCuts[2].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
+	sphere = new CGeoSphere();
+	sphere->Init(1.0, &this->shortCuts[2].CollisionMaterial);
+	this->shortCuts[2].CollisionMesh = sphere;
+	this->shortCuts[2].CollisionPlacement.AddGeo(this->shortCuts[2].CollisionMesh);
+	this->shortCuts[2].CollisionPlacement.TranslateDelta(CHVector(12.8, 0.1, .5));
+
+
 	this->water = new CWater();
 	//this->ground = new CGround();
 	this->landscape = new CLandscape();
@@ -20,17 +53,15 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	this->landscape->Init();
+	//this->landscape->Init();
 	this->placement.Fasten();
-	this->placement.AddPlacement(this->landscape->GetRootPlacement());
-
+	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
 
 	//this->water->Configure(20, 80);
 	//this->water->Init();
 	//this->water->GetRootPlacement()->TranslateYDelta(0.1);
 	//this->water->GetRootPlacement()->TranslateDelta(CHVector(1, 0, 0));
 	//this->placement.AddPlacement(this->water->GetRootPlacement());
-
 
 	this->strecke->Init();
 	this->placement.AddPlacement(this->strecke->GetRootPlacement());
@@ -39,6 +70,11 @@ void CAllgaeuMap::Init()
 CPlacement* CAllgaeuMap::GetRootPlacement()
 {
 	return &this->placement;
+}
+
+ShortcutData* CAllgaeuMap::GetShortcut(int index)
+{
+	return &this->shortCuts[index];
 }
 
 CHVector CAllgaeuMap::GetStartPosition()
