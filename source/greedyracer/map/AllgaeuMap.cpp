@@ -70,19 +70,8 @@ int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 {
-	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
-
-
-	//Abfrage Intersect mit Checkpoints
-	for (int i = 0; i < 5; i++)
-	{
-		CGeo* geo = this->strecke->getCheckpointGeo(i)->GetGeo();
-		CTriangleList* List = (CTriangleList*)geo;
-		if (List->IsIntersecting(raytoRoad))
-		{
-			return this->strecke->getCheckpointGeo(i)->GetRootPlacement()->GetTranslation();
-		}
-	}
+	position.y + 1;
+	CRay raytoRoad(position, CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 	
 	//Abfrage Intersect mit Sektoren
 	for (int i = 0; i < 3; i++)
@@ -108,17 +97,7 @@ CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 		}
 	}
 
-	//Abfrage Intersect mit Finish
-		CGeo* geoFinish = this->strecke->getStartGeo()->GetGeo();
-		CTriangleList* List = (CTriangleList*)geoFinish;
-		if (List->IsIntersecting(raytoRoad))
-		{
-			return this->strecke->getStartGeo()->GetRootPlacement()->GetTranslation();
-		}
-
-
 	return CHVector(1.0f, 1.0f, 1.0f);
-
 }
 
 bool CAllgaeuMap::IsOnFinish(CHVector position)

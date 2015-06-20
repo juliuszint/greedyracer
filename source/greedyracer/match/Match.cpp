@@ -46,84 +46,51 @@ void CMatch::Tick(float fTimeDelta)
 				playerData->TimePenalty -= fTimeDelta;
 			}
 
-			/*
-			// Note (Michael): Collision detection among cars
-			for (int j = 0; j < this->playerCount; j++)
-			{
-			PlayerData* otherPlayer = &this->players[j];
-			if (playerData->CarPosition->IsColliding(otherPlayer->CarPosition))
-			{
-			CHVector vPos = playerData->CarPosition->m_amGlobal[0].GetTranslation();
-			CHVector vDirFront = playerData->CarPosition->m_amGlobal[0] * CHVector(0.0f, 0.0f, -1.0, 0.0f);
-			CHVector vDirRear = playerData->CarPosition->m_amGlobal[0] * CHVector(0.0f, 0.0f, 1.0f, 0.0f);
-			CHVector vDirLeft = playerData->CarPosition->m_amGlobal[0] * CHVector(-1.0f, 0.0f, 0.0f, 0.0f);
-			CHVector vDirRight = playerData->CarPosition->m_amGlobal[0] * CHVector(1.0f, 0.0f, 0.0f, 0.0f);
-
-			CRay rFront(vPos, vDirFront, QUASI_ZERO, F_MAX);
-			CRay rRear(vPos, vDirFront, QUASI_ZERO, F_MAX);
-			CRay rLeft(vPos, vDirFront, QUASI_ZERO, F_MAX);
-			CRay rRight(vPos, vDirFront, QUASI_ZERO, F_MAX);
-
-			if (otherPlayer->CarPosition->IsIntersecting(rFront))
-			{
-			float fSpeedbuffer = playerData->Controller->getaktSpeed();
-			playerData->Controller->UpdateSpeed(otherPlayer->Controller->getaktSpeed());
-			otherPlayer->Controller->UpdateSpeed(fSpeedbuffer);
-			}
-			else if (otherPlayer->CarPosition->IsIntersecting(rRear))
-			{
-			float fSpeedbuffer = otherPlayer->Controller->getaktSpeed();
-			otherPlayer->Controller->UpdateSpeed(playerData->Controller->getaktSpeed());
-			playerData->Controller->UpdateSpeed(fSpeedbuffer);
-			}
-			else if (otherPlayer->CarPosition->IsIntersecting(rLeft))
-			{
-			otherPlayer->Controller->UpdateAngle(0.2);
-			playerData->Controller->UpdateAngle(-0.2);
-			}
-			else if (otherPlayer->CarPosition->IsIntersecting(rRight))
-			{
-			otherPlayer->Controller->UpdateAngle(-0.2);
-			playerData->Controller->UpdateAngle(0.2);
-			}
-
-			}
-			}*/
-
+			CHVector isOnTrack;
+			int checkPoint = 0;
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
+
+			// Note (julius): is on shortcutTrigger
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
 				playerData->TimePenalty = 2;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 
-			// Note (julius): process movement
-			CHVector isOnTrack = this->map->IsOnTrack(playerPosition);
-
-			if (isOnTrack != CHVector(1.0f, 1.0f, 1.0f))
-			{
-				this->avLastPlacement[i] = isOnTrack;
-			}
-
-			if (isOnTrack == CHVector(1.0f, 1.0f, 1.0f))
-			{
-				//CHVector delta = isOnTrack - playerPosition;
-				CHVector delta = avLastPlacement[i] - playerPosition;
-				playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
-			}
-
-			int checkPoint = 0;
-			if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
+			// Note (julius): is on checkpoint
+			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
 				checkPoint > playerData->CheckpointCount)
 			{
 				playerData->CheckpointCount++;
 			}
 
-			if (playerData->CheckpointCount >= 5 && this->map->IsOnFinish(playerPosition))
+			// Note (julius): is on start
+			else if (this->map->IsOnFinish(playerPosition))
 			{
-				playerData->RoundCount++;
-				playerData->CheckpointCount = 0;
+				if (playerData->CheckpointCount >= 5)
+				{
+					playerData->RoundCount++;
+					playerData->CheckpointCount = 0;
+				}
 			}
+
+			// Note (julius): is on track?
+			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1,1,1))
+			{
+				//if (isOnTrack != CHVector(1.0f, 1.0f, 1.0f))
+				//{
+				//	this->avLastPlacement[i] = isOnTrack;
+				//}
+
+				//if (isOnTrack == CHVector(1.0f, 1.0f, 1.0f))
+				//{
+				//	//CHVector delta = isOnTrack - playerPosition;
+				//	CHVector delta = avLastPlacement[i] - playerPosition;
+				//	playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
+				//}
+			}
+			// Note (julius): process movement
+
 			if (playerData->RoundCount == 3)
 			{
 				ended = true;
