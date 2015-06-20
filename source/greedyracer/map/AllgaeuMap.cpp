@@ -20,9 +20,9 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	//this->landscape->Init();
-	//this->placement.Fasten();
-	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
+	this->landscape->Init();
+	this->placement.Fasten();
+	this->placement.AddPlacement(this->landscape->GetRootPlacement());
 
 
 	//this->water->Configure(20, 80);

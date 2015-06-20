@@ -37,6 +37,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->keyboard.SetWASDTranslationSensitivity(15);
 
 	this->m_zlight.Init(CHVector(0.5, 1, 0), CColor(1, 1, 1));
+	this->m_zlight2.Init(CHVector(0, 1, 0.3), CColor(0.5, 0.5, 0.5));
 
 	this->m_zroot.AddFrameHere(&m_zframe);
 	this->m_zframe.AddViewport(&m_zviewport);
@@ -62,6 +63,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
+	m_zscene.AddParallelLight(&m_zlight2);
 	m_zpCamera.AddCamera(&m_zcamera);
 	m_zviewport.SetWireframeOff();
 

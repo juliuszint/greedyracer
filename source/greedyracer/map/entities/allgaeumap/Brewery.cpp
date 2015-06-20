@@ -2,17 +2,17 @@
 
 void CBrewery::Init(){
 	//Brewery
-	m_zmFacade.MakeTextureDiffuse("textures\\sonstiges\\Backsteinwand_256.png");
-	m_zmFacade.MakeTextureBump("textures\\sonstiges\\Backsteinwand_256_n.png");
-	m_zmFacade.MakeTextureSpecular("textures\\sonstiges\\Backsteinwand_256_spec.png");
+	m_zmFacade.MakeTextureDiffuse("textures\\sonstiges\\Backsteinwand_512.jpg");
+	m_zmFacade.MakeTextureBump("textures\\sonstiges\\Backsteinwand_512_n.jpg");
+	m_zmFacade.MakeTextureSpecular("textures\\sonstiges\\Backsteinwand_512_spec.jpg");
 	m_zmRoof.MakeTextureDiffuse("textures\\haus\\Dachziegel_Rot_512.png");
 	m_zmRoof.MakeTextureBump("textures\\haus\\Dachziegel_Rot_512_n.png");
 	m_zmRoof.MakeTextureSpecular("textures\\haus\\Dachziegel_Rot_512_spec.png");
 
 
 	m_zmRoof.SetSpecular(0.2f);
-	m_zgBrewery.SetTextureRepeat(5.0f, 2.0f);
-	m_zmFacade.SetBumpStrength(7.0f);
+	m_zgBrewery.SetTextureRepeat(6.0f, 1.0f);
+	m_zmFacade.SetBumpStrength(1.0f);
 	m_zmRoof.SetBumpStrength(5.0f);
 
 
@@ -94,16 +94,14 @@ void CBrewery::Init(){
 	m_zpSupply2.TranslateXDelta(-0.1f);
 	m_zpSupply2.TranslateYDelta(0.02f);
 	//BreweryChimney
-	m_zmFacadeChimney.MakeTextureDiffuse("textures\\sonstiges\\Backsteinwand_256.png");
-	m_zmFacadeChimney.MakeTextureBump("textures\\sonstiges\\Backsteinwand_256_n.png");
-	m_zmFacadeChimney.MakeTextureSpecular("textures\\sonstiges\\Backsteinwand_256_spec.png");
+	m_zmFacadeChimney.MakeTextureDiffuse("textures\\sonstiges\\Backsteinwand_512.jpg");
+	m_zmFacadeChimney.MakeTextureBump("textures\\sonstiges\\Backsteinwand_512_n.jpg");
+	m_zmFacadeChimney.MakeTextureSpecular("textures\\sonstiges\\Backsteinwand_512_spec.jpg");
 	m_zmFacadeChimney.SetBumpStrength(1.0f);
-
+	m_zmFacadeChimney.SetSpecular(0.3f);
 	m_zgChimney.SetTextureRepeat(2.0f, 6.0f);
 
 	m_zgChimney.SetMaterial(&m_zmFacadeChimney);
-	m_zgChimney.SetTextureRepeat(1.0f, 6.0f);
-	m_zgChimney.SetTextureRepeat(1.0f, 6.0f);
 
 	m_zgChimney.InitTubeSine(3.0f, 1.5f, 40.0f, 0.5f, &m_zmFacadeChimney);
 	m_zpChimney.AddGeo(&m_zgChimney);

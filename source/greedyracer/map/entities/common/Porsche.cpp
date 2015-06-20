@@ -12,12 +12,18 @@ void CPorsche::Init(){
 	m_pzgWindows = m_zgWindows.LoadGeo("meshes\\Porsche\\PorscheWindows_reduced.obj");
 	m_pzgExhaust = m_zgExhaust.LoadGeo("meshes\\Porsche\\PorscheExhaust_reduced.obj");
 
-	m_zmBodywork.MakeTextureDiffuse("textures\\black_image.jpg");
-	m_zmFrontHeadlights.MakeTextureDiffuse("textures\\blue_image.jpg");
-	m_zmRearLights.MakeTextureDiffuse("textures\\red_image.jpg");
-	m_zmTires.MakeTextureDiffuse("textures\\black_image.jpg");
-	m_zmWindow.MakeTextureDiffuse("textures\\black_image.jpg");
-	m_zmExhaust.MakeTextureDiffuse("textures\\black_image.jpg");
+	m_zmBodywork.MakeTextureDiffuse("textures\\autos\\red.jpg");
+	m_zmFrontHeadlights.MakeTextureDiffuse("textures\\autos\\yellow.jpg");
+	m_zmRearLights.MakeTextureDiffuse("textures\\autos\\dark_red.jpg");
+	m_zmTires.MakeTextureDiffuse("textures\\autos\\black.jpg");
+	m_zmWindow.MakeTextureDiffuse("textures\\autos\\black.jpg");
+	m_zmExhaust.MakeTextureDiffuse("textures\\autos\\black.jpg");
+
+	m_zmBodywork.MakeTextureSpecular("textures\\autos\\grey.jpg");
+
+	m_zmBodywork.SetMetallic(0.5f);
+	m_zmBodywork.SetSpecular(0.3f);
+	m_zmWindow.SetSpecular(0.5f);
 
 	m_pzgBodywork->SetMaterial(&m_zmBodywork);
 	m_pzgFrontHeadlights->SetMaterial(&m_zmFrontHeadlights);
@@ -45,7 +51,7 @@ void CPorsche::Init(){
 
 	m_zpPorsche.Fasten();
 
-	m_zpPorsche.TranslateDelta(CHVector(0, 2.5, 0));
+	//m_zpPorsche.TranslateDelta(CHVector(0, 2.5, 0));
 
 	m_zpPorsche.Scale(0.1f);
 }

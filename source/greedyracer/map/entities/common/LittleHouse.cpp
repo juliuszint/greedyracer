@@ -1,14 +1,17 @@
 #include "LittleHouse.h"
 
 void CLittleHouse::Init(){
-	m_zmFacade.MakeTextureDiffuse("textures\\haus\\Fassade_512.png");
-	m_zmFacade.MakeTextureBump("textures\\haus\\Fassade_512_n.png");
+	m_zmFacade.MakeTextureDiffuse("textures\\haus\\Fassade_std_512.jpg");
+	m_zmFacade.MakeTextureBump("textures\\haus\\Fassade_std_512_n.jpg");
+	m_zmFacade.MakeTextureSpecular("textures\\haus\\Fassade_std_512_spec.jpg");
 	m_zmRoof.MakeTextureDiffuse("textures\\haus\\Dachziegel_Rot_512.png");
 	m_zmRoof.MakeTextureBump("textures\\haus\\Dachziegel_Rot_512_n.png");
+	m_zmRoof.MakeTextureSpecular("textures\\haus\\Dachziegel_Rot_512_spec.png");
 
-	m_zmFacade.SetBumpStrength(7.0f);
-	m_zmRoof.SetBumpStrength(5.0f);
-	m_zgLittleHouse.SetTextureRepeat(1.0f, 1.0f);
+	m_zmFacade.SetBumpStrength(1.0f);
+	m_zmRoof.SetBumpStrength(1.0f);
+	m_zgLittleHouse.SetTextureRepeat(2.0f, 1.0f);
+	m_zmFacade.SetSpecular(0.3f);
 
 	m_zgLittleHouse.SetMaterialFacade(&m_zmFacade);
 	m_zgLittleHouse.SetMaterialRoof(&m_zmRoof);

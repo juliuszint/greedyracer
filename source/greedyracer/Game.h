@@ -99,6 +99,7 @@ private:
 	CPlacement m_zpCamera;
 	CCamera m_zcamera;
 	CParallelLight m_zlight;
+	CParallelLight m_zlight2;
 
 	
 	CDeviceCursor cursor;
