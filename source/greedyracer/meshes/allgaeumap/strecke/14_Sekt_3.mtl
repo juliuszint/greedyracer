@@ -1,7 +1,7 @@
 # Blender MTL File: 'None'
 # Material Count: 1
 
-newmtl Material.017
+newmtl Material.053
 Ns 92.156863
 Ka 0.000000 0.000000 0.000000
 Kd 0.512000 0.512000 0.512000
@@ -9,4 +9,3 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\Felix\Desktop\Rennstrecke\Rennstrecke_Parted_text.jpg
