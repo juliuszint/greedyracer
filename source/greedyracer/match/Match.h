@@ -66,12 +66,12 @@ private:
 	
 	void ToggleCameraMode();
 public:
-	void Init(CMap* map, CPlacement* cameraPlacement, CHud* hud);
+	~CMatch();
+
+	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud);
 	void Start();
 	void Tick(float fTimeDelta);
 	void Stop();
-
-	CMatch(CDeviceKeyboard * pkeyboard);
 };
 
 

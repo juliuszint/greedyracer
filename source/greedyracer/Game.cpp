@@ -69,13 +69,9 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 void CGame::Tick(float fTime, float fTimeDelta)
 {
-	// Hier die Echtzeit-Veränderungen einfügen:
-	m_zroot.Tick(fTimeDelta);
-
+	bool ignoreTick = false;
 	if (this->gameMenu.GetIsVisible())
 	{
-		this->CleanCurrentMatch();
-
 		EGameMenuButton result = this->gameMenu.Tick();
 		switch (result)
 		{
@@ -85,17 +81,28 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		case EGameMenuButtonStart:
 			// Todo: game starten
 			this->gameMenu.SetIsVisible(false);
-			this->CleanCurrentMatch();
-			this->currentMatch = new CMatch(&keyboard);
-			this->currentMatch->Init(this->currentMap, &this->m_zpCamera, &this->hud);
+
+			this->currentMatch = new CMatch();
+			this->currentMatch->Init(&this->keyboard, this->currentMap, &this->m_zpCamera, &this->hud);
 			this->currentMatch->Start();
 
 			break;
 		}
 	}
-
+	
 	else if (this->keyboard.KeyPressed(DIK_ESCAPE))
 	{
+		this->currentMatch->Stop();
+		// Note (julius): der tick wird hier aufgerufen und dann unten ignoriert 
+		// weil sobald man placments rausnimmt aus der map was in stop passiert
+		// muss einmal geticked werden bevor man den speicherplatz freigeben kann
+		// sonst kommts zur AccessViolation
+		m_zroot.Tick(fTimeDelta);
+		ignoreTick = true;
+
+		free(this->currentMatch);
+		this->currentMatch = NULL;
+
 		this->gameMenu.SetIsVisible(true);
 	}
 
@@ -103,13 +110,14 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	{
 		this->currentMatch->Tick(fTimeDelta);
 	}
+
+	// Hier die Echtzeit-Veränderungen einfügen:
+	if(!ignoreTick) m_zroot.Tick(fTimeDelta);
 }
 void CGame::CleanCurrentMatch()
 {
 	if (this->currentMatch != NULL)
 	{
-		this->currentMatch->Stop();
-		free(this->currentMatch);
 	}
 
 }

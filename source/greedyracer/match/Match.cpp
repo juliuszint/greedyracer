@@ -1,9 +1,12 @@
 #include "Match.h"
 
-
-CMatch::CMatch(CDeviceKeyboard * pkeyboard)
+CMatch::~CMatch()
 {
-	m_pkeyboard = pkeyboard;
+	for (int i = 0; i < this->playerCount; i++)
+	{
+		free(this->players[i].Controller);
+		free(this->players[i].CarEntity);
+	}
 }
 
 void CMatch::Tick(float fTimeDelta)
@@ -197,7 +200,6 @@ void CMatch::Tick(float fTimeDelta)
 			OutputDebugStringA("C Released\n");
 		}
 	}
-
 }
 
 void CMatch::Start()
@@ -223,7 +225,7 @@ void CMatch::Start()
 	//this->hud->SetTime("00:05:00");
 	this->hud->SetVisible(true);
 
-	this->countingDown = 3.9999999;
+	this->countingDown = 4;
 	this->running = true;
 	this->ended = false;
 }
@@ -233,16 +235,23 @@ void CMatch::Stop()
 	this->running = false;
 
 	this->hud->SetVisible(false);
+	this->hud->SetPlayerName1("");
+	this->hud->SetPlayerName2("");
+	this->hud->SetRoundPlayer1("");
+	this->hud->SetRoundPlayer2("");
+	this->hud->SetWinningBanner("");
 
 	for (int i = 0; i < this->playerCount; i++)
 	{
 		this->mapPlacement->SubPlacement(this->players[i].CarPosition);
-		free(this->players[i].CarEntity);
 	}
 }
 
-void CMatch::Init(CMap* map, CPlacement* cameraPlacement, CHud* hud)
+
+
+void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud)
 {
+	this->m_pkeyboard = keyboard;
 	this->hud = hud;
 	this->map = map;
 	this->cameraPlacement = cameraPlacement;
