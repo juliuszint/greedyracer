@@ -54,6 +54,7 @@ private:
 	bool ended;
 	float countingDown;
 
+	CScene* scene;
 	CHud* hud;
 	CMap* map;
 	CPlacement* mapPlacement;
@@ -64,11 +65,13 @@ private:
 	PlayerData players[2];
 	CHVector avLastPlacement[2];
 	
+	CAudio backgroundAudio;
+
 	void ToggleCameraMode();
 public:
 	~CMatch();
 
-	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud);
+	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene);
 	void Start();
 	void Tick(float fTimeDelta);
 	void Stop();

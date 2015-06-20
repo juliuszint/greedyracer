@@ -84,7 +84,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			this->gameMenu.SetIsVisible(false);
 
 			this->currentMatch = new CMatch();
-			this->currentMatch->Init(&this->keyboard, this->currentMap, &this->m_zpCamera, &this->hud);
+			this->currentMatch->Init(&this->keyboard, this->currentMap, &this->m_zpCamera, &this->hud, &this->m_zscene);
 			this->currentMatch->Start();
 
 			break;

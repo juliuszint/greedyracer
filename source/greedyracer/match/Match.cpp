@@ -50,21 +50,21 @@ void CMatch::Tick(float fTimeDelta)
 			int checkPoint = 0;
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
 
-			// Note (julius): is on shortcutTrigger
+			// Note (julius): is on shortcutTrigger?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
 				playerData->TimePenalty = 2;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 
-			// Note (julius): is on checkpoint
+			// Note (julius): is on checkpoint?
 			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
 				checkPoint > playerData->CheckpointCount)
 			{
 				playerData->CheckpointCount++;
 			}
 
-			// Note (julius): is on start
+			// Note (julius): is on start?
 			else if (this->map->IsOnFinish(playerPosition))
 			{
 				if (playerData->CheckpointCount >= 5)
@@ -191,6 +191,11 @@ void CMatch::Start()
 	this->hud->SetRoundPlayer2("0");
 	//this->hud->SetTime("00:05:00");
 	this->hud->SetVisible(true);
+	
+	this->backgroundAudio.Init("sound\\IngameSound.WAV");
+	this->backgroundAudio.SetVolume(.8f);
+	this->backgroundAudio.Loop();
+	this->scene->AddAudio(&this->backgroundAudio);
 
 	this->countingDown = 4;
 	this->running = true;
@@ -212,13 +217,15 @@ void CMatch::Stop()
 	{
 		this->mapPlacement->SubPlacement(this->players[i].CarPosition);
 	}
+	this->scene->SubAudio(&this->backgroundAudio);
 }
 
 
 
-void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud)
+void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene)
 {
 	this->m_pkeyboard = keyboard;
+	this->scene = scene;
 	this->hud = hud;
 	this->map = map;
 	this->cameraPlacement = cameraPlacement;
