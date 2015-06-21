@@ -18,7 +18,7 @@ void CAllgaeuMap::Init()
 	this->shortCuts[0].MaxActiveTime = 15;
 	this->shortCuts[0].ActiveTime = 0;
 
-	this->shortCuts[0].CollisionEntity = new CSphereEntity();
+	this->shortCuts[0].CollisionEntity = new CFallenTree();
 	this->shortCuts[0].CollisionEntity->Init();
 	this->shortCuts[0].CollisionPlacement = shortCuts[0].CollisionEntity->GetRootPlacement();
 	this->shortCuts[0].CollisionPlacement->TranslateDelta(CHVector(-17.9, 0.1, 14));
@@ -26,11 +26,12 @@ void CAllgaeuMap::Init()
 	this->placement.AddPlacement(this->shortCuts[0].CollisionPlacement);
 
 	// Note (julius): abkürzung in den bergen
-	this->shortCuts[1].ChancePrecentage = 50;
-	this->shortCuts[1].MaxActiveTime = 2;
+	this->shortCuts[1].ChancePrecentage = 100;
+	//this->shortCuts[1].ChancePrecentage = 50;
+	this->shortCuts[1].MaxActiveTime = 20;
+	//this->shortCuts[1].MaxActiveTime = 2;
 	this->shortCuts[1].ActiveTime = 0;
-
-	this->shortCuts[1].CollisionEntity = new CSphereEntity();
+	this->shortCuts[1].CollisionEntity = new CRocks();
 	this->shortCuts[1].CollisionEntity->Init();
 	this->shortCuts[1].CollisionPlacement = shortCuts[1].CollisionEntity->GetRootPlacement();
 	this->shortCuts[1].CollisionPlacement->TranslateDelta(CHVector(11, .1, -34.5));
@@ -42,7 +43,7 @@ void CAllgaeuMap::Init()
 	this->shortCuts[2].MaxActiveTime = 6;
 	this->shortCuts[2].ActiveTime = 0;
 
-	this->shortCuts[2].CollisionEntity = new CSphereEntity();
+	this->shortCuts[2].CollisionEntity = new CBarrel();
 	this->shortCuts[2].CollisionEntity->Init();
 	this->shortCuts[2].CollisionPlacement = shortCuts[2].CollisionEntity->GetRootPlacement();
 	this->shortCuts[2].CollisionPlacement->TranslateDelta(CHVector(12.8, .1, .5));

@@ -9,7 +9,9 @@
 #include "entities\test\SphereEntity.h"
 #include "entities\allgaeumap\Strecke.h"
 #include "entities\allgaeumap\Landscape.h"
-#include "entities\allgaeumap\Trigger.h"
+#include "entities\allgaeumap\shortcuts\Barrel.h"
+#include "entities\allgaeumap\shortcuts\FallenTree.h"
+#include "entities\allgaeumap\shortcuts\Rocks.h"
 
 using namespace Vektoria;
 
@@ -21,12 +23,7 @@ private:
 	CWater * water;
 	CStrecke * strecke;
 	CLandscape * landscape;
-<<<<<<< HEAD
-	ShortcutData shortCuts[3];
-	CTrigger * TriggerTree;
-	CTrigger * TriggerRocks;
-	CTrigger * TriggerBeerbarrel;
-
+	CShortcutData shortCuts[3];
 
 public:
 
