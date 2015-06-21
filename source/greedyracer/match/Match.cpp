@@ -272,7 +272,7 @@ void CMatch::Stop()
 
 
 
-void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene)
+void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene, CDeviceGameController* Controller1, CDeviceGameController* Controller2)
 {
 	this->m_pkeyboard = keyboard;
 	this->scene = scene;
@@ -280,6 +280,8 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->map = map;
 	this->cameraPlacement = cameraPlacement;
 	this->mapPlacement = this->map->GetRootPlacement();
+	this->Contr1 = Controller1;
+	this->Contr2 = Controller2;
 
 	this->fixedCameraMode = true;
 	this->cKeyReleased = true;
@@ -290,6 +292,7 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].CarPosition = this->players[0].CarEntity->GetRootPlacement();
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
+	this->players[0].Controller->addGameController(Contr1);
 	this->players[0].Controller->setKeybinding(DIK_Y, DIK_H, DIK_G, DIK_J);
 	this->players[0].Controller->addCharacter(this->players[0].CarPosition);
 
@@ -299,6 +302,7 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[1].CarPosition = this->players[1].CarEntity->GetRootPlacement();
 	this->players[1].Controller = new CCharacterController();
 	this->players[1].Controller->addKeyboard(this->m_pkeyboard);
+	this->players[1].Controller->addGameController(Contr2);
 	this->players[1].Controller->setKeybinding(DIK_O, DIK_L, DIK_K, DIK_SEMICOLON);
 	this->players[1].Controller->addCharacter(this->players[1].CarPosition);
 

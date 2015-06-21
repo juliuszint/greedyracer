@@ -60,6 +60,8 @@ private:
 	CPlacement* mapPlacement;
 	CPlacement* cameraPlacement;
 	CDeviceKeyboard *m_pkeyboard;
+	CDeviceGameController* Contr1;
+	CDeviceGameController* Contr2;
 	CAudio countdownAudio;
 	CAudio carsoundAudio;
 
@@ -73,7 +75,7 @@ private:
 public:
 	~CMatch();
 
-	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene);
+	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene, CDeviceGameController* Controller1, CDeviceGameController* Controller2);
 	void Start();
 	void Tick(float fTimeDelta);
 	void Stop();

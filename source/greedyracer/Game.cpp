@@ -33,6 +33,8 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 
 	this->m_zframe.AddDeviceKeyboard(&this->keyboard);
 	this->m_zframe.AddDeviceCursor(&this->cursor);
+	this->m_zframe.AddDeviceGameController(&this->Controller1);
+	this->m_zframe.AddDeviceGameController(&this->Controller2);
 
 	this->keyboard.SetWASDTranslationSensitivity(15);
 
@@ -88,7 +90,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			this->gameMenu.SetIsVisible(false);
 
 			this->currentMatch = new CMatch();
-			this->currentMatch->Init(&this->keyboard, this->currentMap, &this->m_zpCamera, &this->hud, &this->m_zscene);
+			this->currentMatch->Init(&this->keyboard, this->currentMap, &this->m_zpCamera, &this->hud, &this->m_zscene, &Controller1, &Controller2);
 			this->currentMatch->Start();
 
 			break;

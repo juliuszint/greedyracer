@@ -82,6 +82,8 @@ public:
 
 	CMatch* currentMatch;
 	CDeviceKeyboard keyboard;
+	CDeviceGameController Controller1;
+	CDeviceGameController Controller2;
 	
 	void WindowReSize(int iNewWidth, int iNewHeight); // WindowsReSize wird immer dann aufgerufen, wenn der Benutzer die Fenstergröße verändert hat
 

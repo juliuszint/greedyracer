@@ -19,6 +19,7 @@ public:
 	void addKeyboard(CDeviceKeyboard *);
 	void Move(float DeltaTime);
 	void addVehicle(CVehicle * Fahrzeug);
+	void addGameController(CDeviceGameController * XBOX360Cont);
 	void setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, int KeyRIGHT);
 	float getaktSpeed(){ return faktSpeed; };
 	void UpdateSpeed(int iNeue) { faktSpeed = iNeue; };
@@ -40,6 +41,7 @@ private:
 	CVehicle * Vehicle;
 	CDeviceKeyboard * playerKeyboard;
 	CVehicle * Auto;
+	CDeviceGameController * Controller;
 
 };
 
