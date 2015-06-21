@@ -56,7 +56,7 @@ void CMatch::Tick(float fTimeDelta)
 				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
 				if (data->ActiveTime <= 0)
 				{
-					data->CollisionPlacement.Translate(CHVector(0,0,0));
+					data->CollisionPlacement.SwitchOn();
 					data->ActiveTime = data->MaxActiveTime;
 				}
 				playerData->TimePenalty = data->ActiveTime;
@@ -104,9 +104,10 @@ void CMatch::Tick(float fTimeDelta)
 			{
 				CShortcutData* data = this->map->GetShortcut(i);
 				data->ActiveTime -= fTimeDelta;
+
 				if (data->ActiveTime <= 0)
 				{
-					//data->CollisionPlacement.TranslateYDelta(-5000);
+					data->CollisionPlacement.SwitchOff();
 				}
 			}
 			
