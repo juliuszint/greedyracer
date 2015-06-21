@@ -39,7 +39,8 @@ void CCharacterController::setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, in
 void CCharacterController::Move(float DeltaTime)
 {
 	//int iSpeed = this->Auto->getaktSpeed();
-	float fSpeed = this->getaktSpeed()*(DeltaTime* 10);
+	float fSpeed = this->getaktSpeed();
+	float fTimeFact = (1/DeltaTime)/2;
 
 	if (this->playerKeyboard->KeyPressed(keyUP))
 	{
@@ -48,7 +49,7 @@ void CCharacterController::Move(float DeltaTime)
 			fSpeed += 4;
 		}
 		float fRelSpeed = this->factor * fSpeed;
-		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
+		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
 		Character->TranslateXDelta(translation.x);
 		Character->TranslateZDelta(translation.z);
 	}
@@ -60,7 +61,7 @@ void CCharacterController::Move(float DeltaTime)
 			fSpeed -= 2.5;
 		}
 		float fRelSpeed = this->factor * fSpeed;
-		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
+		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
 		Character->TranslateXDelta(translation.x);
 		Character->TranslateZDelta(translation.z);
 	}
@@ -71,7 +72,7 @@ void CCharacterController::Move(float DeltaTime)
 		else if (fSpeed > 0){ fSpeed -= 1; }
 
 		float fRelSpeed = this->factor * fSpeed;
-		CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) *(fRelSpeed / 10));
+		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) *(fRelSpeed / fTimeFact));
 
 		Character->TranslateXDelta(translation.x);
 		Character->TranslateZDelta(translation.z);
