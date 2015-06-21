@@ -21,8 +21,7 @@ private:
 	CWater * water;
 	CStrecke * strecke;
 	CLandscape * landscape;
-<<<<<<< HEAD
-	ShortcutData shortCuts[3];
+	CShortcutData shortCuts[3];
 	CTrigger * TriggerTree;
 	CTrigger * TriggerRocks;
 	CTrigger * TriggerBeerbarrel;
