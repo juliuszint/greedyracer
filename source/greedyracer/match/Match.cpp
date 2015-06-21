@@ -110,7 +110,9 @@ void CMatch::Tick(float fTimeDelta)
 			if (playerData->RoundCount == 3)
 			{
 				ended = true;
-				this->hud->SetWinningBanner(playerData->PlayerName);
+				char buff[100];
+				sprintf(buff, "%s gewinnt", playerData->PlayerName.data());
+				this->hud->SetWinningBanner(buff);
 			}
 
 			// Note (julius): player info update
@@ -270,6 +272,7 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].CarEntity = new CCamaro();
 	this->players[0].CarEntity->Init();
 	this->players[0].PlayerName = "Player 1";
+	this->players[0].RoundCount = 3;
 	this->players[0].CarPosition = this->players[0].CarEntity->GetRootPlacement();
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
