@@ -60,6 +60,8 @@ private:
 	CPlacement* mapPlacement;
 	CPlacement* cameraPlacement;
 	CDeviceKeyboard *m_pkeyboard;
+	CAudio countdownAudio;
+	CAudio carsoundAudio;
 
 	int playerCount = 2;
 	PlayerData players[2];

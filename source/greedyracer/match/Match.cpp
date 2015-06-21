@@ -11,12 +11,14 @@ CMatch::~CMatch()
 
 void CMatch::Tick(float fTimeDelta)
 {
+	static bool firstTickAfterCountdown = false;
 	if (this->running == false) return;
+	if (fTimeDelta > 1) return;
 
 	// Note (julius): da muss irgendwo noch ein komischer bug drin
 	// sein wenns um die fTimeDelta geht weil wenn die überprüfung auf <0
 	// nicht drin ist endet der timer softort
-	if (this->countingDown > 0 && fTimeDelta < 1)
+	if (this->countingDown > 0)
 	{
 		int timer = (int)this->countingDown + 1;
 		char buffer[3];
@@ -27,6 +29,13 @@ void CMatch::Tick(float fTimeDelta)
 	}
 	else
 	{
+		if (!firstTickAfterCountdown)
+		{
+			this->countdownAudio.Stop();
+			this->backgroundAudio.Start();
+
+			firstTickAfterCountdown = true;
+		}
 		this->hud->SetCountdown("");
 		CHVector carCenterPosition;
 		float maxXCarDistance = 0;
@@ -222,13 +231,9 @@ void CMatch::Start()
 	this->hud->SetPlayerName2(this->players[1].PlayerName);
 	this->hud->SetRoundPlayer1("0");
 	this->hud->SetRoundPlayer2("0");
-	//this->hud->SetTime("00:05:00");
 	this->hud->SetVisible(true);
 
-	this->backgroundAudio.Init("sound\\IngameSound.WAV");
-	this->backgroundAudio.SetVolume(.8f);
-	this->backgroundAudio.Loop();
-	this->scene->AddAudio(&this->backgroundAudio);
+	this->countdownAudio.Start();
 
 	this->countingDown = 4;
 	this->running = true;
@@ -253,6 +258,7 @@ void CMatch::Stop()
 		this->mapPlacement->SubPlacement(this->players[i].CarPosition);
 	}
 	this->scene->SubAudio(&this->backgroundAudio);
+	this->scene->SubAudio(&this->countdownAudio);
 }
 
 
@@ -286,6 +292,14 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[1].Controller->addKeyboard(this->m_pkeyboard);
 	this->players[1].Controller->setKeybinding(DIK_O, DIK_L, DIK_K, DIK_SEMICOLON);
 	this->players[1].Controller->addCharacter(this->players[1].CarPosition);
+
+	this->countdownAudio.Init("sound\\countdown.wav");
+	this->countdownAudio.SetVolume(.7f);
+	this->scene->AddAudio(&this->countdownAudio);
+
+	this->backgroundAudio.Init("sound\\IngameSound.WAV");
+	this->backgroundAudio.SetVolume(.8f);
+	this->scene->AddAudio(&this->backgroundAudio);
 
 	this->running = false;
 }
