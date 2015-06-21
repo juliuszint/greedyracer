@@ -26,10 +26,8 @@ void CAllgaeuMap::Init()
 	this->placement.AddPlacement(this->shortCuts[0].CollisionPlacement);
 
 	// Note (julius): abkürzung in den bergen
-	this->shortCuts[1].ChancePrecentage = 100;
-	//this->shortCuts[1].ChancePrecentage = 50;
-	this->shortCuts[1].MaxActiveTime = 20;
-	//this->shortCuts[1].MaxActiveTime = 2;
+	this->shortCuts[1].ChancePrecentage = 50;
+	this->shortCuts[1].MaxActiveTime = 2;
 	this->shortCuts[1].ActiveTime = 0;
 	this->shortCuts[1].CollisionEntity = new CRocks();
 	this->shortCuts[1].CollisionEntity->Init();
