@@ -44,7 +44,7 @@ void CAllgaeuMap::Init()
 	this->shortCuts[2].CollisionEntity = new CBarrel();
 	this->shortCuts[2].CollisionEntity->Init();
 	this->shortCuts[2].CollisionPlacement = shortCuts[2].CollisionEntity->GetRootPlacement();
-	this->shortCuts[2].CollisionPlacement->TranslateDelta(CHVector(12.8, .1, .5));
+	this->shortCuts[2].CollisionPlacement->TranslateDelta(CHVector(5.3, .2, -0.5));
 	this->shortCuts[2].CollisionPlacement->SwitchOff();
 	this->placement.AddPlacement(this->shortCuts[2].CollisionPlacement);
 

@@ -46,7 +46,7 @@ void CCharacterController::Move(float DeltaTime)
 	{
 		if (fSpeed <= 45)
 		{
-			fSpeed += 4;
+			fSpeed += fTimeFact/10;
 		}
 		float fRelSpeed = this->factor * fSpeed;
 		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
@@ -58,7 +58,7 @@ void CCharacterController::Move(float DeltaTime)
 	{
 		if (fSpeed >= -7)
 		{
-			fSpeed -= 2.5;
+			fSpeed -= fTimeFact/5;
 		}
 		float fRelSpeed = this->factor * fSpeed;
 		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
@@ -68,8 +68,8 @@ void CCharacterController::Move(float DeltaTime)
 
 	if (!(this->playerKeyboard->KeyPressed(keyUP)) && !(this->playerKeyboard->KeyPressed(keyDOWN)))
 	{
-		if (fSpeed < 0){ fSpeed += 0.5; }
-		else if (fSpeed > 0){ fSpeed -= 1; }
+		if (fSpeed < 0){ fSpeed += fTimeFact/100; }
+		else if (fSpeed > 0){ fSpeed -= fTimeFact/40; }
 
 		float fRelSpeed = this->factor * fSpeed;
 		CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) *(fRelSpeed / fTimeFact));
@@ -87,11 +87,11 @@ void CCharacterController::Move(float DeltaTime)
 		
 		if (fSpeed > 0)
 		{
-			angle_y += faAngle * (fSpeed / 15);
+			angle_y += faAngle / ((fSpeed / (fTimeFact*3))+1);
 		}
 		else if (fSpeed < 0)
 		{
-			angle_y -= faAngle * (fSpeed / 15);
+			angle_y -= faAngle / (fSpeed / (fTimeFact*3)+1);
 		}
 
 		CHVector buffer;
@@ -123,11 +123,11 @@ void CCharacterController::Move(float DeltaTime)
 		
 		if (fSpeed > 0)
 		{
-			angle_y += faAngle * (fSpeed / 15);
+			angle_y += faAngle / ((fSpeed / (fTimeFact * 3)) + 1);
 		}
 		else if (fSpeed < 0)
 		{
-			angle_y -= faAngle * (fSpeed / 15);
+			angle_y -= faAngle / ((fSpeed / (fTimeFact * 3)) + 1);
 		}
 
 		CHVector buffer;
