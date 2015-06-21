@@ -43,16 +43,17 @@ void CCharacterController::setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, in
 
 void CCharacterController::Move(float DeltaTime)
 {
+	//int iSpeed = this->Auto->getaktSpeed();
 	float fSpeed = this->getaktSpeed();
 	float fTimeFact = (1/DeltaTime)/2;
 
 	if (this->playerKeyboard != NULL)
 	{
-		if (this->playerKeyboard->KeyPressed(keyUP) || this->Controller->ButtonPressed(0))
+		if (this->playerKeyboard->KeyPressed(keyUP))
 		{
-			if (fSpeed <= 25)
+			if (fSpeed <= 45)
 			{
-				fSpeed += fTimeFact / 3;
+				fSpeed += fTimeFact / 10;
 			}
 			float fRelSpeed = this->factor * fSpeed;
 			CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
@@ -60,11 +61,11 @@ void CCharacterController::Move(float DeltaTime)
 			Character->TranslateZDelta(translation.z);
 		}
 
-		if (this->playerKeyboard->KeyPressed(keyDOWN) || this->Controller->ButtonPressed(1))
+		if (this->playerKeyboard->KeyPressed(keyDOWN))
 		{
 			if (fSpeed >= -7)
 			{
-				fSpeed -= fTimeFact / 1.5;
+				fSpeed -= fTimeFact / 5;
 			}
 			float fRelSpeed = this->factor * fSpeed;
 			CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
@@ -72,7 +73,7 @@ void CCharacterController::Move(float DeltaTime)
 			Character->TranslateZDelta(translation.z);
 		}
 
-		if ((!(this->playerKeyboard->KeyPressed(keyUP)) && !(this->playerKeyboard->KeyPressed(keyDOWN))) && (!(this->Controller->ButtonPressed(0)) && !(this->Controller->ButtonPressed(1))))
+		if (!(this->playerKeyboard->KeyPressed(keyUP)) && !(this->playerKeyboard->KeyPressed(keyDOWN)))
 		{
 			if (fSpeed < 0){ fSpeed += fTimeFact / 100; }
 			else if (fSpeed > 0){ fSpeed -= fTimeFact / 40; }
@@ -85,6 +86,7 @@ void CCharacterController::Move(float DeltaTime)
 		}
 
 		this->UpdateSpeed(fSpeed);
+		//this->Auto->UpdateSpeed(iSpeed);
 
 		if (this->playerKeyboard->KeyPressed(keyLEFT) && (fSpeed != 0))
 		{
@@ -92,11 +94,11 @@ void CCharacterController::Move(float DeltaTime)
 
 			if (fSpeed > 0)
 			{
-				angle_y += faAngle / (fSpeed / (fTimeFact * 500) + 1);
+				angle_y += faAngle / (fSpeed / (fTimeFact * 200) + 1);
 			}
 			else if (fSpeed < 0)
 			{
-				angle_y -= faAngle / (fSpeed / (fTimeFact * 500) + 1);
+				angle_y -= faAngle / (fSpeed / (fTimeFact * 200) + 1);
 			}
 
 			CHVector buffer;
@@ -115,11 +117,11 @@ void CCharacterController::Move(float DeltaTime)
 
 			if (fSpeed > 0)
 			{
-				angle_y += faAngle / ((fSpeed / (fTimeFact * 500) + 1));
+				angle_y += faAngle / ((fSpeed / (fTimeFact * 200) + 1));
 			}
 			else if (fSpeed < 0)
 			{
-				angle_y -= faAngle / ((fSpeed / (fTimeFact * 500) + 1));
+				angle_y -= faAngle / ((fSpeed / (fTimeFact * 200) + 1));
 			}
 
 			CHVector buffer;
@@ -131,20 +133,19 @@ void CCharacterController::Move(float DeltaTime)
 			Character->TranslateDelta(buffer);
 		}
 	}
-
-		//ControllerSteuerung
+/*	//ControllerSteuerung
 	if (this->Controller != NULL)
 	{
 
-		/*//Vorwärts
+		//Vorwärts
 		if (this->Controller->ButtonPressed(0))
 		{
 			if (fSpeed <= 45)
 			{
-				fSpeed += 4;
+				fSpeed += fTimeFact / 10;
 			}
 			float fRelSpeed = this->factor * fSpeed;
-			CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
+			CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
 			Character->TranslateXDelta(translation.x);
 			Character->TranslateZDelta(translation.z);
 		}
@@ -154,28 +155,39 @@ void CCharacterController::Move(float DeltaTime)
 		{
 			if (fSpeed >= -7)
 			{
-				fSpeed -= 2.5;
+				fSpeed -= fTimeFact / 5;
 			}
 			float fRelSpeed = this->factor * fSpeed;
-			CHVector translation(sin(angle_y) * (fRelSpeed / 10), 0.0f, cos(angle_y) * (fRelSpeed / 10));
+			CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) * (fRelSpeed / fTimeFact));
 			Character->TranslateXDelta(translation.x);
 			Character->TranslateZDelta(translation.z);
 		}
 
+		if (!(this->Controller->ButtonPressed(0)) && !(this->Controller->ButtonPressed(1)))
+		{
+			if (fSpeed < 0){ fSpeed += fTimeFact / 100; }
+			else if (fSpeed > 0){ fSpeed -= fTimeFact / 40; }
 
+			float fRelSpeed = this->factor * fSpeed;
+			CHVector translation(sin(angle_y) * (fRelSpeed / fTimeFact), 0.0f, cos(angle_y) *(fRelSpeed / fTimeFact));
 
-		this->UpdateSpeed(fSpeed);*/
+			Character->TranslateXDelta(translation.x);
+			Character->TranslateZDelta(translation.z);
+		}
+
+		this->UpdateSpeed(fSpeed);
 
 		//Links-Rechts
 
-		float faAngle = this->Controller->GetRelativeX() * DeltaTime * 0.7; 
+		float faAngle = this->Controller->GetRelativeX() * DeltaTime;
+
 		if (fSpeed > 0)
 		{
-			angle_y -= faAngle / ((fSpeed / (fTimeFact * 500) + 0.5));
+			angle_y -= faAngle / ((fSpeed / (fTimeFact * 3)) + 1);
 		}
 		else if (fSpeed < 0)
 		{
-			angle_y += faAngle / ((fSpeed / (fTimeFact * 500) + 0.5));
+			angle_y += faAngle / (fSpeed / (fTimeFact * 3) + 1);
 		}
 
 		CHVector buffer;
@@ -186,7 +198,8 @@ void CCharacterController::Move(float DeltaTime)
 		Character->ScaleDelta(0.1f);
 		Character->TranslateDelta(buffer);
 	}
-
+	*/
+	
 }
 
 void CCharacterController::UpdateAngle(int iChangeValueRAD)
