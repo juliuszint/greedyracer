@@ -153,6 +153,7 @@
     <ClInclude Include="map\entities\allgaeumap\Start.h" />
     <ClInclude Include="map\entities\allgaeumap\Sektor.h" />
     <ClInclude Include="map\entities\allgaeumap\Strecke.h" />
+    <ClInclude Include="map\entities\allgaeumap\Trigger.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="map\entities\common\Ground.h" />
     <ClInclude Include="map\entities\common\BigHouse.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="map\entities\allgaeumap\Start.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Sektor.cpp" />
     <ClCompile Include="map\entities\allgaeumap\Strecke.cpp" />
+    <ClCompile Include="map\entities\allgaeumap\Trigger.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="map\entities\common\Ground.cpp" />
     <ClCompile Include="map\entities\common\BigHouse.cpp" />

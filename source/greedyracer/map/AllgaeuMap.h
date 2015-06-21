@@ -8,6 +8,7 @@
 #include "entities\common\Water.h"
 #include "entities\allgaeumap\Strecke.h"
 #include "entities\allgaeumap\Landscape.h"
+#include "entities\allgaeumap\Trigger.h"
 
 using namespace Vektoria;
 
@@ -20,6 +21,11 @@ private:
 	CStrecke * strecke;
 	CLandscape * landscape;
 	ShortcutData shortCuts[3];
+	CTrigger * TriggerTree;
+	CTrigger * TriggerRocks;
+	CTrigger * TriggerBeerbarrel;
+
+
 public:
 
 	~CAllgaeuMap();
