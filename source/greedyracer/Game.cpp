@@ -119,14 +119,14 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	}
 
 	// Hier die Echtzeit-Veränderungen einfügen:
-	if(!ignoreTick) m_zroot.Tick(fTimeDelta);
-}
-void CGame::CleanCurrentMatch()
-{
-	if (this->currentMatch != NULL)
+	if (!ignoreTick)
 	{
+		m_zroot.Tick(fTimeDelta);
 	}
-
+	else 
+	{
+		ignoreTick = false;
+	}
 }
 
 void CGame::Fini()
