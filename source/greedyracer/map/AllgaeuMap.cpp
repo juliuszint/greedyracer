@@ -32,7 +32,7 @@ void CAllgaeuMap::Init()
 	this->shortCuts[1].CollisionEntity = new CRocks();
 	this->shortCuts[1].CollisionEntity->Init();
 	this->shortCuts[1].CollisionPlacement = shortCuts[1].CollisionEntity->GetRootPlacement();
-	this->shortCuts[1].CollisionPlacement->TranslateDelta(CHVector(11, .1, -34.5));
+	this->shortCuts[1].CollisionPlacement->TranslateDelta(CHVector(11, .1, -36.5));
 	this->shortCuts[1].CollisionPlacement->SwitchOff();
 	this->placement.AddPlacement(this->shortCuts[1].CollisionPlacement);
 
@@ -53,22 +53,22 @@ void CAllgaeuMap::Init()
 	this->landscape = new CLandscape();
 	this->strecke = new CStrecke();
 
-	//this->ground->Configure(10, 10, 60, 40);
-	//this->ground->Init();
-	//this->placement.AddPlacement(this->ground->GetRootPlacement());
+	/*this->ground->Configure(10, 10, 60, 40);
+	this->ground->Init();
+	this->placement.AddPlacement(this->ground->GetRootPlacement());*/
 
 	//this->landscape->Init();
-	// Note (julius): fasten klappt den kompletten unteren baum zu sodass
-	// einzelen placements nicht mehr abgeschaltet werden können was gebraucht wird
-	// für die abkürzungs ereignisse
+	//// Note (julius): fasten klappt den kompletten unteren baum zu sodass
+	//// einzelen placements nicht mehr abgeschaltet werden können was gebraucht wird
+	//// für die abkürzungs ereignisse
 	//this->placement.Fasten();
 	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
 
-	this->water->Configure(20, 80);
+	/*this->water->Configure(20, 80);
 	this->water->Init();
 	this->water->GetRootPlacement()->TranslateYDelta(0.1);
 	this->water->GetRootPlacement()->TranslateDelta(CHVector(1, 0, 0));
-	this->placement.AddPlacement(this->water->GetRootPlacement());
+	this->placement.AddPlacement(this->water->GetRootPlacement());*/
 
 	this->strecke->Init();
 	this->placement.AddPlacement(this->strecke->GetRootPlacement());
