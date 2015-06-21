@@ -36,6 +36,8 @@
 # Verzeichnisse
 lib/
 source/debug
+source/x64/
+source/greedyracer/x64/
 source/greedyracer/debug/
 source/greedyracer/shaders/Cache
 
