@@ -214,18 +214,27 @@ void CMatch::Tick(float fTimeDelta)
 void CMatch::Start()
 {
 	// Note (julius): add player placements
-	CHVector startPosition = this->map->GetStartPosition();
+	MapPositions startPositions = this->map->GetStartPosition();
+	float camX;
+	float camZ;
 	for (int i = 0; i < this->playerCount; i++)
 	{
 		PlayerData* player = &this->players[i];
-		player->CarPosition->TranslateXDelta(startPosition.x + i);
-		player->CarPosition->TranslateYDelta(startPosition.y);
-		player->CarPosition->TranslateZDelta(startPosition.z);
+		MapPosition* p = &startPositions.Positions[i];
+
+		camX = p->position.x;
+		camZ = p->position.z;
+
+		player->CarPosition->RotateYDelta(p->directionAngle);
+		player->CarPosition->TranslateXDelta(p->position.x);
+		player->CarPosition->TranslateYDelta(p->position.y);
+		player->CarPosition->TranslateZDelta(p->position.z);
+
 		this->mapPlacement->AddPlacement(player->CarPosition);
 	}
 
-	this->cameraPlacement->Translate(CHVector(startPosition.x, 10, startPosition.z));
-	this->cameraPlacement->SetPointing(new CHVector(startPosition.x, 1, startPosition.z));
+	this->cameraPlacement->Translate(CHVector(camX, 8, camZ));
+	this->cameraPlacement->SetPointing(new CHVector(camX, 1, camZ));
 
 	this->hud->SetPlayerName1(this->players[0].PlayerName);
 	this->hud->SetPlayerName2(this->players[1].PlayerName);

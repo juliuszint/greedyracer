@@ -33,7 +33,7 @@ public:
 
 	CPlacement* GetRootPlacement();
 
-	CHVector GetStartPosition();
+	MapPositions GetStartPosition();
 
 	int IsOnCheckpoint(CHVector);
 

@@ -84,7 +84,7 @@ CShortcutData* CAllgaeuMap::GetShortcut(int index)
 	return &this->shortCuts[index];
 }
 
-CHVector CAllgaeuMap::GetStartPosition()
+MapPositions CAllgaeuMap::GetStartPosition()
 {
 	return strecke->GetStartPosition();
 }

@@ -5,6 +5,7 @@
 #include "Checkpoint.h"
 #include "Abkuerzung.h"
 #include "Sektor.h"
+#include "..\..\Map.h"
 
 using namespace Vektoria;
 
@@ -43,7 +44,7 @@ public:
 
 	//Felix Die Funktionen muss man noch implementieren, ich weiﬂ nicht, was genau damit passieren soll :)
 
-	CHVector GetStartPosition();
+	MapPositions GetStartPosition();
 
 	int IsOnCheckpoint(CHVector position);
 

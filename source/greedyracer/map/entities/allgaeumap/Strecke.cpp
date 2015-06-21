@@ -99,7 +99,7 @@ void CStrecke::Init()
 	this->Cut3->TranslateTrigger(CHVector(-12, -0.2, 9.2), TRIGGERMID);
 
 	this->Cut3->RotateTriggerY(0.3f, TRIGGEREND);
-	this->Cut3->TranslateTrigger(CHVector(-6.1,-0.2,15.8), TRIGGEREND);
+	this->Cut3->TranslateTrigger(CHVector(-6.1, -0.2, 15.8), TRIGGEREND);
 
 	this->root.AddPlacement(this->Cut3->GetRootPlacement());
 
@@ -164,9 +164,20 @@ int CStrecke::IsOnShortcutTrigger(CHVector position)
 	return -1;
 }
 
-CHVector CStrecke::GetStartPosition()
+MapPositions CStrecke::GetStartPosition()
 {
-	return (this->Start->GetRootPlacement()->GetTranslation() + CHVector(0.0f, 0.255f, 0.0f, 0.0f));
+	CHVector startPosition = this->Start->GetRootPlacement()->GetTranslation();
+	MapPositions result;
+
+	result.StartPositionCount = 2;
+
+	result.Positions[0].position = startPosition + CHVector(-.5f, 0.2, -.0f);
+	result.Positions[0].directionAngle = -.05 * PI;
+
+	result.Positions[1].position = startPosition + CHVector(.4f, 0.2, .2f);
+	result.Positions[1].directionAngle = -.05 * PI;
+
+	return result;
 }
 
 int CStrecke::IsOnCheckpoint(CHVector position)
@@ -207,15 +218,15 @@ CAbkuerzung* CStrecke::getAbkuerzungGeo(int iarraypos)
 
 /*
 CGeo * CStrecke::getStartGeo(){
-	return this->Start->GetGeo();
+return this->Start->GetGeo();
 }
 CGeo * CStrecke::getCheckpointGeo(int pos){
-	//return this->Checkpoints[pos]->GetGeo()
+//return this->Checkpoints[pos]->GetGeo()
 }
 CGeo * CStrecke::getSektorGeo(int pos){
-	//return this->Sektoren[pos]->GetGeo()
+//return this->Sektoren[pos]->GetGeo()
 }
 CGeo * CStrecke::getAbkuerzungGeo(int pos){
-	//return this->Abkuerzungen[pos]->GetGeo()
+//return this->Abkuerzungen[pos]->GetGeo()
 }
 */

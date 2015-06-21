@@ -17,6 +17,17 @@ public:
 	CPlacement* CollisionPlacement;
 };
 
+struct MapPosition
+{
+	CHVector position;
+	float directionAngle;
+};
+
+struct MapPositions
+{
+	int StartPositionCount;
+	MapPosition Positions[5];
+};
 
 class CMap : public CEntity
 {
@@ -24,7 +35,7 @@ public:
 	int ShortcutCount;
 
 	// Note (julius): gibt die Startposition für den Spieler auf dieser Strecke zurück
-	virtual CHVector GetStartPosition() = 0;
+	virtual MapPositions GetStartPosition() = 0;
 
 	virtual int IsOnCheckpoint(CHVector) = 0;
 
