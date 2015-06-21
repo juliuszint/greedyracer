@@ -19,9 +19,10 @@ void CHud::InitHud()								//complete Hud Initialisation
 	m_zwRoundPlayer2.Init(CFloatRect(0.21f, 0.12f, 0.1f, 0.1f), 2, &m_zwFont);	
 
 	m_zwTime.Init(CFloatRect(0.95f, 0.95f, 0.1f, 0.1f), 6, &m_zwFont);			
-	m_zwWiningBanner.Init(CFloatRect(0.25f, 0.4f, 0.5f, 0.2f), 18, &m_zwFont);			
 	m_zwCountdown.Init(CFloatRect(0.425, 0.3, 0.15, 0.4), 1, &m_zwFontCountdown);
-
+	m_zwCountdown.SetLayer(0.9f);
+	m_zwWiningBanner.Init(CFloatRect(0.25f, 0.4f, 0.5f, 0.2f), 18, &m_zwFont);			
+	m_zwWiningBanner.SetLayer(0.8f);
 
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwCountdown);
 	this->m_zoHudRootOverlay.AddOverlay(&this->m_zwWiningBanner);

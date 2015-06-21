@@ -7,14 +7,14 @@
 
 using namespace Vektoria;
 
-struct ShortcutData
+struct CShortcutData
 {
 public:
+	int ChancePrecentage;
 	float MaxActiveTime;
 	float ActiveTime;
-	CGeo * CollisionMesh;
-	CPlacement CollisionPlacement;
-	CMaterial CollisionMaterial;
+	CEntity* CollisionEntity;
+	CPlacement* CollisionPlacement;
 };
 
 
@@ -34,6 +34,6 @@ public:
 
 	virtual int IsOnShortcutTrigger(CHVector) = 0;
 
-	virtual ShortcutData* GetShortcut(int) = 0;
+	virtual CShortcutData* GetShortcut(int) = 0;
 };
 

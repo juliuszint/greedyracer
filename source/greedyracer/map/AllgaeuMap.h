@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "entities\common\Ground.h"
 #include "entities\common\Water.h"
+#include "entities\test\SphereEntity.h"
 #include "entities\allgaeumap\Strecke.h"
 #include "entities\allgaeumap\Landscape.h"
 #include "entities\allgaeumap\Trigger.h"
@@ -20,6 +21,7 @@ private:
 	CWater * water;
 	CStrecke * strecke;
 	CLandscape * landscape;
+<<<<<<< HEAD
 	ShortcutData shortCuts[3];
 	CTrigger * TriggerTree;
 	CTrigger * TriggerRocks;
@@ -42,7 +44,7 @@ public:
 
 	int IsOnShortcutTrigger(CHVector);
 
-	ShortcutData* GetShortcut(int);
+	CShortcutData* GetShortcut(int);
 
 	bool IsOnFinish(CHVector);
 };

@@ -53,13 +53,18 @@ void CMatch::Tick(float fTimeDelta)
 			// Note (julius): is on shortcutTrigger?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
-				ShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
+				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
+
 				if (data->ActiveTime <= 0)
 				{
-					data->ActiveTime = data->MaxActiveTime;
-					data->CollisionPlacement.SwitchOn();
+					// Note (julius): trigger wasnt active 
+					int chance = rand() % 100 + 1;
+					if (chance <= data->ChancePrecentage)
+					{
+						data->CollisionPlacement->SwitchOn();
+						data->ActiveTime = data->MaxActiveTime;
+					}
 				}
-
 				playerData->TimePenalty = data->ActiveTime;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
@@ -79,6 +84,7 @@ void CMatch::Tick(float fTimeDelta)
 				{
 					playerData->RoundCount++;
 					playerData->CheckpointCount = 0;
+					playerData->LatestShortcutTrigger = 0;
 				}
 			}
 
@@ -98,25 +104,15 @@ void CMatch::Tick(float fTimeDelta)
 				//}
 			}
 
-			// Note (julius): abkürzungstimings etc
-
-			for (int i = 0; i < this->map->ShortcutCount; i++)
-			{
-				ShortcutData* data = this->map->GetShortcut(i);
-				data->ActiveTime -= fTimeDelta;
-				if (data->ActiveTime <= 0 && data->CollisionPlacement.IsOn())
-				{
-					data->CollisionPlacement.SwitchOff();
-				}
-			}
-			
 
 			// Note (julius): process movement
 
 			if (playerData->RoundCount == 3)
 			{
 				ended = true;
-				this->hud->SetWinningBanner(playerData->PlayerName);
+				char buff[100];
+				sprintf(buff, "%s gewinnt", playerData->PlayerName.data());
+				this->hud->SetWinningBanner(buff);
 			}
 
 			// Note (julius): player info update
@@ -167,6 +163,21 @@ void CMatch::Tick(float fTimeDelta)
 			this->m_pkeyboard->PlaceWASD(*this->cameraPlacement, fTimeDelta, true);
 		}
 	}
+
+	// Note (julius): bei jedem tick timer für die abkürzungen runter zu zählen
+
+	for (int i = 0; i < this->map->ShortcutCount; i++)
+	{
+		CShortcutData* data = this->map->GetShortcut(i);
+		data->ActiveTime -= fTimeDelta;
+
+		if (data->ActiveTime <= 0)
+		{
+			data->CollisionPlacement->SwitchOff();
+		}
+	}
+
+
 
 	// Note (julius): für debug zwecke hab ich hier ein kleine code schnipsel reingemacht
 	// der es möglich macht das man zwischen 2 kamera modi hin und her springt. 1 der freie modus
@@ -261,6 +272,7 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].CarEntity = new CCamaro();
 	this->players[0].CarEntity->Init();
 	this->players[0].PlayerName = "Player 1";
+	this->players[0].RoundCount = 3;
 	this->players[0].CarPosition = this->players[0].CarEntity->GetRootPlacement();
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);

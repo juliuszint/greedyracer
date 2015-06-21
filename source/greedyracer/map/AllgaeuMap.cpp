@@ -14,38 +14,40 @@ void CAllgaeuMap::Init()
 	this->ShortcutCount = 3;
 
 	// Note (julius): abkürzung im waldgebiet
-	this->shortCuts[0].MaxActiveTime = 4;
+	this->shortCuts[0].ChancePrecentage = 38;
+	this->shortCuts[0].MaxActiveTime = 15;
 	this->shortCuts[0].ActiveTime = 0;
-	this->shortCuts[0].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
-	this->TriggerTree->InitTree();
-	this->shortCuts[0].CollisionMesh = this->TriggerTree->GetGeo();
-	this->shortCuts[0].CollisionPlacement.AddGeo(this->shortCuts[0].CollisionMesh);
-	this->shortCuts[0].CollisionPlacement.TranslateDelta(CHVector(-17.9, 0.1, 14));
-	this->placement.AddPlacement(&this->shortCuts[0].CollisionPlacement);
-	this->shortCuts[0].CollisionPlacement.SwitchOff();
+
+	this->shortCuts[0].CollisionEntity = new CSphereEntity();
+	this->shortCuts[0].CollisionEntity->Init();
+	this->shortCuts[0].CollisionPlacement = shortCuts[0].CollisionEntity->GetRootPlacement();
+	this->shortCuts[0].CollisionPlacement->TranslateDelta(CHVector(-17.9, 0.1, 14));
+	this->shortCuts[0].CollisionPlacement->SwitchOff();
+	this->placement.AddPlacement(this->shortCuts[0].CollisionPlacement);
 
 	// Note (julius): abkürzung in den bergen
+	this->shortCuts[1].ChancePrecentage = 50;
 	this->shortCuts[1].MaxActiveTime = 2;
 	this->shortCuts[1].ActiveTime = 0;
-	this->shortCuts[1].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
-	this->TriggerRocks->InitRocks();
-	this->shortCuts[1].CollisionMesh = this->TriggerRocks->GetGeo();
-	this->shortCuts[1].CollisionPlacement.AddGeo(this->shortCuts[1].CollisionMesh);
-	this->shortCuts[1].CollisionPlacement.TranslateDelta(CHVector(10, 0, 0));
-	this->placement.AddPlacement(&this->shortCuts[1].CollisionPlacement);
-	this->shortCuts[1].CollisionPlacement.SwitchOff();
+
+	this->shortCuts[1].CollisionEntity = new CSphereEntity();
+	this->shortCuts[1].CollisionEntity->Init();
+	this->shortCuts[1].CollisionPlacement = shortCuts[1].CollisionEntity->GetRootPlacement();
+	this->shortCuts[1].CollisionPlacement->TranslateDelta(CHVector(11, .1, -34.5));
+	this->shortCuts[1].CollisionPlacement->SwitchOff();
+	this->placement.AddPlacement(this->shortCuts[1].CollisionPlacement);
 
 	// Note (julius): abkürzung im dorf
-	this->shortCuts[2].MaxActiveTime = 4;
+	this->shortCuts[2].ChancePrecentage = 68;
+	this->shortCuts[2].MaxActiveTime = 6;
 	this->shortCuts[2].ActiveTime = 0;
-	this->shortCuts[2].CollisionMaterial.Init(CColor(0, 1, 0), CColor(0, 1, 0), CColor(0, 0, 0));
-	this->TriggerBeerbarrel->InitBeerbarrel();
-	this->shortCuts[2].CollisionMesh = this->TriggerBeerbarrel->GetGeo();
-	this->shortCuts[2].CollisionPlacement.AddGeo(this->shortCuts[2].CollisionMesh);
-	this->shortCuts[2].CollisionPlacement.Scale(0.1f);
-	this->shortCuts[2].CollisionPlacement.TranslateDelta(CHVector(12.8, 0.1, .5));
-	this->placement.AddPlacement(&this->shortCuts[2].CollisionPlacement);
-	this->shortCuts[2].CollisionPlacement.SwitchOff();
+
+	this->shortCuts[2].CollisionEntity = new CSphereEntity();
+	this->shortCuts[2].CollisionEntity->Init();
+	this->shortCuts[2].CollisionPlacement = shortCuts[2].CollisionEntity->GetRootPlacement();
+	this->shortCuts[2].CollisionPlacement->TranslateDelta(CHVector(12.8, .1, .5));
+	this->shortCuts[2].CollisionPlacement->SwitchOff();
+	this->placement.AddPlacement(this->shortCuts[2].CollisionPlacement);
 
 	this->water = new CWater();
 	//this->ground = new CGround();
@@ -56,9 +58,12 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	this->landscape->Init();
-	this->placement.Fasten();
-	this->placement.AddPlacement(this->landscape->GetRootPlacement());
+	//this->landscape->Init();
+	// Note (julius): fasten klappt den kompletten unteren baum zu sodass
+	// einzelen placements nicht mehr abgeschaltet werden können was gebraucht wird
+	// für die abkürzungs ereignisse
+	//this->placement.Fasten();
+	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
 
 	this->water->Configure(20, 80);
 	this->water->Init();
@@ -75,7 +80,7 @@ CPlacement* CAllgaeuMap::GetRootPlacement()
 	return &this->placement;
 }
 
-ShortcutData* CAllgaeuMap::GetShortcut(int index)
+CShortcutData* CAllgaeuMap::GetShortcut(int index)
 {
 	return &this->shortCuts[index];
 }
