@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "entities\common\Ground.h"
 #include "entities\common\Water.h"
+#include "entities\test\SphereEntity.h"
 #include "entities\allgaeumap\Strecke.h"
 #include "entities\allgaeumap\Landscape.h"
 

@@ -54,10 +54,16 @@ void CMatch::Tick(float fTimeDelta)
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
 				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
+
 				if (data->ActiveTime <= 0)
 				{
-					data->CollisionPlacement.SwitchOn();
-					data->ActiveTime = data->MaxActiveTime;
+					// Note (julius): trigger wasnt active 
+					int chance = rand() % 100 + 1;
+					if (chance <= data->ChancePrecentage)
+					{
+						data->CollisionPlacement->SwitchOn();
+						data->ActiveTime = data->MaxActiveTime;
+					}
 				}
 				playerData->TimePenalty = data->ActiveTime;
 				playerData->LatestShortcutTrigger = shortCutTrigger;
@@ -98,19 +104,6 @@ void CMatch::Tick(float fTimeDelta)
 				//}
 			}
 
-			// Note (julius): abkürzungstimings etc
-
-			for (int i = 0; i < this->map->ShortcutCount; i++)
-			{
-				CShortcutData* data = this->map->GetShortcut(i);
-				data->ActiveTime -= fTimeDelta;
-
-				if (data->ActiveTime <= 0)
-				{
-					data->CollisionPlacement.SwitchOff();
-				}
-			}
-			
 
 			// Note (julius): process movement
 
@@ -168,6 +161,21 @@ void CMatch::Tick(float fTimeDelta)
 			this->m_pkeyboard->PlaceWASD(*this->cameraPlacement, fTimeDelta, true);
 		}
 	}
+
+	// Note (julius): bei jedem tick timer für die abkürzungen runter zu zählen
+
+	for (int i = 0; i < this->map->ShortcutCount; i++)
+	{
+		CShortcutData* data = this->map->GetShortcut(i);
+		data->ActiveTime -= fTimeDelta;
+
+		if (data->ActiveTime <= 0)
+		{
+			data->CollisionPlacement->SwitchOff();
+		}
+	}
+
+
 
 	// Note (julius): für debug zwecke hab ich hier ein kleine code schnipsel reingemacht
 	// der es möglich macht das man zwischen 2 kamera modi hin und her springt. 1 der freie modus

@@ -10,11 +10,11 @@ using namespace Vektoria;
 struct CShortcutData
 {
 public:
+	int ChancePrecentage;
 	float MaxActiveTime;
 	float ActiveTime;
-	CGeo * CollisionMesh;
-	CPlacement CollisionPlacement;
-	CMaterial CollisionMaterial;
+	CEntity* CollisionEntity;
+	CPlacement* CollisionPlacement;
 };
 
 

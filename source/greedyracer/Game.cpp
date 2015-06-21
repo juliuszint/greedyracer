@@ -67,6 +67,8 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	m_zpCamera.AddCamera(&m_zcamera);
 	m_zviewport.SetWireframeOff();
 
+	srand(time(NULL));
+
 	this->m_InitFinished = true;
 }
 
