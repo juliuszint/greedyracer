@@ -15,9 +15,8 @@ void CAllgaeuMap::Init()
 
 	// Note (julius): abkürzung im waldgebiet
 	this->shortCuts[0].ChancePrecentage = 38;
-	this->shortCuts[0].MaxActiveTime = 15;
+	this->shortCuts[0].MaxActiveTime = 11;
 	this->shortCuts[0].ActiveTime = 0;
-
 	this->shortCuts[0].CollisionEntity = new CFallenTree();
 	this->shortCuts[0].CollisionEntity->Init();
 	this->shortCuts[0].CollisionPlacement = shortCuts[0].CollisionEntity->GetRootPlacement();
@@ -57,12 +56,12 @@ void CAllgaeuMap::Init()
 	//this->ground->Init();
 	//this->placement.AddPlacement(this->ground->GetRootPlacement());
 
-	//this->landscape->Init();
+	this->landscape->Init();
 	// Note (julius): fasten klappt den kompletten unteren baum zu sodass
 	// einzelen placements nicht mehr abgeschaltet werden können was gebraucht wird
 	// für die abkürzungs ereignisse
 	//this->placement.Fasten();
-	//this->placement.AddPlacement(this->landscape->GetRootPlacement());
+	this->placement.AddPlacement(this->landscape->GetRootPlacement());
 
 	this->water->Configure(20, 80);
 	this->water->Init();
