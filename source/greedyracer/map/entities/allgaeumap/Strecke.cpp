@@ -214,19 +214,3 @@ CAbkuerzung* CStrecke::getAbkuerzungGeo(int iarraypos)
 {
 	return this->aAbkuerzungen[iarraypos];
 }
-
-
-/*
-CGeo * CStrecke::getStartGeo(){
-return this->Start->GetGeo();
-}
-CGeo * CStrecke::getCheckpointGeo(int pos){
-//return this->Checkpoints[pos]->GetGeo()
-}
-CGeo * CStrecke::getSektorGeo(int pos){
-//return this->Sektoren[pos]->GetGeo()
-}
-CGeo * CStrecke::getAbkuerzungGeo(int pos){
-//return this->Abkuerzungen[pos]->GetGeo()
-}
-*/
