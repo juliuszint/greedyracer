@@ -8,12 +8,19 @@
 
 using namespace Vektoria;
 
+struct MovementSnapshot
+{
+	float timeTaken;
+	float speed;
+	float angle;
+	bool isValid;
+	CHVector position;
+};
 
 class CCharacterController
 {
 public:
 	CCharacterController();
-	~CCharacterController();
 
 	void addCharacter(CPlacement *pCharacter){ Character = pCharacter; };
 	void addKeyboard(CDeviceKeyboard *);
@@ -24,6 +31,8 @@ public:
 	void setSpeed(float fNewSpeed);
 	void setAngle(float fNewAngle);
 
+	void TakeSnapshot(float fTime);
+	void Restore(float fTime);
 private:
 	
 	int keyUP;
@@ -45,5 +54,8 @@ private:
 	CVehicle * Auto;
 	CDeviceGameController * Controller;
 
+	MovementSnapshot snap[30];
+	UINT32 snapshotCount = 30;
+	UINT32 snapshotIndex;
 };
 

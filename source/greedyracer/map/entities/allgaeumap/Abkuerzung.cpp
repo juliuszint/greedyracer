@@ -22,7 +22,7 @@ void CAbkuerzung::Init(char * GeoPath){
 
 	if (this->hasStartTrigger)
 	{
-		m_zgTriggerStart.Init(1.5f, 0.2f, &m_zmAbkuerzung);
+		m_zgTriggerStart.Init(3.0f, 0.2f, &m_zmAbkuerzung);
 		m_zpTriggerStart.AddGeo(&m_zgTriggerStart);
 		m_zpTriggerStart.RotateX(-HALFPI);
 		m_zpAbkuerzung.AddPlacement(&m_zpTriggerStart);
@@ -30,7 +30,7 @@ void CAbkuerzung::Init(char * GeoPath){
 
 	if (hasMiddleTrigger)
 	{
-		m_zgTriggerMiddle.Init(1.5f, 0.2, &m_zmAbkuerzung);
+		m_zgTriggerMiddle.Init(3.0f, 0.2, &m_zmAbkuerzung);
 		m_zpTriggerMiddle.AddGeo(&m_zgTriggerMiddle);
 		m_zpTriggerMiddle.RotateX(-HALFPI);
 		m_zpAbkuerzung.AddPlacement(&m_zpTriggerMiddle);
@@ -38,7 +38,7 @@ void CAbkuerzung::Init(char * GeoPath){
 
 	if (hasEndTrigger)
 	{
-		m_zgTriggerEnd.Init(1.5f, 0.2, &m_zmAbkuerzung);
+		m_zgTriggerEnd.Init(3.0f, 0.2, &m_zmAbkuerzung);
 		m_zpTriggerEnd.AddGeo(&m_zgTriggerEnd);
 		m_zpTriggerEnd.RotateX(-HALFPI);
 		m_zpAbkuerzung.AddPlacement(&m_zpTriggerEnd);

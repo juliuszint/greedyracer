@@ -9,7 +9,7 @@ CMatch::~CMatch()
 	}
 }
 
-void CMatch::Tick(float fTimeDelta)
+void CMatch::Tick(float fTime, float fTimeDelta)
 {
 	static bool firstTickAfterCountdown = false;
 	if (this->running == false) return;
@@ -33,10 +33,14 @@ void CMatch::Tick(float fTimeDelta)
 		{
 			this->countdownAudio.Stop();
 			this->backgroundAudio.Start();
+			this->hud->SetCountdown("");
+
+			for (int i = 0; i < this->playerCount; i++)
+				this->players[i].Controller->TakeSnapshot(fTime);
 
 			firstTickAfterCountdown = true;
 		}
-		this->hud->SetCountdown("");
+
 		CHVector carCenterPosition;
 		float maxXCarDistance = 0;
 		float maxZCarDistance = 0;
@@ -44,6 +48,7 @@ void CMatch::Tick(float fTimeDelta)
 		{
 			PlayerData* playerData = &this->players[i];
 			CHVector playerPosition = playerData->CarPosition->GetTranslation();
+
 
 			// Note (julius): move
 			if (!ended && playerData->TimePenalty <= 0)
@@ -57,9 +62,10 @@ void CMatch::Tick(float fTimeDelta)
 
 			CHVector isOnTrack;
 			int checkPoint = 0;
+			bool validPosition = false;
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
 
-			// Note (julius): is on shortcutTrigger?
+			// Note (julius): is on shortcutTrigge?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
 				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
@@ -75,15 +81,21 @@ void CMatch::Tick(float fTimeDelta)
 					}
 				}
 				playerData->TimePenalty = data->ActiveTime;
+				if (data->ActiveTime > 0)
+				{
+					playerData->Controller->setSpeed(0);
+				}
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 
-
 			// Note (julius): is on checkpoint?
-			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
-				checkPoint > playerData->CheckpointCount)
+			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0)
 			{
-				playerData->CheckpointCount++;
+				if (checkPoint > playerData->CheckpointCount)
+				{
+					playerData->CheckpointCount++;
+				}
+				validPosition = true;
 			}
 
 			// Note (julius): is on start?
@@ -95,24 +107,30 @@ void CMatch::Tick(float fTimeDelta)
 					playerData->CheckpointCount = 0;
 					playerData->LatestShortcutTrigger = 0;
 				}
+				validPosition = true;
 			}
 
 			// Note (julius): is on track?
-			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1, 1, 1))
+			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) == CHVector(1, 1, 1))
 			{
-				//if (isOnTrack != CHVector(1.0f, 1.0f, 1.0f))
-				//{
-				//	this->avLastPlacement[i] = isOnTrack;
-				//}
-
-				//if (isOnTrack == CHVector(1.0f, 1.0f, 1.0f))
-				//{
-				//	//CHVector delta = isOnTrack - playerPosition;
-				//	CHVector delta = avLastPlacement[i] - playerPosition;
-				//	playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
-				//}
+				// Note (julius): spieler befindet sich nichtmehr auf der zulässigen strecke
+				// wiederherstellen auf vorherige position
+				playerData->Controller->Restore(fTime);
+			}
+			else
+			{
+				validPosition = true;
 			}
 
+			if (validPosition)
+			{
+				if (((int)(fTime * 1000) % 200) < 30)
+				{
+					// Note (julius): alle 200ms wenn der spieler auf der Strecke
+					// ist n snapshot machen von aktuellen position den spielers
+					playerData->Controller->TakeSnapshot(fTime);
+				}
+			}
 
 			// Note (julius): process movement
 
@@ -293,7 +311,8 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
 	this->players[0].Controller->addGameController(Contr1);
-	this->players[0].Controller->setKeybinding(DIK_Y, DIK_H, DIK_G, DIK_J);
+	//this->players[0].Controller->setKeybinding(DIK_W, DIK_S, DIK_A, DIK_D);
+	this->players[0].Controller->setKeybinding(DIK_Z, DIK_H, DIK_G, DIK_J);
 	this->players[0].Controller->addCharacter(this->players[0].CarPosition);
 
 	this->players[1].CarEntity = new CPorsche();
