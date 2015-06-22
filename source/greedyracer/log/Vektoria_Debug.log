@@ -2,6 +2,5 @@
 Vektoria-Logfile
 
 ****************
-Ok:    CDevice::InitDirectInput succeeded
-Ok:    LPDIRECTINPUT8::EnumDevices succeeded!
-Ok:    LPDIRECTINPUT8::EnumDevices succeeded!
+Ok:    Game Controller Nr. 1 found: DeviceType: 66069 - Product Name: Controller (SL-6566)
+Ok:    Game Controller Nr. 2 found: DeviceType: 66069 - Product Name: Wireless Controller

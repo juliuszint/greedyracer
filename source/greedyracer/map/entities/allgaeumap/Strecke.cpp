@@ -119,7 +119,7 @@ void CStrecke::Init()
 	this->root.AddPlacement(this->Sektor3->GetRootPlacement());
 
 	//Strecke verschieben
-	root.Translate(CHVector(0, 0.1, 0));
+	root.Translate(CHVector(0, -0.2, 0));
 
 	this->aCheckpoints[0] = CP1;
 	this->aCheckpoints[1] = CP2;
