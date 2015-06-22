@@ -21,10 +21,7 @@ public:
 	void addVehicle(CVehicle * Fahrzeug);
 	void addGameController(CDeviceGameController * XBOX360Cont);
 	void setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, int KeyRIGHT);
-	float getaktSpeed(){ return faktSpeed; };
-	void UpdateSpeed(int iNeue) { faktSpeed = iNeue; };
-	void UpdateAngle(int iChangeValueRAD);
-	void UpdateFactor(float factor);
+
 private:
 	
 	int keyUP;
@@ -32,9 +29,12 @@ private:
 	int keyLEFT;
 	int keyRIGHT;
 
-	float factor;
-	float faktSpeed;
+	float fAcceleration;
+	float fBrake;
+	float fDeceleration;
+	float fSteering_fact;
 
+	float fSpeed;
 	float angle_y;
 
 	CPlacement * Character;
