@@ -13,9 +13,13 @@ private:
 	CPlacement m_zpStart;
 	CMaterial m_zmStart;
 
+	float RespawnAngle;
+
 public:
 	void Init();
 	CPlacement* GetRootPlacement();
 	CGeo * GetGeo();
 	void Translate(CHVector Vektor);
+	void setRespawnAngle(float fAngle);
+	float getRespawnAngle();
 };

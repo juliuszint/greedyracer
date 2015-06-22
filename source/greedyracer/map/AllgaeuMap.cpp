@@ -7,6 +7,7 @@ CAllgaeuMap::~CAllgaeuMap()
 	free(this->landscape);
 	free(this->water);
 	free(this->strecke);
+	free(this->OptStrecke);
 }
 
 void CAllgaeuMap::Init()
@@ -51,6 +52,7 @@ void CAllgaeuMap::Init()
 	//this->ground = new CGround();
 	this->landscape = new CLandscape();
 	this->strecke = new CStrecke();
+	this->OptStrecke = new COptischeStrecke();
 
 	/*this->ground->Configure(10, 10, 60, 40);
 	this->ground->Init();
@@ -72,6 +74,10 @@ void CAllgaeuMap::Init()
 	this->strecke->Init();
 	this->placement.AddPlacement(this->strecke->GetRootPlacement());
 	//Strecke über die Klasse Strecke verschieben
+
+	//optische Strecke
+	this->OptStrecke->Init();
+	this->placement.AddPlacement(this->OptStrecke->GetRootPlacement());
 }
 CPlacement* CAllgaeuMap::GetRootPlacement()
 {
@@ -112,8 +118,7 @@ int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 {
-	position.y + 1;
-	CRay raytoRoad(position, CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 	
 	//Abfrage Intersect mit Sektoren
 	for (int i = 0; i < 3; i++)

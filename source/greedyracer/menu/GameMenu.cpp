@@ -11,6 +11,7 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	this->startButtonImage.Init("resources\\menu\\StartButton.jpg");
 	this->creditsButtonImage.Init("resources\\menu\\CreditsButton.jpg");
 	this->stopButtonImage.Init("resources\\menu\\EndButton.jpg");
+	this->creditsImage.Init("resources\\menu\\credits.jpg");
 
 	this->rootOverlay.InitFull(&this->backgroundImage);
 	this->rootOverlay.SetLayer(0.8f);
@@ -39,10 +40,23 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	this->startButtonOverlay.Init(&this->startButtonImage, this->startButtonRect);
 	this->creditsButtonOverlay.Init(&this->creditsButtonImage, this->creditsButtonRect);
 	this->stopButtonOverlay.Init(&this->stopButtonImage, this->stopButtonRect);
+	this->creditsOverlay.Init(&this->creditsImage, CFloatRect(0, 0, 1, 1));
+	this->creditsOverlay.SwitchOff();
 
+	this->rootOverlay.AddOverlay(&this->creditsOverlay);
 	this->rootOverlay.AddOverlay(&this->startButtonOverlay);
 	this->rootOverlay.AddOverlay(&this->creditsButtonOverlay);
 	this->rootOverlay.AddOverlay(&this->stopButtonOverlay);
+}
+
+bool CGameMenu::CreditsOn()
+{
+	return this->creditsOverlay.IsOn();
+}
+void CGameMenu::CreditsSwitch(bool value)
+{
+	if (value) this->creditsOverlay.SwitchOn();
+	else this->creditsOverlay.SwitchOff();
 }
 
 COverlay* CGameMenu::GetRootOverlay()
@@ -97,7 +111,7 @@ EGameMenuButton CGameMenu::Tick()
 	{
 		if (leftMousePressed)
 		{
-			return EGameMenuButtonHighscore;
+			return EGameMenuButtonCredits;
 		}
 	}
 	if (currentOverlay == &this->stopButtonOverlay && leftMousePressed)

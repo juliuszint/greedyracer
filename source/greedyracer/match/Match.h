@@ -77,7 +77,7 @@ public:
 
 	void Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacement, CHud* hud, CScene* scene, CDeviceGameController* Controller1, CDeviceGameController* Controller2);
 	void Start();
-	void Tick(float fTimeDelta);
+	void Tick(float fTime, float fTimeDelta);
 	void Stop();
 };
 

@@ -9,7 +9,7 @@ enum EGameMenuButton
 {
 	EGameMenuButtonNone,
 	EGameMenuButtonStart,
-	EGameMenuButtonHighscore,
+	EGameMenuButtonCredits,
 	EGameMenuButtonQuit
 };
 
@@ -23,10 +23,13 @@ private:
 	COverlay startButtonOverlay;
 	COverlay creditsButtonOverlay;
 	COverlay stopButtonOverlay;
+	COverlay creditsOverlay;
 
 	CImage backgroundImage;
 	
 	CDeviceCursor * cursor;
+
+	CImage creditsImage;
 
 	CFloatRect startButtonRect;
 	CImage startButtonImage;
@@ -38,6 +41,10 @@ public:
 	void Init(CDeviceCursor * cursor);
 	bool GetIsVisible();
 	void SetIsVisible(bool value);
+
+	bool CreditsOn();
+	void CreditsSwitch(bool);
+
 	EGameMenuButton Tick();
 	COverlay* GetRootOverlay();
 	CAudio* GetAudio();
