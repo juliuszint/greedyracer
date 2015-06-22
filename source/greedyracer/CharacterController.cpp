@@ -143,22 +143,25 @@ void CCharacterController::Move(float DeltaTime)
 
 			{
 				float faAngle = this->Controller->GetRelativeX();
-				if (fSpeed > 0.5)
+				if ((faAngle <= -0.2) || (faAngle >= 0.2))
 				{
-					angle_y -= faAngle / fSteering_fact * DeltaTime;
-				}
-				else if (fSpeed < 0.5)
-				{
-					angle_y += faAngle / fSteering_fact * DeltaTime;
-				}
+					if (fSpeed > 0.5)
+					{
+						angle_y -= faAngle / fSteering_fact * DeltaTime;
+					}
+					else if (fSpeed < 0.5)
+					{
+						angle_y += faAngle / fSteering_fact * DeltaTime;
+					}
 
-				CHVector buffer;
-				buffer = Character->GetTranslation();
+					CHVector buffer;
+					buffer = Character->GetTranslation();
 
-				Character->TranslateDelta(-buffer);
-				Character->RotateY((angle_y));
-				Character->ScaleDelta(0.1f);
-				Character->TranslateDelta(buffer);
+					Character->TranslateDelta(-buffer);
+					Character->RotateY((angle_y));
+					Character->ScaleDelta(0.1f);
+					Character->TranslateDelta(buffer);
+				}
 			}
 
 		}
