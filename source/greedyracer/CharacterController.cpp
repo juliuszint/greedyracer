@@ -135,7 +135,7 @@ void CCharacterController::Move(float DeltaTime)
 			Character->TranslateDelta(buffer);
 		}
 
-		/*if (this->Controller != NULL)
+		if (this->Controller != NULL)
 		{
 			//Links-Rechts
 
