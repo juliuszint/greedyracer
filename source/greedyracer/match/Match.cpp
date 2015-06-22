@@ -311,7 +311,8 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
 	this->players[0].Controller->addGameController(Contr1);
-	this->players[0].Controller->setKeybinding(DIK_W, DIK_S, DIK_A, DIK_D);
+	//this->players[0].Controller->setKeybinding(DIK_W, DIK_S, DIK_A, DIK_D);
+	this->players[0].Controller->setKeybinding(DIK_Z, DIK_H, DIK_G, DIK_J);
 	this->players[0].Controller->addCharacter(this->players[0].CarPosition);
 
 	this->players[1].CarEntity = new CPorsche();
