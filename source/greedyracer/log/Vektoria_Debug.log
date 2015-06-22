@@ -2,6 +2,5 @@
 Vektoria-Logfile
 
 ****************
-Ok:    CDevice::InitDirectInput succeeded
-Ok:    LPDIRECTINPUT8::EnumDevices succeeded!
-Ok:    LPDIRECTINPUT8::EnumDevices succeeded!
+Error: CDevice::AddGameController: Tried to add more Controllers as found
+Error: CDevice::AddGameController: Tried to add more Controllers as found

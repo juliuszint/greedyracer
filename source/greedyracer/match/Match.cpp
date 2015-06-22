@@ -62,6 +62,7 @@ void CMatch::Tick(float fTime, float fTimeDelta)
 
 			CHVector isOnTrack;
 			int checkPoint = 0;
+			bool validPosition = false;
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
 
 			// Note (julius): is on shortcutTrigge?
@@ -87,12 +88,14 @@ void CMatch::Tick(float fTime, float fTimeDelta)
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 
-
 			// Note (julius): is on checkpoint?
-			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0 &&
-				checkPoint > playerData->CheckpointCount)
+			else if ((checkPoint = this->map->IsOnCheckpoint(playerPosition)) >= 0)
 			{
-				playerData->CheckpointCount++;
+				if (checkPoint > playerData->CheckpointCount)
+				{
+					playerData->CheckpointCount++;
+				}
+				validPosition = true;
 			}
 
 			// Note (julius): is on start?
@@ -104,10 +107,11 @@ void CMatch::Tick(float fTime, float fTimeDelta)
 					playerData->CheckpointCount = 0;
 					playerData->LatestShortcutTrigger = 0;
 				}
+				validPosition = true;
 			}
 
 			// Note (julius): is on track?
-			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1, 1, 1))
+			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) == CHVector(1, 1, 1))
 			{
 				// Note (julius): spieler befindet sich nichtmehr auf der zulässigen strecke
 				// wiederherstellen auf vorherige position
@@ -115,7 +119,12 @@ void CMatch::Tick(float fTime, float fTimeDelta)
 			}
 			else
 			{
-				if ((int)(fTime * 1000) % 200 == 0)
+				validPosition = true;
+			}
+
+			if (validPosition)
+			{
+				if (((int)(fTime * 1000) % 200) < 30)
 				{
 					// Note (julius): alle 200ms wenn der spieler auf der Strecke
 					// ist n snapshot machen von aktuellen position den spielers

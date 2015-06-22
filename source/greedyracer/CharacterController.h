@@ -13,6 +13,7 @@ struct MovementSnapshot
 	float timeTaken;
 	float speed;
 	float angle;
+	bool isValid;
 	CHVector position;
 };
 
@@ -20,7 +21,6 @@ class CCharacterController
 {
 public:
 	CCharacterController();
-	~CCharacterController();
 
 	void addCharacter(CPlacement *pCharacter){ Character = pCharacter; };
 	void addKeyboard(CDeviceKeyboard *);
@@ -54,8 +54,8 @@ private:
 	CVehicle * Auto;
 	CDeviceGameController * Controller;
 
-	MovementSnapshot snap[20];
-	int snapshotCount;
-	int snapshotIndex;
+	MovementSnapshot snap[30];
+	UINT32 snapshotCount = 30;
+	UINT32 snapshotIndex;
 };
 

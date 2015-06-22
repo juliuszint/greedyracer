@@ -112,8 +112,7 @@ int CAllgaeuMap::IsOnCheckpoint(CHVector position)
 
 CHVector CAllgaeuMap::IsOnTrack(CHVector position)
 {
-	position.y + 1;
-	CRay raytoRoad(position, CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
+	CRay raytoRoad(position + CHVector(0.0f, 1.0f, 0.0f), CHVector(0.0f, -1.0f, 0.0f, 0.0f), QUASI_ZERO, F_MAX);
 	
 	//Abfrage Intersect mit Sektoren
 	for (int i = 0; i < 3; i++)
