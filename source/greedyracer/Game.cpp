@@ -62,7 +62,7 @@ void CGame::Init(HWND hwnd, CSplash * psplash)
 	this->hud.InitHud();
 	this->hud.SetVisible(false);
 	this->m_zviewport.AddOverlay(this->hud.GetRootOverlay());
-	
+
 	m_zscene.AddPlacement(&m_zpCamera);
 	m_zscene.AddParallelLight(&m_zlight);
 	m_zscene.AddParallelLight(&m_zlight2);
@@ -85,6 +85,9 @@ void CGame::Tick(float fTime, float fTimeDelta)
 		case EGameMenuButtonQuit:
 			PostQuitMessage(0);
 			break;
+		case EGameMenuButtonCredits:
+			this->gameMenu.CreditsSwitch(true);
+			break;
 		case EGameMenuButtonStart:
 			// Todo: game starten
 			this->gameMenu.SetIsVisible(false);
@@ -96,21 +99,28 @@ void CGame::Tick(float fTime, float fTimeDelta)
 			break;
 		}
 	}
-	
-	else if (this->keyboard.KeyPressed(DIK_ESCAPE))
+
+	if (this->keyboard.KeyPressed(DIK_ESCAPE))
 	{
-		this->currentMatch->Stop();
-		// Note (julius): der tick wird hier aufgerufen und dann unten ignoriert 
-		// weil sobald man placments rausnimmt aus der map was in stop passiert
-		// muss einmal geticked werden bevor man den speicherplatz freigeben kann
-		// sonst kommts zur AccessViolation
-		m_zroot.Tick(fTimeDelta);
-		ignoreTick = true;
+		if (this->gameMenu.GetIsVisible())
+		{
+			this->gameMenu.CreditsSwitch(false);
+		}
+		else
+		{
+			this->currentMatch->Stop();
+			// Note (julius): der tick wird hier aufgerufen und dann unten ignoriert 
+			// weil sobald man placments rausnimmt aus der map was in stop passiert
+			// muss einmal geticked werden bevor man den speicherplatz freigeben kann
+			// sonst kommts zur AccessViolation
+			m_zroot.Tick(fTimeDelta);
+			ignoreTick = true;
 
-		free(this->currentMatch);
-		this->currentMatch = NULL;
+			free(this->currentMatch);
+			this->currentMatch = NULL;
 
-		this->gameMenu.SetIsVisible(true);
+			this->gameMenu.SetIsVisible(true);
+		}
 	}
 
 	if (this->currentMatch != NULL)
@@ -123,7 +133,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	{
 		m_zroot.Tick(fTimeDelta);
 	}
-	else 
+	else
 	{
 		ignoreTick = false;
 	}
