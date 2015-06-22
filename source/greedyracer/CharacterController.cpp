@@ -1,5 +1,3 @@
-
-
 #include "CharacterController.h"
 
 
@@ -154,10 +152,7 @@ void CCharacterController::Move(float DeltaTime)
 			Character->ScaleDelta(0.1f);
 			Character->TranslateDelta(buffer);
 		}
-
-
 	}
-
 }
 
 void CCharacterController::setSpeed(float fNewSpeed){
@@ -169,3 +164,14 @@ void CCharacterController::setAngle(float fNewAngle){
 }
 
 
+void CCharacterController::TakeSnapshot(float fTime)
+{
+}
+
+void CCharacterController::Restore(float fTime)
+{
+	//this->angle_y = this->snap.angle;
+	//this->fSpeed = this->snap.speed;
+	//CHVector delta = this->snap.position - this->Character->GetTranslation();
+	//this->Character->TranslateDelta(delta);
+}

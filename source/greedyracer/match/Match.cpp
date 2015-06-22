@@ -9,7 +9,7 @@ CMatch::~CMatch()
 	}
 }
 
-void CMatch::Tick(float fTimeDelta)
+void CMatch::Tick(float fTime, float fTimeDelta)
 {
 	static bool firstTickAfterCountdown = false;
 	if (this->running == false) return;
@@ -33,10 +33,14 @@ void CMatch::Tick(float fTimeDelta)
 		{
 			this->countdownAudio.Stop();
 			this->backgroundAudio.Start();
+			this->hud->SetCountdown("");
+
+			for (int i = 0; i < this->playerCount; i++)
+				this->players[i].Controller->TakeSnapshot(fTime);
 
 			firstTickAfterCountdown = true;
 		}
-		this->hud->SetCountdown("");
+
 		CHVector carCenterPosition;
 		float maxXCarDistance = 0;
 		float maxZCarDistance = 0;
@@ -44,6 +48,7 @@ void CMatch::Tick(float fTimeDelta)
 		{
 			PlayerData* playerData = &this->players[i];
 			CHVector playerPosition = playerData->CarPosition->GetTranslation();
+
 
 			// Note (julius): move
 			if (!ended && playerData->TimePenalty <= 0)
@@ -100,19 +105,19 @@ void CMatch::Tick(float fTimeDelta)
 			// Note (julius): is on track?
 			else if ((isOnTrack = this->map->IsOnTrack(playerPosition)) != CHVector(1, 1, 1))
 			{
-				//if (isOnTrack != CHVector(1.0f, 1.0f, 1.0f))
-				//{
-				//	this->avLastPlacement[i] = isOnTrack;
-				//}
-
-				//if (isOnTrack == CHVector(1.0f, 1.0f, 1.0f))
-				//{
-				//	//CHVector delta = isOnTrack - playerPosition;
-				//	CHVector delta = avLastPlacement[i] - playerPosition;
-				//	playerData->CarPosition->TranslateDelta(delta + +CHVector(0.0f, 0.255f, 0.0f, 0.0f));
-				//}
+				// Note (julius): spieler befindet sich nichtmehr auf der zulässigen strecke
+				// wiederherstellen auf vorherige position
+				playerData->Controller->Restore(fTime);
 			}
-
+			else
+			{
+				if ((int)(fTime * 1000) % 200 == 0)
+				{
+					// Note (julius): alle 200ms wenn der spieler auf der Strecke
+					// ist n snapshot machen von aktuellen position den spielers
+					playerData->Controller->TakeSnapshot(fTime);
+				}
+			}
 
 			// Note (julius): process movement
 

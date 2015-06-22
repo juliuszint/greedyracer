@@ -125,7 +125,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	if (this->currentMatch != NULL)
 	{
-		this->currentMatch->Tick(fTimeDelta);
+		this->currentMatch->Tick(fTime, fTimeDelta);
 	}
 
 	// Hier die Echtzeit-Veränderungen einfügen:

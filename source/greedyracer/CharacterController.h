@@ -8,6 +8,13 @@
 
 using namespace Vektoria;
 
+struct MovementSnapshot
+{
+	float timeTaken;
+	float speed;
+	float angle;
+	CHVector position;
+};
 
 class CCharacterController
 {
@@ -24,6 +31,8 @@ public:
 	void setSpeed(float fNewSpeed);
 	void setAngle(float fNewAngle);
 
+	void TakeSnapshot(float fTime);
+	void Restore(float fTime);
 private:
 	
 	int keyUP;
@@ -45,5 +54,8 @@ private:
 	CVehicle * Auto;
 	CDeviceGameController * Controller;
 
+	MovementSnapshot snap[20];
+	int snapshotCount;
+	int snapshotIndex;
 };
 
