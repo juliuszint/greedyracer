@@ -162,6 +162,9 @@
     <ClInclude Include="map\entities\allgaeumap\shortcuts\Rocks.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="map\entities\allgaeumap\OptischeStrecke.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="map\entities\common\Ground.h" />
     <ClInclude Include="map\entities\common\BigHouse.h" />
@@ -205,6 +208,9 @@
     <ClCompile Include="map\entities\allgaeumap\Strecke.cpp" />
     <ClCompile Include="map\entities\allgaeumap\shortcuts\Rocks.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="map\entities\allgaeumap\OptischeStrecke.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="map\entities\common\Ground.cpp" />

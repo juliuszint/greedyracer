@@ -2,5 +2,5 @@
 Vektoria-Logfile
 
 ****************
-Error: CDevice::AddGameController: Tried to add more Controllers as found
-Error: CDevice::AddGameController: Tried to add more Controllers as found
+Ok:    Game Controller Nr. 1 found: DeviceType: 66069 - Product Name: Controller (SL-6566)
+Ok:    Game Controller Nr. 2 found: DeviceType: 66069 - Product Name: Wireless Controller

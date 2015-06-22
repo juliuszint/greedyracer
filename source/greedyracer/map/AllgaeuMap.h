@@ -12,6 +12,7 @@
 #include "entities\allgaeumap\shortcuts\Barrel.h"
 #include "entities\allgaeumap\shortcuts\FallenTree.h"
 #include "entities\allgaeumap\shortcuts\Rocks.h"
+#include "entities\allgaeumap\OptischeStrecke.h"
 
 using namespace Vektoria;
 
@@ -24,6 +25,7 @@ private:
 	CStrecke * strecke;
 	CLandscape * landscape;
 	CShortcutData shortCuts[3];
+	COptischeStrecke * OptStrecke;
 
 public:
 

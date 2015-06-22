@@ -66,6 +66,7 @@ void CCharacterController::Move(float DeltaTime)
 		}
 
 		else if ((!(this->playerKeyboard->KeyPressed(keyUP)) && !(this->playerKeyboard->KeyPressed(keyDOWN))) && (!(this->Controller->ButtonPressed(0)) && !(this->Controller->ButtonPressed(1))))
+
 		{
 			//ULDebug("NO Key!");
 
@@ -87,15 +88,16 @@ void CCharacterController::Move(float DeltaTime)
 		Character->TranslateZDelta(translation.z);
 
 
+
 		if (this->playerKeyboard->KeyPressed(keyLEFT) && ((fSpeed > 0.5) || (fSpeed < -0.5)))
 		{
 			float faAngle = UM_DEG2RAD(25);
 
-			if (fSpeed > 0)
+			if (fSpeed > 0.5)
 			{
 				angle_y += faAngle / fSteering_fact * DeltaTime;
 			}
-			else if (fSpeed < 0)
+			else if (fSpeed < -0.5)
 			{
 				angle_y -= faAngle / fSteering_fact * DeltaTime;
 			}
@@ -111,14 +113,15 @@ void CCharacterController::Move(float DeltaTime)
 		}
 
 		if (this->playerKeyboard->KeyPressed(keyRIGHT) && ((fSpeed > 0.5) || (fSpeed < -0.5)))
+
 		{
 			float faAngle = -UM_DEG2RAD(25);
 
-			if (fSpeed > 0)
+			if (fSpeed > 0.5)
 			{
 				angle_y += faAngle / fSteering_fact * DeltaTime;
 			}
-			else if (fSpeed < 0)
+			else if (fSpeed < -0.5)
 			{
 				angle_y -= faAngle / fSteering_fact* DeltaTime;
 			}
@@ -132,10 +135,12 @@ void CCharacterController::Move(float DeltaTime)
 			Character->TranslateDelta(buffer);
 		}
 
-		if (this->Controller != NULL)
+		/*if (this->Controller != NULL)
 		{
 			//Links-Rechts
+
 			if ((fSpeed > 0.5) || (fSpeed < -0.5))
+
 			{
 				float faAngle = this->Controller->GetRelativeX();
 				if (fSpeed > 0.5)
@@ -155,7 +160,9 @@ void CCharacterController::Move(float DeltaTime)
 				Character->ScaleDelta(0.1f);
 				Character->TranslateDelta(buffer);
 			}
+
 		}
+
 	}
 }
 
