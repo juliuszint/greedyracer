@@ -59,7 +59,7 @@ void CMatch::Tick(float fTimeDelta)
 			int checkPoint = 0;
 			int shortCutTrigger = this->map->IsOnShortcutTrigger(playerPosition);
 
-			// Note (julius): is on shortcutTrigger?
+			// Note (julius): is on shortcutTrigge?
 			if (shortCutTrigger > 0 && shortCutTrigger != playerData->LatestShortcutTrigger)
 			{
 				CShortcutData* data = this->map->GetShortcut(shortCutTrigger - 1);
@@ -75,6 +75,10 @@ void CMatch::Tick(float fTimeDelta)
 					}
 				}
 				playerData->TimePenalty = data->ActiveTime;
+				if (data->ActiveTime > 0)
+				{
+					playerData->Controller->setSpeed(0);
+				}
 				playerData->LatestShortcutTrigger = shortCutTrigger;
 			}
 
@@ -293,7 +297,7 @@ void CMatch::Init(CDeviceKeyboard* keyboard, CMap* map, CPlacement* cameraPlacem
 	this->players[0].Controller = new CCharacterController();
 	this->players[0].Controller->addKeyboard(this->m_pkeyboard);
 	this->players[0].Controller->addGameController(Contr1);
-	this->players[0].Controller->setKeybinding(DIK_Y, DIK_H, DIK_G, DIK_J);
+	this->players[0].Controller->setKeybinding(DIK_W, DIK_S, DIK_A, DIK_D);
 	this->players[0].Controller->addCharacter(this->players[0].CarPosition);
 
 	this->players[1].CarEntity = new CPorsche();

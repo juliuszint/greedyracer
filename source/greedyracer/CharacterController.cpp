@@ -11,7 +11,7 @@ CCharacterController::CCharacterController()
 	this->fAcceleration = 6.0;
 	this->fBrake = 15.0;
 	this->fDeceleration = 3;
-	this->fSteering_fact = 0.5;
+	this->fSteering_fact = 0.2;
 	this->angle_y = -0.05*PI;
 	this->fSpeed = 0;
 }
@@ -54,11 +54,11 @@ void CCharacterController::Move(float DeltaTime)
 		if (this->playerKeyboard->KeyPressed(keyUP) /*|| this->Controller->ButtonPressed(0)*/)
 		{
 			//ULDebug("Key UP!");
-			if (fSpeed < 8)
+			if (fSpeed < 10)
 				fActAccel = fAcceleration;
 		}
 
-		else if (this->playerKeyboard->KeyPressed(keyDOWN) /*|| this->Controller->ButtonPressed(1)*/)
+		else if (this->playerKeyboard->KeyPressed(keyDOWN )/*|| this->Controller->ButtonPressed(1)*/)
 		{
 			//ULDebug("Key DOWN!");
 			if (fSpeed > -2)
