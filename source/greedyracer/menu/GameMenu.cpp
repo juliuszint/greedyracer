@@ -11,7 +11,7 @@ void CGameMenu::Init(CDeviceCursor * cursor)
 	this->startButtonImage.Init("resources\\menu\\StartButton.jpg");
 	this->creditsButtonImage.Init("resources\\menu\\CreditsButton.jpg");
 	this->stopButtonImage.Init("resources\\menu\\EndButton.jpg");
-	this->creditsImage.Init("resources\\menu\\credits.jpg");
+	this->creditsImage.Init("resources\\menu\\credits.png");
 
 	this->rootOverlay.InitFull(&this->backgroundImage);
 	this->rootOverlay.SetLayer(0.8f);
