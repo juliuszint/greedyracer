@@ -28,3 +28,11 @@ CGeo * CSektor::GetGeo(){
 void CSektor::Translate(CHVector Vektor){
 	m_zpSektor.Translate(Vektor);
 }
+
+void CSektor::setRespawnAngle(float fAngle){
+	RespawnAngle = fAngle;
+}
+
+float CSektor::getRespawnAngle(){
+	return RespawnAngle;
+}

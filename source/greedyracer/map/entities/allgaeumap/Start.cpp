@@ -23,3 +23,11 @@ CGeo * CStart::GetGeo(){
 void CStart::Translate(CHVector Vektor){
 	m_zpStart.Translate(Vektor);
 }
+
+void CStart::setRespawnAngle(float fAngle){
+	RespawnAngle = fAngle;
+}
+
+float CStart::getRespawnAngle(){
+	return RespawnAngle;
+}

@@ -26,3 +26,12 @@ CGeo * CCheckpoint::GetGeo(){
 void CCheckpoint::Translate(CHVector Vektor){
 	m_zpCheckpoint.Translate(Vektor);
 }
+
+
+void CCheckpoint::setRespawnAngle(float fAngle){
+	RespawnAngle = fAngle;
+}
+
+float CCheckpoint::getRespawnAngle(){
+	return RespawnAngle;
+}

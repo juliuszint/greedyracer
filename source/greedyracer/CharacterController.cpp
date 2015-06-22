@@ -160,4 +160,12 @@ void CCharacterController::Move(float DeltaTime)
 
 }
 
+void CCharacterController::setSpeed(float fNewSpeed){
+	fSpeed = fNewSpeed;
+}
+
+void CCharacterController::setAngle(float fNewAngle){
+	angle_y = fNewAngle;
+}
+
 

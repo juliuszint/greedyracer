@@ -98,3 +98,11 @@ CPlacement* CAbkuerzung::GetTriggerPlacement(Trigger t)
 	}
 	return currentTrigger;
 }
+
+void CAbkuerzung::setRespawnAngle(float fAngle){
+	RespawnAngle = fAngle;
+}
+
+float CAbkuerzung::getRespawnAngle(){
+	return RespawnAngle;
+}

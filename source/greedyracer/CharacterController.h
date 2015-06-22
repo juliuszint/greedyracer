@@ -21,6 +21,8 @@ public:
 	void addVehicle(CVehicle * Fahrzeug);
 	void addGameController(CDeviceGameController * XBOX360Cont);
 	void setKeybinding(int KeyUP, int KeyDOWN, int KeyLEFT, int KeyRIGHT);
+	void setSpeed(float fNewSpeed);
+	void setAngle(float fNewAngle);
 
 private:
 	
