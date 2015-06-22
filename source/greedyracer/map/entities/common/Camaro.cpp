@@ -13,7 +13,7 @@ void CCamaro::Init(){
 	m_pzgFrontTires = m_zgFrontTires.LoadGeo("meshes\\Camaro\\CamaroTires.obj");
 	//m_pzgRearTires = m_zgRearTires.LoadGeo("meshes\\PorscheRearTires.obj");
 
-	m_zmBodywork.MakeTextureDiffuse("textures\\autos\\orange.jpg");
+	m_zmBodywork.MakeTextureDiffuse("textures\\autos\\Camaro.jpg");
 	m_zmPlastic.MakeTextureDiffuse("textures\\autos\\black.jpg");
 	m_zmWindow.MakeTextureDiffuse("textures\\autos\\black.jpg");
 	//m_zmFrontHeadlights.MakeTextureDiffuse("textures\\blue_image.jpg");

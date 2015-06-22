@@ -12,7 +12,7 @@ void CPorsche::Init(){
 	m_pzgWindows = m_zgWindows.LoadGeo("meshes\\Porsche\\PorscheWindows_reduced.obj");
 	m_pzgExhaust = m_zgExhaust.LoadGeo("meshes\\Porsche\\PorscheExhaust_reduced.obj");
 
-	m_zmBodywork.MakeTextureDiffuse("textures\\autos\\red.jpg");
+	m_zmBodywork.MakeTextureDiffuse("textures\\autos\\Porsche.jpg");
 	m_zmFrontHeadlights.MakeTextureDiffuse("textures\\autos\\yellow.jpg");
 	m_zmRearLights.MakeTextureDiffuse("textures\\autos\\dark_red.jpg");
 	m_zmTires.MakeTextureDiffuse("textures\\autos\\black.jpg");
