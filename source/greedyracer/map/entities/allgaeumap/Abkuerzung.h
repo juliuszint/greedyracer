@@ -34,6 +34,8 @@ private:
 	bool hasStartTrigger;
 
 	CPlacement* GetTriggerPlacement(Trigger);
+
+	float RespawnAngle;
 public:
 	void ConfigureInit(bool, bool, bool);
 	void Init();
@@ -47,4 +49,6 @@ public:
 	void RotateTriggerY(float RotateY, Trigger t);
 
 	CGeoQuad* GetMidTrigger();
+	void setRespawnAngle(float fAngle);
+	float getRespawnAngle();
 };
