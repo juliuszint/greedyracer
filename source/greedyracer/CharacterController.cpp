@@ -216,5 +216,13 @@ void CCharacterController::Restore(float fTime)
 	this->angle_y = recoverSnap.angle;
 	this->fSpeed = recoverSnap.speed;
 	CHVector delta = recoverSnap.position - this->Character->GetTranslation();
+	//Character->RotateY((angle_y));
+	//Character->ScaleDelta(0.1f);
 	this->Character->TranslateDelta(delta);
+	CHVector RotBuffer = this->Character->GetTranslation();
+	Character->TranslateDelta(-RotBuffer);
+	Character->RotateY(angle_y);
+	Character->ScaleDelta(0.1f);
+	Character->TranslateDelta(RotBuffer);
+	
 }
