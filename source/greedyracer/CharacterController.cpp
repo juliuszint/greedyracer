@@ -147,11 +147,11 @@ void CCharacterController::Move(float DeltaTime)
 				{
 					if (fSpeed > 0.5)
 					{
-						angle_y -= faAngle / fSteering_fact * DeltaTime;
+						angle_y -= faAngle / fSteering_fact * DeltaTime*0.48;
 					}
 					else if (fSpeed < 0.5)
 					{
-						angle_y += faAngle / fSteering_fact * DeltaTime;
+						angle_y += faAngle / fSteering_fact * DeltaTime*0.48;
 					}
 
 					CHVector buffer;
