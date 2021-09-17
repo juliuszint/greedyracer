@@ -1,4 +1,4 @@
-### Greedy Racer
+# Greedy Racer
 
 The first major project as part of the game engineering bachelor´s degree at the university of applied sciences in Kempten was to design and create a racing game. As game engine one is required to use the Vektoria Engine. An educational game engine developed by Tobias Breiner.
 
